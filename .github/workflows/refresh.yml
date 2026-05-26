@@ -3,10 +3,9 @@ name: PennyWatch daily refresh
 on:
   schedule:
     - cron: '0 20 * * *'   # 20:00 UTC = ~6am AEST / 7am AEDT
-  workflow_dispatch:        # allows you to trigger it manually from the Actions tab
+  workflow_dispatch:        # allows manual triggering from the Actions tab
 
 jobs:
-  
   refresh:
     runs-on: ubuntu-latest
     steps:
@@ -23,20 +22,14 @@ jobs:
           X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
         run: python build_tracker.py
 
-     - name: List Cloudflare Pages projects (diagnostic)
+      - name: List Cloudflare Pages projects (diagnostic)
+        continue-on-error: true
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages project list
-          
-    - name: List Cloudflare Pages projects (diagnostic)
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages project list
-          
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
