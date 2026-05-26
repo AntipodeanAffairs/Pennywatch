@@ -1,0 +1,500 @@
+{
+  "total_classified": 317,
+  "total_critical": 117,
+  "total_positive": 219,
+  "total_mixed": 19,
+  "by_country": {
+    "Russia": 31,
+    "Israel": 22,
+    "Iran": 22,
+    "Lebanon": 10,
+    "Ukraine": 9,
+    "North Korea": 9,
+    "Afghanistan": 5,
+    "United Kingdom": 5,
+    "Belarus": 4,
+    "China": 4,
+    "Myanmar": 3,
+    "Iraq": 2,
+    "Qatar": 2,
+    "United Arab Emirates": 2,
+    "Canada": 2,
+    "European Union": 2,
+    "Yemen": 2,
+    "Jordan": 1,
+    "Saudi Arabia": 1,
+    "Germany": 1,
+    "Thailand": 1,
+    "India": 1,
+    "Syria": 1,
+    "Venezuela": 1,
+    "South Korea": 1
+  },
+  "by_severity": {
+    "Condemn": 43,
+    "Call for action": 34,
+    "Criticise": 30,
+    "Concern": 10
+  },
+  "by_month": {
+    "2023-05": 2,
+    "2023-06": 2,
+    "2023-07": 1,
+    "2023-08": 1,
+    "2023-09": 2,
+    "2023-10": 3,
+    "2023-11": 1,
+    "2023-12": 2,
+    "2024-01": 6,
+    "2024-02": 4,
+    "2024-03": 3,
+    "2024-04": 4,
+    "2024-05": 1,
+    "2024-06": 2,
+    "2024-07": 7,
+    "2024-08": 4,
+    "2024-09": 9,
+    "2024-10": 12,
+    "2024-11": 4,
+    "2024-12": 1,
+    "2025-01": 2,
+    "2025-02": 5,
+    "2025-03": 1,
+    "2025-04": 1,
+    "2025-05": 3,
+    "2025-06": 3,
+    "2025-07": 3,
+    "2025-08": 1,
+    "2025-09": 7,
+    "2025-10": 1,
+    "2025-11": 1,
+    "2025-12": 5,
+    "2026-01": 5,
+    "2026-02": 3,
+    "2026-03": 2,
+    "2026-04": 2,
+    "2026-05": 1
+  },
+  "by_country_severity": {
+    "Israel": {
+      "Condemn": 9,
+      "Call for action": 5,
+      "Criticise": 5,
+      "Concern": 3
+    },
+    "Iran": {
+      "Call for action": 4,
+      "Condemn": 11,
+      "Criticise": 6,
+      "Concern": 1
+    },
+    "Iraq": {
+      "Condemn": 1,
+      "Call for action": 1
+    },
+    "Jordan": {
+      "Condemn": 1
+    },
+    "Qatar": {
+      "Condemn": 1,
+      "Call for action": 1
+    },
+    "Saudi Arabia": {
+      "Condemn": 1
+    },
+    "United Arab Emirates": {
+      "Condemn": 1,
+      "Call for action": 1
+    },
+    "Lebanon": {
+      "Call for action": 8,
+      "Criticise": 1,
+      "Concern": 1
+    },
+    "Russia": {
+      "Call for action": 11,
+      "Condemn": 9,
+      "Criticise": 10,
+      "Concern": 1
+    },
+    "Afghanistan": {
+      "Condemn": 2,
+      "Criticise": 2,
+      "Call for action": 1
+    },
+    "Canada": {
+      "Condemn": 1,
+      "Call for action": 1
+    },
+    "European Union": {
+      "Condemn": 1,
+      "Criticise": 1
+    },
+    "United Kingdom": {
+      "Condemn": 1,
+      "Criticise": 2,
+      "Concern": 2
+    },
+    "Ukraine": {
+      "Criticise": 4,
+      "Call for action": 2,
+      "Condemn": 3
+    },
+    "Belarus": {
+      "Condemn": 3,
+      "Call for action": 1
+    },
+    "Germany": {
+      "Call for action": 1
+    },
+    "Thailand": {
+      "Concern": 1
+    },
+    "India": {
+      "Concern": 1
+    },
+    "Syria": {
+      "Condemn": 1
+    },
+    "North Korea": {
+      "Criticise": 1,
+      "Call for action": 1,
+      "Condemn": 5,
+      "Concern": 2
+    },
+    "Yemen": {
+      "Criticise": 1,
+      "Condemn": 1
+    },
+    "China": {
+      "Criticise": 1,
+      "Call for action": 2,
+      "Concern": 1
+    },
+    "Venezuela": {
+      "Condemn": 1
+    },
+    "South Korea": {
+      "Condemn": 1
+    },
+    "Myanmar": {
+      "Concern": 1,
+      "Call for action": 1,
+      "Criticise": 1
+    }
+  },
+  "positive_by_country": {
+    "Indonesia": 22,
+    "Ukraine": 16,
+    "United Kingdom": 16,
+    "Japan": 13,
+    "Timor-Leste": 12,
+    "India": 12,
+    "Israel": 10,
+    "Malaysia": 9,
+    "Russia": 9,
+    "Lebanon": 8,
+    "South Korea": 7,
+    "Singapore": 7,
+    "New Zealand": 7,
+    "Canada": 7,
+    "Iran": 7,
+    "Tonga": 7,
+    "Thailand": 7,
+    "Fiji": 7,
+    "Solomon Islands": 6,
+    "Tuvalu": 6,
+    "Vietnam": 5,
+    "Vanuatu": 5,
+    "Germany": 4,
+    "Afghanistan": 4,
+    "Palestine": 4,
+    "Jordan": 4,
+    "Papua New Guinea": 3,
+    "Kiribati": 3,
+    "Philippines": 3,
+    "China": 3,
+    "Myanmar": 2,
+    "North Korea": 2,
+    "United Arab Emirates": 2,
+    "Sudan": 2,
+    "Qatar": 1,
+    "Samoa": 1,
+    "European Union": 1,
+    "Cook Islands": 1,
+    "Türkiye": 1,
+    "Egypt": 1
+  },
+  "positive_by_warmth": {
+    "Endorse": 57,
+    "Appreciate": 63,
+    "Commend": 60,
+    "Solidarity": 39
+  },
+  "positive_by_month": {
+    "2023-05": 6,
+    "2023-07": 10,
+    "2023-08": 1,
+    "2023-09": 6,
+    "2023-10": 10,
+    "2023-11": 3,
+    "2023-12": 2,
+    "2024-01": 5,
+    "2024-02": 8,
+    "2024-03": 10,
+    "2024-04": 1,
+    "2024-05": 9,
+    "2024-06": 7,
+    "2024-07": 10,
+    "2024-08": 7,
+    "2024-09": 5,
+    "2024-10": 15,
+    "2024-11": 4,
+    "2024-12": 8,
+    "2025-01": 3,
+    "2025-02": 4,
+    "2025-03": 3,
+    "2025-04": 1,
+    "2025-05": 6,
+    "2025-06": 3,
+    "2025-07": 15,
+    "2025-08": 10,
+    "2025-09": 11,
+    "2025-10": 6,
+    "2025-12": 3,
+    "2026-01": 5,
+    "2026-02": 10,
+    "2026-03": 4,
+    "2026-04": 6,
+    "2026-05": 2
+  },
+  "positive_by_country_warmth": {
+    "Timor-Leste": {
+      "Endorse": 6,
+      "Solidarity": 1,
+      "Commend": 5
+    },
+    "South Korea": {
+      "Appreciate": 5,
+      "Endorse": 1,
+      "Solidarity": 1
+    },
+    "Japan": {
+      "Commend": 4,
+      "Endorse": 5,
+      "Appreciate": 4
+    },
+    "Singapore": {
+      "Appreciate": 4,
+      "Commend": 1,
+      "Endorse": 2
+    },
+    "Israel": {
+      "Commend": 3,
+      "Solidarity": 2,
+      "Appreciate": 5
+    },
+    "Lebanon": {
+      "Commend": 2,
+      "Endorse": 1,
+      "Appreciate": 5
+    },
+    "Malaysia": {
+      "Appreciate": 1,
+      "Solidarity": 1,
+      "Commend": 4,
+      "Endorse": 3
+    },
+    "Vietnam": {
+      "Endorse": 1,
+      "Commend": 3,
+      "Appreciate": 1
+    },
+    "Indonesia": {
+      "Solidarity": 3,
+      "Appreciate": 6,
+      "Commend": 7,
+      "Endorse": 6
+    },
+    "New Zealand": {
+      "Commend": 3,
+      "Solidarity": 3,
+      "Appreciate": 1
+    },
+    "Qatar": {
+      "Appreciate": 1
+    },
+    "Samoa": {
+      "Commend": 1
+    },
+    "Ukraine": {
+      "Endorse": 2,
+      "Solidarity": 11,
+      "Commend": 1,
+      "Appreciate": 2
+    },
+    "Russia": {
+      "Solidarity": 6,
+      "Appreciate": 1,
+      "Commend": 2
+    },
+    "Canada": {
+      "Solidarity": 2,
+      "Endorse": 2,
+      "Appreciate": 3
+    },
+    "Germany": {
+      "Commend": 2,
+      "Endorse": 1,
+      "Solidarity": 1
+    },
+    "Iran": {
+      "Solidarity": 5,
+      "Endorse": 1,
+      "Appreciate": 1
+    },
+    "Solomon Islands": {
+      "Commend": 4,
+      "Endorse": 2
+    },
+    "Tonga": {
+      "Commend": 4,
+      "Appreciate": 3
+    },
+    "India": {
+      "Appreciate": 2,
+      "Endorse": 6,
+      "Solidarity": 1,
+      "Commend": 3
+    },
+    "Thailand": {
+      "Endorse": 3,
+      "Solidarity": 1,
+      "Commend": 2,
+      "Appreciate": 1
+    },
+    "United Kingdom": {
+      "Endorse": 5,
+      "Appreciate": 5,
+      "Commend": 4,
+      "Solidarity": 2
+    },
+    "European Union": {
+      "Commend": 1
+    },
+    "Papua New Guinea": {
+      "Endorse": 1,
+      "Appreciate": 1,
+      "Commend": 1
+    },
+    "Afghanistan": {
+      "Solidarity": 3,
+      "Appreciate": 1
+    },
+    "Fiji": {
+      "Appreciate": 4,
+      "Endorse": 2,
+      "Commend": 1
+    },
+    "Vanuatu": {
+      "Appreciate": 1,
+      "Endorse": 3,
+      "Commend": 1
+    },
+    "Palestine": {
+      "Appreciate": 3,
+      "Solidarity": 1
+    },
+    "Cook Islands": {
+      "Appreciate": 1
+    },
+    "Tuvalu": {
+      "Endorse": 3,
+      "Appreciate": 1,
+      "Commend": 2
+    },
+    "Kiribati": {
+      "Appreciate": 2,
+      "Endorse": 1
+    },
+    "Philippines": {
+      "Endorse": 1,
+      "Commend": 1,
+      "Appreciate": 1
+    },
+    "Myanmar": {
+      "Solidarity": 2
+    },
+    "Türkiye": {
+      "Appreciate": 1
+    },
+    "Jordan": {
+      "Appreciate": 4
+    },
+    "China": {
+      "Appreciate": 1,
+      "Commend": 2
+    },
+    "North Korea": {
+      "Solidarity": 2
+    },
+    "Egypt": {
+      "Appreciate": 1
+    },
+    "United Arab Emirates": {
+      "Appreciate": 2
+    },
+    "Sudan": {
+      "Appreciate": 2
+    }
+  },
+  "net_by_country": {
+    "Russia": -22,
+    "Iran": -15,
+    "Israel": -12,
+    "North Korea": -7,
+    "Belarus": -4,
+    "Iraq": -2,
+    "Yemen": -2,
+    "Lebanon": -2,
+    "Myanmar": -1,
+    "China": -1,
+    "Qatar": -1,
+    "Venezuela": -1,
+    "European Union": -1,
+    "Saudi Arabia": -1,
+    "Afghanistan": -1,
+    "Syria": -1,
+    "United Arab Emirates": 0,
+    "Samoa": 1,
+    "Cook Islands": 1,
+    "Egypt": 1,
+    "Türkiye": 1,
+    "Sudan": 2,
+    "Kiribati": 3,
+    "Jordan": 3,
+    "Philippines": 3,
+    "Germany": 3,
+    "Papua New Guinea": 3,
+    "Palestine": 4,
+    "Canada": 5,
+    "Vanuatu": 5,
+    "Vietnam": 5,
+    "Solomon Islands": 6,
+    "Tuvalu": 6,
+    "South Korea": 6,
+    "Thailand": 6,
+    "Tonga": 7,
+    "Singapore": 7,
+    "New Zealand": 7,
+    "Fiji": 7,
+    "Ukraine": 7,
+    "Malaysia": 9,
+    "India": 11,
+    "United Kingdom": 11,
+    "Timor-Leste": 12,
+    "Japan": 13,
+    "Indonesia": 22
+  },
+  "needs_review": 17
+}

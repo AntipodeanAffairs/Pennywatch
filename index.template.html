@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PennyWatch — tracking Penny Wong's public statements on foreign countries</title>
+<meta name="description" content="PennyWatch, from Antipodean Affairs — an open, auditable tally of public statements (critical and positive) issued by Australian Foreign Minister Penny Wong on her X feed.">
+<meta name="author" content="Antipodean Affairs">
+<meta property="og:title" content="PennyWatch — Antipodean Affairs">
+<meta property="og:description" content="An open, auditable tally of Australian Foreign Minister Penny Wong's public statements about foreign countries and officials — what she condemns and what she praises, sourced from her X feed. Published by Antipodean Affairs.">
+<meta property="og:site_name" content="Antipodean Affairs">
+<meta property="og:type" content="website">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #f7f5f1;
+    --panel: #ffffff;
+    --ink: #1b1b1b;
+    --muted: #5a5a5a;
+    --rule: #e3dfd6;
+    --accent: #8a1c1c;
+    --condemn: #8a1c1c;
+    --criticise: #c25a1a;
+    --concern: #b89020;
+    --call: #4c6a86;
+    --endorse: #1a5d1a;
+    --commend: #2e7d32;
+    --appreciate: #5ba85e;
+    --solidarity: #9bc89e;
+    --positive-accent: #1a5d1a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.55 Georgia, "Times New Roman", serif;
+  }
+  header {
+    border-bottom: 1px solid var(--rule);
+    padding: 36px 24px 26px;
+    background: var(--panel);
+  }
+  header .wrap { max-width: 1100px; margin: 0 auto; }
+  .publisher {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .publisher a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .publisher a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .wordmark {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  h1 {
+    font-size: 44px;
+    margin: 0;
+    letter-spacing: -0.025em;
+    color: var(--accent);
+  }
+  h1 .penny { color: var(--accent); }
+  h1 .watch { color: var(--ink); }
+  .tagline {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+  .deck {
+    color: var(--ink);
+    font-size: 18px;
+    margin: 14px 0 8px;
+    max-width: 740px;
+    line-height: 1.5;
+  }
+  .deck-sub {
+    color: var(--muted);
+    font-size: 15px;
+    margin: 0 0 18px;
+    max-width: 740px;
+  }
+  .meta {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .meta strong { color: var(--ink); }
+  .sample-banner {
+    background: #fff5cc;
+    border: 1px solid #e1c849;
+    color: #5a4500;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-top: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+  }
+  main { max-width: 1100px; margin: 0 auto; padding: 24px; }
+  section { margin-bottom: 40px; }
+  h2 {
+    font-size: 22px;
+    margin: 0 0 14px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 4px;
+  }
+  .totals {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+  }
+  .stat {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    padding: 16px 18px;
+  }
+  .stat .n {
+    font-size: 38px;
+    line-height: 1.05;
+    font-weight: bold;
+    color: var(--accent);
+  }
+  .stat .l {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    padding: 18px;
+  }
+  .chart-wrap { position: relative; height: 380px; }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .swatch {
+    display: inline-block;
+    width: 12px; height: 12px;
+    margin-right: 6px;
+    vertical-align: -1px;
+  }
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px;
+  }
+  .controls input, .controls select {
+    font: inherit;
+    padding: 6px 10px;
+    border: 1px solid var(--rule);
+    background: var(--panel);
+  }
+  .controls input { flex: 1 1 200px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  th {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+  }
+  td.date { white-space: nowrap; color: var(--muted); width: 90px; }
+  td.targets { width: 160px; }
+  td a { color: var(--accent); text-decoration: none; }
+  td a:hover { text-decoration: underline; }
+  .tag {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 3px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: white;
+    font-weight: 600;
+  }
+  .tag-condemn { background: var(--condemn); }
+  .tag-criticise { background: var(--criticise); }
+  .tag-concern { background: var(--concern); }
+  .tag-call { background: var(--call); }
+  .tag-endorse { background: var(--endorse); }
+  .tag-commend { background: var(--commend); }
+  .tag-appreciate { background: var(--appreciate); }
+  .tag-solidarity { background: var(--solidarity); color: #1a3a1c; }
+  .tone-dot {
+    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    margin-right: 4px; vertical-align: 1px;
+  }
+  .tone-critical { background: var(--accent); }
+  .tone-positive { background: var(--endorse); }
+  .tone-mixed { background: linear-gradient(135deg, var(--accent) 0%, var(--accent) 50%, var(--endorse) 50%, var(--endorse) 100%); }
+  .pill {
+    display: inline-block;
+    margin: 1px 2px 1px 0;
+    padding: 1px 7px;
+    background: #efeae0;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+  .pill.non-state { background: #f0e5ff; }
+  .pill.crit { background: #f5d8d8; }
+  .pill.pos { background: #d6ecd6; }
+  .pill.both { background: linear-gradient(90deg, #f5d8d8 50%, #d6ecd6 50%); }
+  .review {
+    color: #a05; font-size: 11px; margin-left: 4px;
+  }
+  .methodology {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    padding: 24px 30px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .methodology h3 {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    margin: 24px 0 8px;
+    color: var(--ink);
+  }
+  .methodology h3:first-child { margin-top: 0; }
+  .methodology table {
+    margin: 10px 0 14px;
+    font-size: 14px;
+  }
+  .methodology th { background: #f3efe6; }
+  .methodology code {
+    background: #f3efe6;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 13px;
+  }
+  .methodology ul, .methodology ol { padding-left: 22px; }
+  .methodology li { margin-bottom: 4px; }
+  .methodology .version {
+    margin-top: 24px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 20px 24px;
+    color: var(--muted);
+    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    text-align: center;
+  }
+  footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="publisher">From <a href="#about">Antipodean Affairs</a></div>
+    <div class="wordmark">
+      <h1><span class="penny">Penny</span><span class="watch">Watch</span></h1>
+      <span class="tagline">A foreign-policy statement tracker</span>
+    </div>
+    <p class="deck">PennyWatch is an open, auditable tally of public statements — both <strong>critical</strong> and <strong>positive</strong> — issued by Australian Foreign Minister Senator Penny Wong on her X feed, since her swearing-in on 1 June 2022.</p>
+    <p class="deck-sub">Every statement is sourced to a specific tweet, attributed to the country, government, or official it concerns, and tagged on one of two scales: a four-tier <strong>critical</strong> scale (Condemn → Criticise → Concern → Call for action) or a four-tier <strong>positive</strong> scale (Endorse → Commend → Appreciate → Solidarity). A single tweet may register as both at once. The classifier, the full target list, and every inclusion rule are <a href="#methodology">published below</a> so readers can audit, dispute, or replicate the counts. The aim is not to argue a verdict but to make the pattern of statements visible — what's said, about whom, how warmly or critically, and when.</p>
+    <div class="meta">
+      <span>Source: <strong id="m-source"></strong></span>
+      <span>Since: <strong id="m-since"></strong></span>
+      <span>Methodology: <strong>v<span id="m-method"></span></strong> &middot; <a href="#methodology">read the rules</a></span>
+      <span>Data updated: <strong id="m-gen"></strong></span>
+    </div>
+    <div id="sample-banner" class="sample-banner" style="display:none">
+      <strong>Sample data.</strong> This page is currently showing illustrative seed data, not real classified tweets. Run <code>build_tracker.py</code> with an X API key to replace it with the real dataset.
+    </div>
+  </div>
+</header>
+
+<main>
+  <section>
+    <h2>Headline numbers</h2>
+    <div class="totals" id="totals"></div>
+  </section>
+
+  <section>
+    <h2>Critical statements by country</h2>
+    <div class="panel">
+      <div class="chart-wrap"><canvas id="countryChart"></canvas></div>
+      <div class="legend">
+        <span><span class="swatch" style="background:var(--condemn)"></span>Condemn</span>
+        <span><span class="swatch" style="background:var(--criticise)"></span>Criticise</span>
+        <span><span class="swatch" style="background:var(--concern)"></span>Concern</span>
+        <span><span class="swatch" style="background:var(--call)"></span>Call for action</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Positive statements by country</h2>
+    <div class="panel">
+      <div class="chart-wrap"><canvas id="positiveCountryChart"></canvas></div>
+      <div class="legend">
+        <span><span class="swatch" style="background:var(--endorse)"></span>Endorse</span>
+        <span><span class="swatch" style="background:var(--commend)"></span>Commend</span>
+        <span><span class="swatch" style="background:var(--appreciate)"></span>Appreciate</span>
+        <span><span class="swatch" style="background:var(--solidarity)"></span>Solidarity</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Timeline</h2>
+    <div class="panel">
+      <div class="chart-wrap"><canvas id="monthChart"></canvas></div>
+      <div class="legend">
+        <span><span class="swatch" style="background:var(--accent)"></span>Critical statements</span>
+        <span><span class="swatch" style="background:var(--endorse)"></span>Positive statements</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About</h2>
+    <div class="methodology">
+      <p><strong>PennyWatch</strong> is a project of <strong>Antipodean Affairs</strong>, an independent editorial outfit focused on Australian foreign policy and the public record of those who conduct it.</p>
+      <p>Our view is that public, on-the-record statements by senior ministers — the things a foreign minister chooses to condemn, what they choose to welcome, who they choose to stand with, who they choose to criticise, and what they choose to stay silent on — are themselves a window into a country's foreign policy posture. PennyWatch records all of them: the critical statements and the positive statements, side by side. Counting them is not a verdict; it is a starting point for an honest argument.</p>
+      <p>Every entry on this page is sourced to a specific tweet on the Foreign Minister's verified X account, and every rule we use to include, exclude, or tag a statement is published in the <a href="#methodology">methodology</a> below. If you find a misclassified statement, a missing one, or a flaw in the rules, we want to hear about it; the methodology is versioned so corrections are visible.</p>
+      <p>PennyWatch has no affiliation with any political party, candidate, foreign government, or the Department of Foreign Affairs and Trade.</p>
+    </div>
+  </section>
+
+  <section id="methodology">
+    <h2>Methodology</h2>
+    <div class="methodology">
+      <p>This tracker counts public statements by Senator the Hon. Penny Wong, Australian Minister for Foreign Affairs, directed <strong>critically or positively</strong> at named foreign countries, governments, or named foreign ministers/officials. Statements are sourced from her official X account, <a href="https://x.com/SenatorWong" rel="noopener" target="_blank">@SenatorWong</a>, back to her swearing-in on <strong>1 June 2022</strong>.</p>
+      <p>Trackers of this kind are only as credible as their inclusion rules. We publish ours in full so readers can audit, dispute, or replicate them.</p>
+
+      <h3>What counts as a tracked statement</h3>
+      <p>A tweet is included if <strong>both</strong> of the following are true:</p>
+      <ol>
+        <li>It contains <strong>either</strong> a critical <strong>or</strong> a positive trigger word from the lists below.</li>
+        <li>It identifies a target — a country, government, regime, or named foreign minister/official from the target list below.</li>
+      </ol>
+      <p>A single tweet may be <strong>both</strong> critical and positive (e.g. praising a people while criticising their government). These are recorded as <strong>mixed</strong> and appear in both views. Pure retweets without added commentary are excluded.</p>
+
+      <h3>Critical severity tiers</h3>
+      <table>
+        <thead><tr><th>Tier</th><th>Trigger words (non-exhaustive)</th><th>Example phrasing</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tag-condemn">Condemn</span></td><td>condemn, condemnation, denounce</td><td>"Australia condemns…"</td></tr>
+          <tr><td><span class="tag tag-criticise">Criticise</span></td><td>deplore, unacceptable, abhorrent, outrageous, reject, appalled, atrocity, sanctions</td><td>"These actions are unacceptable"</td></tr>
+          <tr><td><span class="tag tag-concern">Concern</span></td><td>concerned, deeply concerned, troubled, alarmed, dismayed, disturbed, regret, (call for/urge) restraint, exercise of restraint, maximum/utmost restraint, "how X defends itself matters", "manner in which X defends"</td><td>"deeply concerned by…", "urges restraint", "how Israel defends itself matters"</td></tr>
+          <tr><td><span class="tag tag-call">Call for action</span></td><td>must end/stop/cease/release, must be allowed/protected/guaranteed, demand, call(ing/ed) on [X], calling/called for, urge/urging [X] to, immediate/unimpeded ceasefire/access/withdrawal</td><td>"calling on Israel to allow aid…", "must release all hostages"</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Positive warmth tiers</h3>
+      <p>Added in v1.2. A critical-only tally tells half a story — a foreign minister's public record is the sum of what they choose to celebrate as well as what they choose to condemn.</p>
+      <table>
+        <thead><tr><th>Tier</th><th>Trigger words (non-exhaustive)</th><th>Example phrasing</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tag-endorse">Endorse</span></td><td>congratulate, commend, applaud, salute, warmly welcome, celebrate, honour</td><td>"Australia warmly congratulates…"</td></tr>
+          <tr><td><span class="tag tag-commend">Commend</span></td><td>welcome, proud, pleased to welcome/meet/host, strongly support, delighted</td><td>"Pleased to host PM X in Canberra"</td></tr>
+          <tr><td><span class="tag tag-appreciate">Appreciate</span></td><td>thank, grateful, appreciate, value, recognise, close partner / partnership / friendship, enduring partnership</td><td>"We are grateful for our close partnership with…"</td></tr>
+          <tr><td><span class="tag tag-solidarity">Solidarity</span></td><td>thoughts with, hearts go out, condolences, mourn, stand with the people of, in solidarity with</td><td>"Our thoughts are with the people of X"</td></tr>
+        </tbody>
+      </table>
+      <p>The <strong>Solidarity</strong> tier captures expressions of sympathy and standing-with that v1.0 excluded entirely. We now count these as positive-toward statements, because choosing to make them is itself a foreign-policy signal — just as choosing <em>not</em> to make them is.</p>
+
+      <h3>Target list</h3>
+      <p>A statement only counts if the target is identifiable. We track three target categories.</p>
+      <ul>
+        <li><strong>Country / government</strong> — e.g. "Russia", "Iran", "the Myanmar military regime", "the Israeli cabinet", "Japan", "Indonesia".</li>
+        <li><strong>Named foreign official</strong> — any named head of state, head of government, cabinet minister, senior military commander, or other senior government official. <strong>Criticism (or praise) of a named official is attributed to their country.</strong>
+          <ul>
+            <li>A statement criticising Israeli National Security Minister <strong>Itamar Ben-Gvir</strong> is recorded as a statement targeting <strong>Israel</strong>.</li>
+            <li>A statement praising Indonesian President <strong>Prabowo</strong> or thanking PNG PM <strong>James Marape</strong> is recorded as a positive statement toward <strong>Indonesia</strong> / <strong>Papua New Guinea</strong>.</li>
+          </ul>
+        </li>
+        <li><strong>State entity</strong> — e.g. "the IRGC", "the Russian Foreign Ministry", "the IDF General Staff".</li>
+      </ul>
+      <p>Named individuals affiliated with a <strong>non-state actor</strong> (e.g. Yahya Sinwar / Hamas, Hassan Nasrallah / Hezbollah) attribute to the non-state actor — they do <strong>not</strong> contribute to any country's total. References to a region without a clear state target ("we are concerned about the situation in the Middle East") are <strong>excluded</strong>. If one statement targets multiple actors, it is counted <strong>once per distinct target</strong>.</p>
+
+      <h3>Sentence-level tone scoping</h3>
+      <p>When a tweet contains both critical and positive language, targets are attributed based on the <strong>sentence</strong> they appear in. A target only receives a critical tier if it appears in a sentence that contains a critical trigger, and only receives a positive tier if it appears in a sentence with a positive trigger.</p>
+      <p><em>Example:</em> "Australia condemns Russia's invasion of Ukraine. We stand with the Ukrainian people." → <strong>Russia</strong> is recorded as a Condemn target; <strong>Ukraine</strong> is recorded as a Solidarity target. Russia is <strong>not</strong> credited with the Solidarity statement, despite both words appearing in the same tweet.</p>
+
+      <h3>Edge cases</h3>
+      <ul>
+        <li><strong>Joint statements.</strong> Tweets attributed to a joint statement (AUKUS, Quad, G7) are included only if Senator Wong personally posts them from her account.</li>
+        <li><strong>Domestic political commentary.</strong> Excluded.</li>
+        <li><strong>Australian citizens detained abroad.</strong> Included as critical if they criticise the detaining state; excluded if purely consular/welfare.</li>
+        <li><strong>Sanctions announcements.</strong> Included as Criticise-tier at minimum.</li>
+        <li><strong>Non-state actors</strong> (Hamas, Houthis, etc.). Recorded separately. Do not contribute to any country's total unless the tweet separately names a country.</li>
+        <li><strong>A tweet praising a people while criticising their government</strong> (e.g. "We stand with the brave women of Iran against the regime") is recorded as <strong>mixed</strong> — both Solidarity-positive and the relevant critical tier, both attributed to Iran.</li>
+      </ul>
+
+      <h3>Known limitations</h3>
+      <ol>
+        <li><strong>Keyword-based classification has false positives.</strong> A tweet that says "Australia condemns the attacks by X on Y" tags both X and Y as targets, even though the criticism is only of X. Praise of an individual who shares a name with a country term will mis-attribute. We flag low-confidence cases for review.</li>
+        <li><strong>The X feed is not the complete record.</strong> Press releases, multilateral joint statements, Senate speeches, and doorstop interviews are not captured.</li>
+        <li><strong>The denominator matters.</strong> A raw count of "country X was criticised N times" is not, on its own, evidence of bias. It must be read alongside the newsworthy events involving each country, the criticism levelled by comparable democracies, and the positive-statement count for the same country — which is exactly what the positive view above is for.</li>
+        <li><strong>Translation and transliteration.</strong> Names with multiple spellings (e.g. "Myanmar" vs "Burma", "Erdoğan" vs "Erdogan", "Ben-Gvir" vs "Ben Gvir") are normalised in the target list.</li>
+      </ol>
+
+      <h3>Changelog</h3>
+      <ul>
+        <li><strong>v1.3.2</strong> — Added <em>victim-pattern exclusion</em>. When a sentence describes violence done TO a country ("attacks on Israel", "killing of Israeli embassy staff", "bombing of Russian diplomats"), the country named is the victim, not the target of the criticism. The classifier now strips victim countries from the critical-target list for that sentence. Same shape as the co-signatory and descriptive-construction exclusions. Fixes the long-standing "condemns attacks on X by Y" false positive that was wrongly tagging X as a criticism target. Content-neutral, applies symmetrically to any country.</li>
+        <li><strong>v1.3.1</strong> — Closed Middle East country coverage gap (added Lebanon, Jordan, Egypt, UAE, Qatar, Iraq, Yemen, Libya; added "Hizballah" spelling). Added diplomatic-restraint patterns to the Concern tier (content-neutral, fires identically across all targets). Added <em>descriptive-construction exclusion</em>: country names in attributive phrases like "Indonesian-funded hospital" or "Iranian-backed militia" describe a noun, not the statement's target, so they're stripped from per-sentence target lists. Honest consequence: some tweets that were mis-tagged in v1.3 are now correctly classified as having no identifiable country target and dropped from the dataset entirely.</li>
+        <li><strong>v1.3</strong> — Broadened the Call-for-action trigger list to capture grammatical forms (gerund/past tense/multi-word "urge X Y to") and passive constructions ("must be allowed/protected") missed in v1.2. Surfaced by a noted false negative on a 2025-04-24 Israel/Gaza statement where the call on Israel was missed and only the call on Hamas was recorded. Added <em>co-signatory exclusion</em>: countries appearing in "Australia joins X in calling on Y" constructions are recognised as joining the statement, not as its target. Content-neutral: the same patterns apply to every target equally.</li>
+        <li><strong>v1.2</strong> — Added positive-statement tracking. Clarified that criticism or praise of any named cabinet minister or senior official attributes to their country. Substantially expanded the country list. Introduced sentence-level tone scoping.</li>
+        <li><strong>v1.0</strong> — Critical-only tracker with four severity tiers.</li>
+      </ul>
+
+      <div class="version">
+        Methodology version <strong>v<span class="m-method-inline"></span></strong> &middot; Last updated <strong><span class="m-gen-inline"></span></strong>.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>All classified statements</h2>
+    <div class="controls">
+      <input id="q" placeholder="Search text…">
+      <select id="f-country"><option value="">All countries</option></select>
+      <select id="f-tone">
+        <option value="">All tones</option>
+        <option value="critical">Critical only</option>
+        <option value="positive">Positive only</option>
+        <option value="mixed">Mixed only</option>
+      </select>
+      <select id="f-tier">
+        <option value="">All tiers</option>
+        <optgroup label="Critical">
+          <option>Condemn</option><option>Criticise</option><option>Concern</option><option>Call for action</option>
+        </optgroup>
+        <optgroup label="Positive">
+          <option>Endorse</option><option>Commend</option><option>Appreciate</option><option>Solidarity</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <table>
+        <thead><tr><th>Date</th><th>Tone</th><th>Tier</th><th>Targets</th><th>Statement</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <strong>PennyWatch</strong> &middot; a project of <a href="#about">Antipodean Affairs</a>. Independent, open-source, no party affiliation. Counts are computed from a transparent keyword classifier &mdash; see the <a href="#methodology">methodology</a> for limitations and known false positives.
+</footer>
+
+<script id="payload" type="application/json">/*__DATA__*/</script>
+<script>
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const SEVERITY_COLOURS = {
+  "Condemn": css("--condemn"), "Criticise": css("--criticise"),
+  "Concern": css("--concern"), "Call for action": css("--call"),
+};
+const WARMTH_COLOURS = {
+  "Endorse": css("--endorse"), "Commend": css("--commend"),
+  "Appreciate": css("--appreciate"), "Solidarity": css("--solidarity"),
+};
+const TIER_CLASS = {
+  "Condemn": "tag-condemn", "Criticise": "tag-criticise",
+  "Concern": "tag-concern", "Call for action": "tag-call",
+  "Endorse": "tag-endorse", "Commend": "tag-commend",
+  "Appreciate": "tag-appreciate", "Solidarity": "tag-solidarity",
+};
+
+const payload = JSON.parse(document.getElementById("payload").textContent);
+const { dataset, summary } = payload;
+
+document.getElementById("m-source").textContent = dataset.source_handle;
+document.getElementById("m-since").textContent = dataset.since.slice(0, 10);
+document.getElementById("m-method").textContent = dataset.methodology_version;
+document.getElementById("m-gen").textContent = dataset.generated_at.slice(0, 10);
+document.querySelectorAll(".m-method-inline").forEach(el => el.textContent = dataset.methodology_version);
+document.querySelectorAll(".m-gen-inline").forEach(el => el.textContent = dataset.generated_at.slice(0, 10));
+
+if (dataset.tweets.some(t => String(t.id).startsWith("SAMPLE"))) {
+  document.getElementById("sample-banner").style.display = "block";
+}
+
+// Headline stats — show critical + positive side by side
+const critCountries = Object.keys(summary.by_country);
+const posCountries = Object.keys(summary.positive_by_country);
+const totalsEl = document.getElementById("totals");
+const topCrit = critCountries[0] ? `${critCountries[0]} (${summary.by_country[critCountries[0]]})` : "—";
+const topPos = posCountries[0] ? `${posCountries[0]} (${summary.positive_by_country[posCountries[0]]})` : "—";
+const cards = [
+  ["Critical statements", summary.total_critical],
+  ["Positive statements", summary.total_positive],
+  ["Most-criticised", topCrit],
+  ["Most-praised", topPos],
+];
+totalsEl.innerHTML = cards.map(([l, n]) =>
+  `<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`).join("");
+
+// Critical country chart — stacked bars, sorted descending
+const sevOrder = ["Condemn", "Criticise", "Concern", "Call for action"];
+// Size each chart container by row count so labels never overlap.
+const ROW_PX = 26, CHART_PADDING_PX = 60;
+document.getElementById("countryChart").parentElement.style.height =
+  Math.max(380, critCountries.length * ROW_PX + CHART_PADDING_PX) + "px";
+document.getElementById("positiveCountryChart").parentElement.style.height =
+  Math.max(380, posCountries.length * ROW_PX + CHART_PADDING_PX) + "px";
+new Chart(document.getElementById("countryChart"), {
+  type: "bar",
+  data: {
+    labels: critCountries,
+    datasets: sevOrder.map(sev => ({
+      label: sev,
+      data: critCountries.map(c => (summary.by_country_severity[c] || {})[sev] || 0),
+      backgroundColor: SEVERITY_COLOURS[sev],
+    })),
+  },
+  options: {
+    indexAxis: "y",
+    responsive: true, maintainAspectRatio: false,
+    scales: {
+      x: { stacked: true, beginAtZero: true, ticks: { precision: 0 } },
+      y: { stacked: true, ticks: { autoSkip: false, font: { size: 12 } } },
+    },
+    plugins: { legend: { display: false } },
+  },
+});
+
+// Positive country chart — stacked bars with green gradient
+const warmthOrder = ["Endorse", "Commend", "Appreciate", "Solidarity"];
+new Chart(document.getElementById("positiveCountryChart"), {
+  type: "bar",
+  data: {
+    labels: posCountries,
+    datasets: warmthOrder.map(w => ({
+      label: w,
+      data: posCountries.map(c => (summary.positive_by_country_warmth[c] || {})[w] || 0),
+      backgroundColor: WARMTH_COLOURS[w],
+    })),
+  },
+  options: {
+    indexAxis: "y",
+    responsive: true, maintainAspectRatio: false,
+    scales: {
+      x: { stacked: true, beginAtZero: true, ticks: { precision: 0 } },
+      y: { stacked: true, ticks: { autoSkip: false, font: { size: 12 } } },
+    },
+    plugins: { legend: { display: false } },
+  },
+});
+
+// Monthly timeline — two datasets, critical (red) and positive (green)
+const allMonths = Array.from(new Set([...Object.keys(summary.by_month), ...Object.keys(summary.positive_by_month)])).sort();
+new Chart(document.getElementById("monthChart"), {
+  type: "bar",
+  data: {
+    labels: allMonths,
+    datasets: [
+      { label: "Critical", data: allMonths.map(m => summary.by_month[m] || 0), backgroundColor: css("--accent") },
+      { label: "Positive", data: allMonths.map(m => summary.positive_by_month[m] || 0), backgroundColor: css("--endorse") },
+    ],
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: { y: { beginAtZero: true, ticks: { precision: 0 } } },
+    plugins: { legend: { display: false } },
+  },
+});
+
+// Table + filters
+const rowsEl = document.getElementById("rows");
+const qEl = document.getElementById("q");
+const fcEl = document.getElementById("f-country");
+const ftoneEl = document.getElementById("f-tone");
+const ftierEl = document.getElementById("f-tier");
+
+// Country filter dropdown — union of critical and positive countries
+const allCountries = Array.from(new Set([...critCountries, ...posCountries])).sort();
+allCountries.forEach(c => {
+  const o = document.createElement("option");
+  const ncrit = summary.by_country[c] || 0;
+  const npos = summary.positive_by_country[c] || 0;
+  o.value = c; o.textContent = `${c} (${ncrit} crit / ${npos} pos)`;
+  fcEl.appendChild(o);
+});
+
+function render() {
+  const q = qEl.value.toLowerCase();
+  const fc = fcEl.value;
+  const ftone = ftoneEl.value;
+  const ftier = ftierEl.value;
+  const matches = dataset.tweets.filter(t => {
+    if (q && !t.text.toLowerCase().includes(q)) return false;
+    if (ftone && t.tone !== ftone) return false;
+    if (ftier && t.severity !== ftier && t.warmth !== ftier) return false;
+    if (fc) {
+      // Country filter respects the active tone filter
+      const inCrit = (t.critical_targets || []).includes(fc);
+      const inPos = (t.positive_targets || []).includes(fc);
+      if (ftone === "critical" && !inCrit) return false;
+      if (ftone === "positive" && !inPos) return false;
+      if (!ftone && !inCrit && !inPos) return false;
+    }
+    return true;
+  });
+  rowsEl.innerHTML = matches.map(t => {
+    const ct = new Set(t.critical_targets || []);
+    const pt = new Set(t.positive_targets || []);
+    const tags = (t.targets || []).map(c => {
+      const cls = ct.has(c) && pt.has(c) ? "both" : ct.has(c) ? "crit" : pt.has(c) ? "pos" : "";
+      return `<span class="pill ${cls}">${c}</span>`;
+    }).join("")
+      + (t.non_state_targets || []).map(c => `<span class="pill non-state">${c}</span>`).join("");
+    const review = t.needs_review ? '<span class="review">needs review</span>' : "";
+    const url = String(t.id).startsWith("SAMPLE") ? "#" : t.url;
+    const escText = t.text.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+    const toneLabel = t.tone === "mixed" ? "Mixed" : (t.tone === "positive" ? "Positive" : "Critical");
+    const toneCell = `<span class="tone-dot tone-${t.tone}"></span>${toneLabel}`;
+    const tierTags = [];
+    if (t.severity) tierTags.push(`<span class="tag ${TIER_CLASS[t.severity]}">${t.severity}</span>`);
+    if (t.warmth) tierTags.push(`<span class="tag ${TIER_CLASS[t.warmth]}">${t.warmth}</span>`);
+    return `<tr>
+      <td class="date">${t.created_at.slice(0, 10)}</td>
+      <td>${toneCell}</td>
+      <td>${tierTags.join(" ")}${review}</td>
+      <td class="targets">${tags}</td>
+      <td><a href="${url}" target="_blank" rel="noopener">${escText}</a></td>
+    </tr>`;
+  }).join("");
+  if (!matches.length) rowsEl.innerHTML = '<tr><td colspan="5" style="color:var(--muted);padding:20px">No matching statements.</td></tr>';
+}
+
+qEl.addEventListener("input", render);
+fcEl.addEventListener("change", render);
+ftoneEl.addEventListener("change", render);
+ftierEl.addEventListener("change", render);
+render();
+</script>
+</body>
+</html>

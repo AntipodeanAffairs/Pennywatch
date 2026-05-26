@@ -1,0 +1,197 @@
+[
+  {
+    "id": "SAMPLE-001",
+    "created_at": "2022-06-15T03:12:00Z",
+    "text": "[SAMPLE DATA] Australia condemns Russia's illegal and immoral invasion of Ukraine. We stand with the Ukrainian people."
+  },
+  {
+    "id": "SAMPLE-002",
+    "created_at": "2022-09-22T11:40:00Z",
+    "text": "[SAMPLE DATA] Australia is deeply concerned by the violent response of Iranian authorities to peaceful protests. The regime must respect the rights of Iranian women."
+  },
+  {
+    "id": "SAMPLE-003",
+    "created_at": "2022-10-05T22:01:00Z",
+    "text": "[SAMPLE DATA] North Korea's continued ballistic missile launches are a flagrant violation of UN Security Council resolutions. We condemn the DPRK's reckless actions."
+  },
+  {
+    "id": "SAMPLE-004",
+    "created_at": "2023-02-01T05:30:00Z",
+    "text": "[SAMPLE DATA] One year on from the Myanmar military coup, Australia continues to call on the regime to release all political prisoners and restore democracy."
+  },
+  {
+    "id": "SAMPLE-005",
+    "created_at": "2023-04-18T08:15:00Z",
+    "text": "[SAMPLE DATA] The situation in Sudan is alarming. We urge all parties to cease hostilities and protect civilians."
+  },
+  {
+    "id": "SAMPLE-006",
+    "created_at": "2023-07-09T13:55:00Z",
+    "text": "[SAMPLE DATA] Australia is troubled by reports of further human rights abuses in Xinjiang. We call on China to grant unfettered access to UN human rights monitors."
+  },
+  {
+    "id": "SAMPLE-007",
+    "created_at": "2023-10-08T19:22:00Z",
+    "text": "[SAMPLE DATA] Australia condemns the terrorist attacks by Hamas on Israel. We stand with Israel and recognise its right to defend itself."
+  },
+  {
+    "id": "SAMPLE-008",
+    "created_at": "2023-11-14T07:42:00Z",
+    "text": "[SAMPLE DATA] Australia is deeply concerned by the humanitarian situation in Gaza. We call on Israel to ensure humanitarian access and the protection of civilians."
+  },
+  {
+    "id": "SAMPLE-009",
+    "created_at": "2024-01-12T02:30:00Z",
+    "text": "[SAMPLE DATA] Houthi attacks on commercial shipping in the Red Sea are unacceptable. These actions threaten global trade and innocent lives."
+  },
+  {
+    "id": "SAMPLE-010",
+    "created_at": "2024-02-24T06:00:00Z",
+    "text": "[SAMPLE DATA] Two years on, Russia's brutal war of aggression against Ukraine continues. Australia stands with Ukraine and will continue to support its defence."
+  },
+  {
+    "id": "SAMPLE-011",
+    "created_at": "2024-03-30T10:15:00Z",
+    "text": "[SAMPLE DATA] Australia has imposed new sanctions on Russian and Iranian individuals responsible for cyber attacks. These actions are unacceptable."
+  },
+  {
+    "id": "SAMPLE-012",
+    "created_at": "2024-05-02T14:00:00Z",
+    "text": "[SAMPLE DATA] Australia condemns the abhorrent killing of aid workers in Gaza. Israel must do more to protect humanitarian workers and civilians."
+  },
+  {
+    "id": "SAMPLE-013",
+    "created_at": "2024-06-19T03:33:00Z",
+    "text": "[SAMPLE DATA] The deepening military cooperation between Russia and North Korea is deeply concerning. We condemn any transfer of weapons that prolong the war in Ukraine."
+  },
+  {
+    "id": "SAMPLE-014",
+    "created_at": "2024-08-04T09:25:00Z",
+    "text": "[SAMPLE DATA] Australia is appalled by the regime's violent crackdown on demonstrators in Venezuela. We call on the Maduro regime to respect the will of the Venezuelan people."
+  },
+  {
+    "id": "SAMPLE-015",
+    "created_at": "2024-09-30T11:05:00Z",
+    "text": "[SAMPLE DATA] The escalation in Lebanon is deeply concerning. We call on Hezbollah to stop its attacks and on Israel to exercise restraint."
+  },
+  {
+    "id": "SAMPLE-016",
+    "created_at": "2024-11-12T18:48:00Z",
+    "text": "[SAMPLE DATA] Australia condemns the arrest and detention of opposition figures in Belarus. The Lukashenko regime continues to repress its own people."
+  },
+  {
+    "id": "SAMPLE-017",
+    "created_at": "2025-01-20T22:10:00Z",
+    "text": "[SAMPLE DATA] Australia's thoughts are with the people of Türkiye following the earthquake. We stand ready to assist."
+  },
+  {
+    "id": "SAMPLE-018",
+    "created_at": "2025-03-08T07:12:00Z",
+    "text": "[SAMPLE DATA] On International Women's Day we remember the courageous women of Iran and Afghanistan. The Taliban's denial of women's rights is unacceptable."
+  },
+  {
+    "id": "SAMPLE-019",
+    "created_at": "2025-04-15T13:20:00Z",
+    "text": "[SAMPLE DATA] Australia is deeply concerned by reports of further attacks on civilians in Sudan. We urge the RSF and SAF to cease hostilities immediately."
+  },
+  {
+    "id": "SAMPLE-020",
+    "created_at": "2025-06-22T19:55:00Z",
+    "text": "[SAMPLE DATA] The IRGC's continued support for terrorism in the region is condemned. Australia stands with our partners against Iran's destabilising activities."
+  },
+  {
+    "id": "SAMPLE-021",
+    "created_at": "2025-08-30T04:00:00Z",
+    "text": "[SAMPLE DATA] Australia condemns the Assad regime's use of chemical weapons. Those responsible must be held to account."
+  },
+  {
+    "id": "SAMPLE-022",
+    "created_at": "2025-10-07T15:30:00Z",
+    "text": "[SAMPLE DATA] Two years on from the October 7 attacks, Australia remembers the victims and reiterates: Hamas must release all remaining hostages."
+  },
+  {
+    "id": "SAMPLE-023",
+    "created_at": "2025-12-05T08:45:00Z",
+    "text": "[SAMPLE DATA] Russia's continued strikes on Ukrainian civilian infrastructure are abhorrent. We condemn these attacks and stand with Ukraine."
+  },
+  {
+    "id": "SAMPLE-024",
+    "created_at": "2026-02-14T11:20:00Z",
+    "text": "[SAMPLE DATA] Australia is alarmed by the deteriorating human rights situation in Cuba. We call on the Cuban government to release political prisoners."
+  },
+  {
+    "id": "SAMPLE-025",
+    "created_at": "2026-04-30T06:30:00Z",
+    "text": "[SAMPLE DATA] The Israeli government's expansion of settlements is unacceptable and undermines the prospects for a two-state solution."
+  },
+  {
+    "id": "SAMPLE-026",
+    "created_at": "2026-05-01T08:00:00Z",
+    "text": "[SAMPLE DATA] Australia condemns the inflammatory comments by Israeli Minister Ben-Gvir. These statements are unacceptable and undermine prospects for peace."
+  },
+  {
+    "id": "SAMPLE-027",
+    "created_at": "2026-05-02T09:00:00Z",
+    "text": "[SAMPLE DATA] Comments by Finance Minister Smotrich calling for the annexation of the West Bank are deplorable and contrary to international law."
+  },
+  {
+    "id": "SAMPLE-028",
+    "created_at": "2022-08-15T03:00:00Z",
+    "text": "[SAMPLE DATA] Australia warmly congratulates Indonesia on its 77th Independence Day. Our deep partnership goes from strength to strength."
+  },
+  {
+    "id": "SAMPLE-029",
+    "created_at": "2022-12-10T07:30:00Z",
+    "text": "[SAMPLE DATA] Pleased to welcome Japanese Foreign Minister Hayashi to Adelaide. Our enduring partnership with Japan is a cornerstone of regional stability."
+  },
+  {
+    "id": "SAMPLE-030",
+    "created_at": "2023-05-19T10:00:00Z",
+    "text": "[SAMPLE DATA] Australia stands with the people of Ukraine. We commend President Zelensky's leadership and his country's defence of its sovereignty."
+  },
+  {
+    "id": "SAMPLE-031",
+    "created_at": "2023-07-22T05:20:00Z",
+    "text": "[SAMPLE DATA] Delighted to host PM Marape and the Papua New Guinea delegation in Canberra. Our friendship with PNG is a close partnership of equals."
+  },
+  {
+    "id": "SAMPLE-032",
+    "created_at": "2024-03-04T11:00:00Z",
+    "text": "[SAMPLE DATA] Australia thanks New Zealand for its leadership in the Pacific. We are grateful for our close partnership with Aotearoa."
+  },
+  {
+    "id": "SAMPLE-033",
+    "created_at": "2024-08-30T14:45:00Z",
+    "text": "[SAMPLE DATA] We applaud Indonesia's chairmanship of ASEAN and celebrate the deepening partnership between our two countries."
+  },
+  {
+    "id": "SAMPLE-034",
+    "created_at": "2025-02-06T22:00:00Z",
+    "text": "[SAMPLE DATA] Our thoughts are with the people of Türkiye and Syria following the earthquakes. Australia stands ready to assist."
+  },
+  {
+    "id": "SAMPLE-035",
+    "created_at": "2025-07-04T03:30:00Z",
+    "text": "[SAMPLE DATA] Pleased to meet UK Foreign Secretary Lammy in London. Our enduring partnership with the United Kingdom remains vital to global security."
+  },
+  {
+    "id": "SAMPLE-036",
+    "created_at": "2025-09-14T08:00:00Z",
+    "text": "[SAMPLE DATA] Australia warmly welcomes the Cook Islands as our newest treaty partner. We celebrate the strength of our Pacific family."
+  },
+  {
+    "id": "SAMPLE-037",
+    "created_at": "2025-11-22T13:00:00Z",
+    "text": "[SAMPLE DATA] Congratulations to India on the successful Quad summit. Our friendship with India and the leadership of PM Modi remain central to a stable Indo-Pacific."
+  },
+  {
+    "id": "SAMPLE-038",
+    "created_at": "2026-01-15T05:00:00Z",
+    "text": "[SAMPLE DATA] Australia is deeply grateful to the Philippines for hosting the regional dialogue. We value the close partnership with President Marcos and Foreign Secretary Manalo."
+  },
+  {
+    "id": "SAMPLE-039",
+    "created_at": "2026-03-08T07:00:00Z",
+    "text": "[SAMPLE DATA] On International Women's Day we salute the women leaders of Fiji, Samoa and the Pacific. We are proud of our partnership with you."
+  }
+]
