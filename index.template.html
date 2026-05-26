@@ -235,6 +235,18 @@
   .review {
     color: #a05; font-size: 11px; margin-left: 4px;
   }
+  .manual-badge {
+    display: inline-block;
+    margin-left: 4px;
+    padding: 1px 6px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: #fff5cc;
+    border: 1px solid #e1c849;
+    color: #5a4500;
+    border-radius: 3px;
+  }
   .methodology {
     background: var(--panel);
     border: 1px solid var(--rule);
@@ -426,12 +438,14 @@
       <ol>
         <li><strong>Keyword-based classification has false positives.</strong> A tweet that says "Australia condemns the attacks by X on Y" tags both X and Y as targets, even though the criticism is only of X. Praise of an individual who shares a name with a country term will mis-attribute. We flag low-confidence cases for review.</li>
         <li><strong>The X feed is not the complete record.</strong> Press releases, multilateral joint statements, Senate speeches, and doorstop interviews are not captured.</li>
+        <li><strong>The X API is not the complete X feed.</strong> The endpoint we use (<code>/2/users/:id/tweets</code>) does not always return every tweet the account has posted. Replies and conversation continuations are filtered intermittently for reasons X does not document. To compensate, we maintain a small <code>manual_tweets.json</code> file of tweets we have noticed the API miss, which is merged into the dataset and classified by the same rules. Tweets added via that mechanism are flagged in the table with a yellow <span class="manual-badge">manual</span> badge. Counts of manually-added tweets are reported separately in the build output so the proportion is auditable.</li>
         <li><strong>The denominator matters.</strong> A raw count of "country X was criticised N times" is not, on its own, evidence of bias. It must be read alongside the newsworthy events involving each country, the criticism levelled by comparable democracies, and the positive-statement count for the same country — which is exactly what the positive view above is for.</li>
         <li><strong>Translation and transliteration.</strong> Names with multiple spellings (e.g. "Myanmar" vs "Burma", "Erdoğan" vs "Erdogan", "Ben-Gvir" vs "Ben Gvir") are normalised in the target list.</li>
       </ol>
 
       <h3>Changelog</h3>
       <ul>
+        <li><strong>v1.3.3</strong> — Acknowledged a known limitation of the X API: the user-timeline endpoint does not always return every tweet, particularly replies. Added a <code>manual_tweets.json</code> mechanism so any tweet that the auto-fetch misses can be added by hand and runs through the same classifier. Manually-added tweets are flagged with a badge in the table. Expanded the X API request fields and added expansions to maximise reply coverage from the API.</li>
         <li><strong>v1.3.2</strong> — Added <em>victim-pattern exclusion</em>. When a sentence describes violence done TO a country ("attacks on Israel", "killing of Israeli embassy staff", "bombing of Russian diplomats"), the country named is the victim, not the target of the criticism. The classifier now strips victim countries from the critical-target list for that sentence. Same shape as the co-signatory and descriptive-construction exclusions. Fixes the long-standing "condemns attacks on X by Y" false positive that was wrongly tagging X as a criticism target. Content-neutral, applies symmetrically to any country.</li>
         <li><strong>v1.3.1</strong> — Closed Middle East country coverage gap (added Lebanon, Jordan, Egypt, UAE, Qatar, Iraq, Yemen, Libya; added "Hizballah" spelling). Added diplomatic-restraint patterns to the Concern tier (content-neutral, fires identically across all targets). Added <em>descriptive-construction exclusion</em>: country names in attributive phrases like "Indonesian-funded hospital" or "Iranian-backed militia" describe a noun, not the statement's target, so they're stripped from per-sentence target lists. Honest consequence: some tweets that were mis-tagged in v1.3 are now correctly classified as having no identifiable country target and dropped from the dataset entirely.</li>
         <li><strong>v1.3</strong> — Broadened the Call-for-action trigger list to capture grammatical forms (gerund/past tense/multi-word "urge X Y to") and passive constructions ("must be allowed/protected") missed in v1.2. Surfaced by a noted false negative on a 2025-04-24 Israel/Gaza statement where the call on Israel was missed and only the call on Hamas was recorded. Added <em>co-signatory exclusion</em>: countries appearing in "Australia joins X in calling on Y" constructions are recognised as joining the statement, not as its target. Content-neutral: the same patterns apply to every target equally.</li>
@@ -641,6 +655,7 @@ function render() {
     }).join("")
       + (t.non_state_targets || []).map(c => `<span class="pill non-state">${c}</span>`).join("");
     const review = t.needs_review ? '<span class="review">needs review</span>' : "";
+    const manual = t.manually_added ? '<span class="manual-badge" title="Manually added because the X API didn\'t return this tweet">manual</span>' : "";
     const url = String(t.id).startsWith("SAMPLE") ? "#" : t.url;
     const escText = t.text.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
     const toneLabel = t.tone === "mixed" ? "Mixed" : (t.tone === "positive" ? "Positive" : "Critical");
@@ -651,7 +666,7 @@ function render() {
     return `<tr>
       <td class="date">${t.created_at.slice(0, 10)}</td>
       <td>${toneCell}</td>
-      <td>${tierTags.join(" ")}${review}</td>
+      <td>${tierTags.join(" ")}${review}${manual}</td>
       <td class="targets">${tags}</td>
       <td><a href="${url}" target="_blank" rel="noopener">${escText}</a></td>
     </tr>`;

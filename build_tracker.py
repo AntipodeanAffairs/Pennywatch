@@ -41,7 +41,7 @@ from urllib.error import HTTPError
 
 HANDLE = "SenatorWong"
 SINCE = "2022-06-01T00:00:00Z"   # Wong sworn in as Foreign Minister
-METHODOLOGY_VERSION = "1.3.2"
+METHODOLOGY_VERSION = "1.3.3"
 
 HERE = Path(__file__).parent
 TWEETS_PATH = HERE / "tweets.json"
@@ -49,6 +49,7 @@ SUMMARY_PATH = HERE / "summary.json"
 SEED_PATH = HERE / "seed_tweets.json"
 HTML_PATH = HERE / "index.html"
 TEMPLATE_PATH = HERE / "index.template.html"
+MANUAL_PATH = HERE / "manual_tweets.json"   # tweets the X API missed
 
 # Critical severity tiers, ordered strongest → weakest. The classifier assigns
 # the strongest tier any trigger from the tweet matches.
@@ -492,7 +493,15 @@ def fetch_tweets(handle: str, since: str, bearer: str) -> list[dict]:
         params = {
             "max_results": "100",
             "start_time": since,
-            "tweet.fields": "created_at,text,public_metrics,referenced_tweets",
+            # v1.3.3: expanded tweet.fields and added expansions to coax X's
+            # API into returning replies and conversation continuations more
+            # reliably. The endpoint still has documented and undocumented
+            # filtering — see METHODOLOGY.md for the limitation note.
+            "tweet.fields": (
+                "created_at,text,public_metrics,referenced_tweets,"
+                "in_reply_to_user_id,conversation_id,author_id"
+            ),
+            "expansions": "in_reply_to_user_id,referenced_tweets.id,author_id",
             "exclude": "retweets",          # pure RTs excluded per methodology
         }
         if pagination_token:
@@ -507,31 +516,82 @@ def fetch_tweets(handle: str, since: str, bearer: str) -> list[dict]:
     return out
 
 
+def load_manual_tweets() -> list[dict]:
+    """Load manually-curated tweets (those the X API didn't return).
+
+    Schema (manual_tweets.json):
+        {
+          "tweets": [
+            {
+              "id": "2057237000168808476",
+              "created_at": "2026-05-20T23:08:17Z",
+              "text": "the full tweet text",
+              "added_by": "antipodean-affairs",  // optional
+              "note": "missed by X API"           // optional
+            },
+            ...
+          ]
+        }
+    """
+    if not MANUAL_PATH.exists():
+        return []
+    try:
+        data = json.loads(MANUAL_PATH.read_text())
+    except json.JSONDecodeError as e:
+        print(f"WARN: manual_tweets.json invalid JSON: {e}", file=sys.stderr)
+        return []
+    tweets = data.get("tweets", [])
+    # Mark each so build_dataset knows which entries came from this file
+    for t in tweets:
+        t["_manual"] = True
+    return tweets
+
+
 # ---------------------------------------------------------------------------
 # Pipeline
 # ---------------------------------------------------------------------------
 
 def build_dataset(raw_tweets: list[dict]) -> dict:
-    classified = []
+    # Deduplicate by id — if a manual tweet has the same id as one already
+    # returned by the API, keep the API version (so the API stays canonical).
+    seen: set[str] = set()
+    ordered: list[dict] = []
     for t in raw_tweets:
+        if t["id"] in seen:
+            continue
+        seen.add(t["id"])
+        ordered.append(t)
+
+    classified = []
+    n_manual = 0
+    for t in ordered:
         result = classify(t["text"])
         if not result:
             continue
-        classified.append({
+        record = {
             "id": t["id"],
             "url": f"https://x.com/{HANDLE}/status/{t['id']}",
             "created_at": t["created_at"],
             "text": t["text"],
             **result,
-        })
+        }
+        if t.get("_manual"):
+            record["manually_added"] = True
+            for k in ("added_by", "note"):
+                if k in t:
+                    record[k] = t[k]
+            n_manual += 1
+        classified.append(record)
+
     classified.sort(key=lambda c: c["created_at"], reverse=True)
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "methodology_version": METHODOLOGY_VERSION,
         "source_handle": f"@{HANDLE}",
         "since": SINCE,
-        "tweet_count_raw": len(raw_tweets),
+        "tweet_count_raw": len(ordered),
         "tweet_count_classified": len(classified),
+        "tweet_count_manual": n_manual,
         "tweets": classified,
     }
 
@@ -618,7 +678,8 @@ def main() -> int:
         print(f"Using seed dataset: {len(raw)} tweets", file=sys.stderr)
     elif args.no_fetch:
         existing = json.loads(TWEETS_PATH.read_text())
-        raw = [{"id": t["id"], "text": t["text"], "created_at": t["created_at"]}
+        raw = [{"id": t["id"], "text": t["text"], "created_at": t["created_at"],
+                "_manual": t.get("manually_added", False)}
                for t in existing["tweets"]]
         print(f"Reclassifying existing dataset: {len(raw)} tweets", file=sys.stderr)
     else:
@@ -629,6 +690,12 @@ def main() -> int:
         print(f"Fetching @{HANDLE} since {SINCE}…", file=sys.stderr)
         raw = fetch_tweets(HANDLE, SINCE, bearer)
 
+    # v1.3.3: merge in any manually-curated tweets that the X API missed.
+    manual = load_manual_tweets()
+    if manual:
+        print(f"Adding {len(manual)} manually-curated tweets from manual_tweets.json", file=sys.stderr)
+        raw = list(raw) + manual
+
     dataset = build_dataset(raw)
     summary = summarise(dataset)
 
@@ -638,7 +705,7 @@ def main() -> int:
 
     print(f"Classified {summary['total_classified']} / {dataset['tweet_count_raw']} tweets "
           f"({summary['total_critical']} critical, {summary['total_positive']} positive, "
-          f"{summary['total_mixed']} mixed)")
+          f"{summary['total_mixed']} mixed, {dataset['tweet_count_manual']} manual)")
     print(f"Top critical targets: {list(summary['by_country'].items())[:5]}")
     print(f"Top positive targets: {list(summary['positive_by_country'].items())[:5]}")
     print(f"Wrote {TWEETS_PATH.name}, {SUMMARY_PATH.name}, {HTML_PATH.name}")
