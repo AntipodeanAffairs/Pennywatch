@@ -1,0 +1,30 @@
+name: PennyWatch daily refresh
+
+on:
+  schedule:
+    - cron: '0 20 * * *'   # 20:00 UTC = ~6am AEST / 7am AEDT
+  workflow_dispatch:        # allows you to trigger it manually from the Actions tab
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch and classify tweets
+        env:
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+        run: python build_tracker.py
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy . --project-name=${{ secrets.CF_PROJECT_NAME }} --branch=main --commit-dirty=true
