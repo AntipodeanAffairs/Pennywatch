@@ -41,7 +41,13 @@ from urllib.error import HTTPError
 
 HANDLE = "SenatorWong"
 SINCE = "2022-06-01T00:00:00Z"   # Wong sworn in as Foreign Minister
-METHODOLOGY_VERSION = "1.3.8"
+METHODOLOGY_VERSION = "1.4.0"
+
+# v1.4.0: incremental fetching. Each daily run fetches only tweets newer
+# than the most recent tweet in the existing dataset, minus this overlap
+# window in days (to catch any tweets the previous run missed near the
+# boundary due to X API filtering or rate limits).
+INCREMENTAL_OVERLAP_DAYS = 5
 
 HERE = Path(__file__).parent
 TWEETS_PATH = HERE / "tweets.json"
@@ -880,30 +886,85 @@ def render_site(dataset: dict, summary: dict) -> None:
     HTML_PATH.write_text(html)
 
 
+def _existing_raw_from_dataset(existing: dict) -> list[dict]:
+    """Extract raw fields from an already-classified tweets.json, preserving
+    the manually_added / fetched_by_id flags so a re-classification run keeps
+    them intact."""
+    out = []
+    for t in existing.get("tweets", []):
+        out.append({
+            "id": t["id"],
+            "text": t["text"],
+            "created_at": t["created_at"],
+            "_manual": t.get("manually_added", False),
+            "_via_id_lookup": t.get("fetched_by_id", False),
+        })
+    return out
+
+
+def _incremental_start_time(existing_raw: list[dict]) -> str:
+    """v1.4.0: derive a 'fetch since' timestamp from the most-recent tweet
+    in the existing dataset, with an overlap window to catch boundary
+    misses. Falls back to SINCE if no existing data."""
+    if not existing_raw:
+        return SINCE
+    latest = max(t["created_at"] for t in existing_raw)
+    try:
+        when = datetime.fromisoformat(latest.replace("Z", "+00:00"))
+    except ValueError:
+        return SINCE
+    overlap_dt = when - timedelta(days=INCREMENTAL_OVERLAP_DAYS)
+    since_dt = datetime.fromisoformat(SINCE.replace("Z", "+00:00"))
+    if overlap_dt < since_dt:
+        return SINCE
+    return overlap_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-fetch", action="store_true",
                     help="skip the API call, reclassify existing tweets.json")
     ap.add_argument("--seed", action="store_true",
                     help="use seed_tweets.json instead of calling the API")
+    ap.add_argument("--full-fetch", action="store_true",
+                    help="force a full backfill from SINCE instead of incremental")
     args = ap.parse_args()
+
+    # Load existing dataset (if any) so we can carry forward across runs.
+    existing_raw: list[dict] = []
+    if TWEETS_PATH.exists() and not args.seed:
+        try:
+            existing = json.loads(TWEETS_PATH.read_text())
+            existing_raw = _existing_raw_from_dataset(existing)
+        except json.JSONDecodeError:
+            existing_raw = []
 
     if args.seed:
         raw = json.loads(SEED_PATH.read_text())
         print(f"Using seed dataset: {len(raw)} tweets", file=sys.stderr)
     elif args.no_fetch:
-        existing = json.loads(TWEETS_PATH.read_text())
-        raw = [{"id": t["id"], "text": t["text"], "created_at": t["created_at"],
-                "_manual": t.get("manually_added", False)}
-               for t in existing["tweets"]]
+        raw = existing_raw
         print(f"Reclassifying existing dataset: {len(raw)} tweets", file=sys.stderr)
     else:
         bearer = os.environ.get("X_BEARER_TOKEN")
         if not bearer:
             print("Set X_BEARER_TOKEN, or pass --seed / --no-fetch", file=sys.stderr)
             return 2
-        print(f"Fetching @{HANDLE} via timeline since {SINCE}…", file=sys.stderr)
-        raw = fetch_tweets(HANDLE, SINCE, bearer)
+
+        # v1.4.0: incremental fetch. Start from the latest existing tweet
+        # minus an overlap window, or from SINCE if forced / no existing data.
+        if args.full_fetch or not existing_raw:
+            start_time = SINCE
+            print(f"Full backfill from {start_time} (--full-fetch={args.full_fetch}, "
+                  f"existing={len(existing_raw)})", file=sys.stderr)
+        else:
+            start_time = _incremental_start_time(existing_raw)
+            print(f"Incremental fetch from {start_time} "
+                  f"({len(existing_raw)} existing tweets, {INCREMENTAL_OVERLAP_DAYS}d overlap)",
+                  file=sys.stderr)
+
+        print(f"Fetching @{HANDLE} via timeline…", file=sys.stderr)
+        raw = fetch_tweets(HANDLE, start_time, bearer)
         print(f"Fetching @{HANDLE} via search/recent (supplementary, last 7d)…", file=sys.stderr)
         recent = fetch_recent_via_search(HANDLE, bearer)
         # v1.3.4: merge by tweet id, keep timeline entry on conflict
@@ -955,6 +1016,19 @@ def main() -> int:
     if manual:
         print(f"Adding {len(manual)} manually-curated tweets from manual_tweets.json", file=sys.stderr)
         raw = list(raw) + manual
+
+    # v1.4.0: if this was an incremental fetch, merge with the existing
+    # dataset. Newly-fetched tweets take precedence on ID collision so
+    # any updated fields (e.g., new flags) win, but existing tweets that
+    # weren't refetched (because they're older than the start_time) are
+    # preserved. Skip merge for --seed (seed mode rebuilds from scratch).
+    if existing_raw and not args.seed:
+        new_ids = {t["id"] for t in raw}
+        kept_from_existing = [t for t in existing_raw if t["id"] not in new_ids]
+        print(f"v1.4.0 merge: existing {len(existing_raw)} + newly-fetched {len(raw)} "
+              f"= {len(kept_from_existing) + len(raw)} after dedupe",
+              file=sys.stderr)
+        raw = list(raw) + kept_from_existing
 
     dataset = build_dataset(raw)
     summary = summarise(dataset)
