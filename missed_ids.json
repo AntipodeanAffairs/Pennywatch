@@ -1,0 +1,6 @@
+{
+  "_comment": "Tweet IDs that the timeline/search/conversation-chase steps don't surface. Each ID is fetched via /2/tweets?ids=… which bypasses the filtering applied to user-timeline and search queries. To add an ID: copy it from a tweet URL (the digits after /status/), append it to the list. The script handles deduplication against the main dataset automatically. Tweets added via this path appear in the table with a 'direct-id' badge.",
+  "ids": [
+    "2057237192603570389"
+  ]
+}

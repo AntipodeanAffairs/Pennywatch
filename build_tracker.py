@@ -41,7 +41,7 @@ from urllib.error import HTTPError
 
 HANDLE = "SenatorWong"
 SINCE = "2022-06-01T00:00:00Z"   # Wong sworn in as Foreign Minister
-METHODOLOGY_VERSION = "1.3.6"
+METHODOLOGY_VERSION = "1.3.7"
 
 HERE = Path(__file__).parent
 TWEETS_PATH = HERE / "tweets.json"
@@ -50,6 +50,7 @@ SEED_PATH = HERE / "seed_tweets.json"
 HTML_PATH = HERE / "index.html"
 TEMPLATE_PATH = HERE / "index.template.html"
 MANUAL_PATH = HERE / "manual_tweets.json"   # tweets the X API missed
+MISSED_IDS_PATH = HERE / "missed_ids.json"  # tweet IDs to fetch directly by /2/tweets/?ids=...
 
 # Critical severity tiers, ordered strongest → weakest. The classifier assigns
 # the strongest tier any trigger from the tweet matches.
@@ -648,6 +649,72 @@ def fetch_recent_via_search(handle: str, bearer: str) -> list[dict]:
     return out
 
 
+def load_missed_ids() -> list[str]:
+    """Load tweet IDs to fetch via direct ID lookup. v1.3.7.
+
+    Schema (missed_ids.json):
+        { "ids": ["2057237192603570389", "..."] }
+
+    Each ID is fetched via /2/tweets/?ids=... and added to the raw set if
+    the API returns it. Lighter than manual_tweets.json (no text-typing
+    required) — useful when you spot a missing tweet and just want to
+    paste its ID.
+    """
+    if not MISSED_IDS_PATH.exists():
+        return []
+    try:
+        data = json.loads(MISSED_IDS_PATH.read_text())
+    except json.JSONDecodeError as e:
+        print(f"WARN: missed_ids.json invalid JSON: {e}", file=sys.stderr)
+        return []
+    return [str(i) for i in data.get("ids", []) if i]
+
+
+def fetch_tweets_by_ids(ids: list[str], bearer: str) -> list[dict]:
+    """Direct-fetch tweets by ID via /2/tweets?ids=A,B,C.
+
+    Returns each tweet the API recognises, marked with _via_id_lookup=True
+    so downstream classification can flag them. Up to 100 IDs per request.
+    Tweets the API does NOT recognise (deleted / private / hard-filtered)
+    are reported but not added.
+    """
+    out: list[dict] = []
+    if not ids:
+        return out
+
+    # Dedupe and chunk
+    unique = sorted(set(ids))
+    BATCH = 100
+    for i in range(0, len(unique), BATCH):
+        batch = unique[i:i + BATCH]
+        params = {
+            "ids": ",".join(batch),
+            "tweet.fields": (
+                "created_at,text,public_metrics,referenced_tweets,"
+                "in_reply_to_user_id,conversation_id,author_id"
+            ),
+        }
+        try:
+            data = _x_get("/tweets", params, bearer)
+        except HTTPError as e:
+            print(f"  /tweets?ids=… batch {i//BATCH + 1} failed ({e})", file=sys.stderr)
+            continue
+        got = data.get("data", []) or []
+        errors = data.get("errors", []) or []
+        for t in got:
+            t["_via_id_lookup"] = True
+            out.append(t)
+        if errors:
+            for err in errors:
+                # X returns per-ID errors: not found, suspended, etc.
+                rid = err.get("resource_id") or err.get("value") or "?"
+                detail = err.get("title") or err.get("detail") or "unknown"
+                print(f"  id={rid} not returned: {detail}", file=sys.stderr)
+        print(f"  /tweets?ids=… batch {i//BATCH + 1}: requested {len(batch)}, "
+              f"returned {len(got)}, errors {len(errors)}", file=sys.stderr)
+    return out
+
+
 def load_manual_tweets() -> list[dict]:
     """Load manually-curated tweets (those the X API didn't return).
 
@@ -713,6 +780,8 @@ def build_dataset(raw_tweets: list[dict]) -> dict:
                 if k in t:
                     record[k] = t[k]
             n_manual += 1
+        if t.get("_via_id_lookup"):
+            record["fetched_by_id"] = True
         classified.append(record)
 
     classified.sort(key=lambda c: c["created_at"], reverse=True)
@@ -851,6 +920,21 @@ def main() -> int:
             added2 = [t for t in extra if t["id"] not in existing_ids]
             raw = list(raw) + added2
             print(f"Conversation chase added {len(added2)} new tweets, total {len(raw)}", file=sys.stderr)
+
+        # v1.3.7: direct ID lookup for tweets the timeline/search filters miss.
+        # Reads missed_ids.json (just a list of IDs) and fetches each via
+        # /2/tweets?ids=… — this endpoint bypasses the filtering applied to
+        # timeline and search queries.
+        missed = load_missed_ids()
+        if missed:
+            print(f"Direct-fetching {len(missed)} missed IDs via /2/tweets…", file=sys.stderr)
+            by_id = fetch_tweets_by_ids(missed, bearer)
+            existing_ids = {t["id"] for t in raw}
+            added3 = [t for t in by_id if t["id"] not in existing_ids]
+            raw = list(raw) + added3
+            print(f"Direct ID lookup added {len(added3)} new tweets "
+                  f"({len(by_id) - len(added3)} were already in dataset), "
+                  f"total {len(raw)}", file=sys.stderr)
 
     # v1.3.3: merge in any manually-curated tweets that the X API missed.
     manual = load_manual_tweets()
