@@ -41,7 +41,7 @@ from urllib.error import HTTPError
 
 HANDLE = "SenatorWong"
 SINCE = "2022-06-01T00:00:00Z"   # Wong sworn in as Foreign Minister
-METHODOLOGY_VERSION = "1.3.4"
+METHODOLOGY_VERSION = "1.3.5"
 
 HERE = Path(__file__).parent
 TWEETS_PATH = HERE / "tweets.json"
@@ -539,40 +539,57 @@ def fetch_tweets(handle: str, since: str, bearer: str) -> list[dict]:
 
 
 def fetch_recent_via_search(handle: str, bearer: str) -> list[dict]:
-    """Supplementary fetch via /2/tweets/search/recent (v1.3.4).
+    """Supplementary fetch via /2/tweets/search/recent.
 
-    The user-timeline endpoint silently filters certain tweet types in ways
-    X doesn't document. Search uses an entirely separate filtering pipeline,
-    so combining both endpoints' results gives better coverage. Limited to
-    the last 7 days on Basic tier; that's enough to catch recent missed
-    tweets while the timeline endpoint provides the deep history.
+    v1.3.5: runs TWO queries in parallel and merges results:
+      (a) `from:HANDLE`            — originals + replies to others
+      (b) `from:HANDLE is:reply`   — explicitly requests replies, which
+                                     includes thread continuations
+                                     (self-replies) that query (a) appears
+                                     to silently filter despite X docs
+                                     saying it shouldn't.
+    Limited to the last 7 days on Basic tier. The deep history still comes
+    from the timeline endpoint.
     """
+    queries = [
+        f"from:{handle}",
+        f"from:{handle} is:reply",
+    ]
     out: list[dict] = []
-    next_token: str | None = None
-    page = 0
-    while True:
-        page += 1
-        params = {
-            "query": f"from:{handle} -is:retweet",   # -is:retweet excludes RTs at query level
-            "max_results": "100",
-            "tweet.fields": (
-                "created_at,text,public_metrics,referenced_tweets,"
-                "in_reply_to_user_id,conversation_id,author_id"
-            ),
-        }
-        if next_token:
-            params["next_token"] = next_token
-        try:
-            data = _x_get("/tweets/search/recent", params, bearer)
-        except HTTPError as e:
-            print(f"  search/recent failed ({e}); continuing with timeline only", file=sys.stderr)
-            return out
-        batch = data.get("data", [])
-        out.extend(batch)
-        print(f"  search page {page}: +{len(batch)} (total {len(out)})", file=sys.stderr)
-        next_token = data.get("meta", {}).get("next_token")
-        if not next_token:
-            break
+    seen_ids: set[str] = set()
+    for q_idx, q in enumerate(queries, 1):
+        next_token: str | None = None
+        page = 0
+        while True:
+            page += 1
+            params = {
+                "query": q,
+                "max_results": "100",
+                "tweet.fields": (
+                    "created_at,text,public_metrics,referenced_tweets,"
+                    "in_reply_to_user_id,conversation_id,author_id"
+                ),
+            }
+            if next_token:
+                params["next_token"] = next_token
+            try:
+                data = _x_get("/tweets/search/recent", params, bearer)
+            except HTTPError as e:
+                print(f"  search/recent ({q!r}) failed ({e}); continuing", file=sys.stderr)
+                break
+            batch = data.get("data", []) or []
+            new = [t for t in batch if t["id"] not in seen_ids]
+            for t in new:
+                seen_ids.add(t["id"])
+            # Client-side filter: drop pure retweets (search is already
+            # filtered, but be defensive).
+            new = [t for t in new if not _is_retweet(t)]
+            out.extend(new)
+            print(f"  search q{q_idx} page {page}: +{len(new)} new of {len(batch)} "
+                  f"(seen total {len(seen_ids)})", file=sys.stderr)
+            next_token = data.get("meta", {}).get("next_token")
+            if not next_token:
+                break
     return out
 
 
