@@ -1,12 +1,4 @@
 {
   "_comment": "Manually-curated tweets that the X API did not return. Each entry is run through the same classifier and merged with the auto-fetched dataset. Tweets flagged here appear in the table with a 'manually added' badge so readers can audit. To add a tweet: copy its ID from the URL (e.g. x.com/SenatorWong/status/<ID>), paste the full tweet text, set created_at to the tweet's timestamp in ISO 8601 UTC form. Schema: tweets[]: {id, created_at, text, added_by?, note?}.",
-  "tweets": [
-    {
-      "id": "2057237000168808476",
-      "created_at": "2026-05-20T23:08:17Z",
-      "text": "REPLACE THIS PLACEHOLDER with the actual tweet text from https://x.com/SenatorWong/status/2057237000168808476",
-      "added_by": "antipodean-affairs",
-      "note": "missed by X API auto-fetch"
-    }
-  ]
+  "tweets": []
 }
