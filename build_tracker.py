@@ -41,7 +41,7 @@ from urllib.error import HTTPError
 
 HANDLE = "SenatorWong"
 SINCE = "2022-06-01T00:00:00Z"   # Wong sworn in as Foreign Minister
-METHODOLOGY_VERSION = "1.3.3"
+METHODOLOGY_VERSION = "1.3.4"
 
 HERE = Path(__file__).parent
 TWEETS_PATH = HERE / "tweets.json"
@@ -93,8 +93,12 @@ TRIGGERS: list[tuple[str, list[str]]] = [
         # call-on variants — v1.3 broadened from just "call/calls on" to include
         # the "calling on" gerund form and "called on" past tense, plus
         # "calling for" which appears in ceasefire-type statements.
+        # v1.3.4: added bare "call for" / "calls for" — these catch "our
+        # call for the release of detained Australians" patterns that the
+        # gerund/past forms alone missed.
         r"\bcalls? on\b", r"\bcalled on\b", r"\bcalling on\b",
-        r"\bcalling for\b", r"\bcalled for\b",
+        r"\bcalling for\b", r"\bcalled for\b", r"\bcalls? for\b",
+        r"\b(our|the|a) call for\b",
         # urge variants — v1.3 relaxed to allow 1–2 intermediate words
         # ("urge all parties to", "urge the regime to") and added "urging".
         r"\burges? (\w+ ){0,2}\w+ to\b",
@@ -483,35 +487,91 @@ def fetch_user_id(handle: str, bearer: str) -> str:
     return data["data"]["id"]
 
 
+def _is_retweet(tweet: dict) -> bool:
+    """A pure retweet has a referenced_tweets entry of type=retweeted.
+    Replies have type=replied_to; quote tweets have type=quoted. We keep
+    those — only retweets are excluded per methodology."""
+    return any(r.get("type") == "retweeted" for r in tweet.get("referenced_tweets") or [])
+
+
 def fetch_tweets(handle: str, since: str, bearer: str) -> list[dict]:
+    """Fetch Senator Wong's tweets via /2/users/:id/tweets (the timeline).
+
+    v1.3.4: dropped the server-side `exclude=retweets` parameter — empirical
+    testing showed X's exclude filter aggressively dropped replies and thread
+    continuations alongside retweets, contrary to documentation. We now fetch
+    everything and filter retweets client-side by inspecting
+    referenced_tweets[].type. This restores replies and conversation
+    continuations to the dataset, which the methodology has always intended
+    to include (a foreign minister's thread leads and follow-ups are part of
+    the public record by the same logic as standalone tweets).
+    """
     user_id = fetch_user_id(handle, bearer)
     out: list[dict] = []
     pagination_token: str | None = None
     page = 0
+    dropped_rt = 0
     while True:
         page += 1
         params = {
             "max_results": "100",
             "start_time": since,
-            # v1.3.3: expanded tweet.fields and added expansions to coax X's
-            # API into returning replies and conversation continuations more
-            # reliably. The endpoint still has documented and undocumented
-            # filtering — see METHODOLOGY.md for the limitation note.
             "tweet.fields": (
                 "created_at,text,public_metrics,referenced_tweets,"
                 "in_reply_to_user_id,conversation_id,author_id"
             ),
             "expansions": "in_reply_to_user_id,referenced_tweets.id,author_id",
-            "exclude": "retweets",          # pure RTs excluded per methodology
+            # Note: NO `exclude=retweets`. Filter client-side instead.
         }
         if pagination_token:
             params["pagination_token"] = pagination_token
         data = _x_get(f"/users/{user_id}/tweets", params, bearer)
         batch = data.get("data", [])
-        out.extend(batch)
-        print(f"  page {page}: +{len(batch)} (total {len(out)})", file=sys.stderr)
+        kept = [t for t in batch if not _is_retweet(t)]
+        dropped_rt += len(batch) - len(kept)
+        out.extend(kept)
+        print(f"  timeline page {page}: kept {len(kept)} of {len(batch)} (total {len(out)})", file=sys.stderr)
         pagination_token = data.get("meta", {}).get("next_token")
         if not pagination_token:
+            break
+    print(f"  timeline: {len(out)} kept, {dropped_rt} retweets filtered client-side", file=sys.stderr)
+    return out
+
+
+def fetch_recent_via_search(handle: str, bearer: str) -> list[dict]:
+    """Supplementary fetch via /2/tweets/search/recent (v1.3.4).
+
+    The user-timeline endpoint silently filters certain tweet types in ways
+    X doesn't document. Search uses an entirely separate filtering pipeline,
+    so combining both endpoints' results gives better coverage. Limited to
+    the last 7 days on Basic tier; that's enough to catch recent missed
+    tweets while the timeline endpoint provides the deep history.
+    """
+    out: list[dict] = []
+    next_token: str | None = None
+    page = 0
+    while True:
+        page += 1
+        params = {
+            "query": f"from:{handle} -is:retweet",   # -is:retweet excludes RTs at query level
+            "max_results": "100",
+            "tweet.fields": (
+                "created_at,text,public_metrics,referenced_tweets,"
+                "in_reply_to_user_id,conversation_id,author_id"
+            ),
+        }
+        if next_token:
+            params["next_token"] = next_token
+        try:
+            data = _x_get("/tweets/search/recent", params, bearer)
+        except HTTPError as e:
+            print(f"  search/recent failed ({e}); continuing with timeline only", file=sys.stderr)
+            return out
+        batch = data.get("data", [])
+        out.extend(batch)
+        print(f"  search page {page}: +{len(batch)} (total {len(out)})", file=sys.stderr)
+        next_token = data.get("meta", {}).get("next_token")
+        if not next_token:
             break
     return out
 
@@ -687,8 +747,15 @@ def main() -> int:
         if not bearer:
             print("Set X_BEARER_TOKEN, or pass --seed / --no-fetch", file=sys.stderr)
             return 2
-        print(f"Fetching @{HANDLE} since {SINCE}…", file=sys.stderr)
+        print(f"Fetching @{HANDLE} via timeline since {SINCE}…", file=sys.stderr)
         raw = fetch_tweets(HANDLE, SINCE, bearer)
+        print(f"Fetching @{HANDLE} via search/recent (supplementary, last 7d)…", file=sys.stderr)
+        recent = fetch_recent_via_search(HANDLE, bearer)
+        # v1.3.4: merge by tweet id, keep timeline entry on conflict
+        existing_ids = {t["id"] for t in raw}
+        added = [t for t in recent if t["id"] not in existing_ids]
+        raw = list(raw) + added
+        print(f"Merge: timeline {len(existing_ids)}, search added {len(added)} new, total {len(raw)}", file=sys.stderr)
 
     # v1.3.3: merge in any manually-curated tweets that the X API missed.
     manual = load_manual_tweets()
