@@ -41,7 +41,7 @@ from urllib.error import HTTPError
 
 HANDLE = "SenatorWong"
 SINCE = "2022-06-01T00:00:00Z"   # Wong sworn in as Foreign Minister
-METHODOLOGY_VERSION = "1.3.7"
+METHODOLOGY_VERSION = "1.3.8"
 
 HERE = Path(__file__).parent
 TWEETS_PATH = HERE / "tweets.json"
@@ -64,10 +64,24 @@ TRIGGERS: list[tuple[str, list[str]]] = [
         r"\bunacceptable\b", r"\bappalling\b", r"\bappalled\b",
         r"\babhorrent\b", r"\boutrageous\b", r"\batrocity\b", r"\batrocities\b",
         r"\breject(s|ed)?\b", r"\bsanction(s|ed|ing)?\b",
+        # v1.3.8: severe diplomatic-protest actions — expelling or recalling
+        # ambassadors. Recall (of one's own) is the stronger; expel (of theirs)
+        # is also strong. Both at Criticise tier. Requires proximity to
+        # "ambassador" to avoid false positives on "recall" / "expel" in
+        # unrelated contexts.
+        r"\bexpel(s|led|ling)?\b.{0,40}\b(ambassador|envoy|diplomat|high commissioner)\b",
+        r"\brecall(s|ed|ing)? (our|the|its)\b.{0,40}\b(ambassador|envoy|diplomat|high commissioner)\b",
     ]),
     ("Concern", [
         r"\bconcerned\b", r"\bdeeply concerned\b", r"\btroubled\b",
         r"\balarmed\b", r"\bdismayed\b", r"\bdisturbed\b", r"\bregret\b",
+        # v1.3.8: diplomatic protest — calling in or summoning a foreign
+        # ambassador is a formal critical action that signals serious
+        # displeasure short of recall/expulsion. Recorded at Concern tier.
+        # Requires proximity to "ambassador" / "envoy" / "diplomat" /
+        # "high commissioner" to avoid false positives on common phrases
+        # like "call in sick" or "summon courage".
+        r"\b(call(s|ed|ing)? in|summon(s|ed|ing)?|haul(s|ed|ing)? in)\b.{0,40}\b(ambassador|envoy|diplomat|high commissioner|chargé d'affaires)\b",
         # v1.3.1: "restraint" is a diplomatic soft-criticism — recorded at
         # Concern tier. Patterns require the trigger to be near restraint
         # to avoid bare "restraint" false positives.
