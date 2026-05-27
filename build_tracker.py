@@ -41,7 +41,7 @@ from urllib.error import HTTPError
 
 HANDLE = "SenatorWong"
 SINCE = "2022-06-01T00:00:00Z"   # Wong sworn in as Foreign Minister
-METHODOLOGY_VERSION = "1.4.0"
+METHODOLOGY_VERSION = "1.4.2"
 
 # v1.4.0: incremental fetching. Each daily run fetches only tweets newer
 # than the most recent tweet in the existing dataset, minus this overlap
@@ -348,6 +348,81 @@ _VICTIM_RX = re.compile(
     re.IGNORECASE,
 )
 
+# Perpetrator pattern: v1.4.1. Mirror of the victim pattern. When a country
+# appears in clearly oppositional framing — "X's invasion", "X's oppressive
+# regime", "against X", "hold X accountable" — it is the PERPETRATOR of the
+# action being criticised, not a recipient of positive sentiment. Countries
+# detected by these patterns are:
+#   - Excluded from positive_targets for the sentence (a "stand with Ukraine
+#     against Russia's invasion" sentence should not credit Russia with
+#     Solidarity).
+#   - Tagged with Condemn severity in critical_targets (because the
+#     construction itself is a critical signal — even if no explicit
+#     "condemn"/"deplore" trigger is in the sentence).
+# Symmetric across all countries.
+
+_PERPETRATOR_AGGRESSION_RX = re.compile(
+    # "X's [aggression-noun]": Russia's invasion, Iran's atrocities, etc.
+    r"\b(\w+)['’]s\s+"
+    r"(invasion|invasions|aggression|aggressions|"
+    r"atrocity|atrocities|war\s+crimes?|crimes?\s+against\s+humanity|"
+    r"occupation|annexation|bombardment|shelling|"
+    r"interference|disinformation|threats?|incursions?|provocations?|"
+    r"hostilities|reckless\s+behaviou?r|illegal\s+actions?)\b",
+    re.IGNORECASE,
+)
+
+_PERPETRATOR_DESCRIPT_RX = re.compile(
+    # "X's [critical-adj] [regime/government/...]": Putin's oppressive regime
+    r"\b(\w+)['’]s\s+"
+    r"(oppressive|brutal|illegal|reckless|repressive|authoritarian|"
+    r"criminal|murderous|warlike|hostile)\s+"
+    r"(regime|government|authorities|actions|behaviou?r|leadership|"
+    r"cabinet|forces|military|administration)\b",
+    re.IGNORECASE,
+)
+
+_AGAINST_RX = re.compile(
+    # "against X" — opposition. Captures up to 80 chars after "against",
+    # stopping at sentence/clause boundaries.
+    r"\bagainst\s+(.{0,80}?)(?=[.!?,;]|\s+in\s|\s+despite\b|$)",
+    re.IGNORECASE | re.DOTALL,
+)
+
+_ACCOUNTABILITY_RX = re.compile(
+    # "hold X accountable" / "holding X accountable" / etc.
+    r"\b(?:holds?|holding|held)\s+(.{0,80}?)\s+accountable\b",
+    re.IGNORECASE | re.DOTALL,
+)
+
+# Location-context patterns: v1.4.2. When a country is mentioned as a
+# place people are departing from, leaving, evacuating, or stranded in,
+# it is a CONTEXTUAL LOCATION, not a recipient of any positive sentiment
+# the sentence may express. E.g., "Australia thanks Jordan for assisting
+# Australians depart Israel & the Occupied Palestinian Territories" —
+# Jordan is the positive target; Israel and Palestine are locations.
+# Countries detected here are excluded from positive_targets only. They
+# remain available for critical_targets if a separate critical signal
+# applies in the same sentence.
+
+_LOC_DEPARTURE_RX = re.compile(
+    # "depart Israel", "leaving Israel", "evacuate (from) X", "flee X".
+    # Captures up to 80 chars after the verb, including coordinated phrases
+    # like "Israel & the Occupied Palestinian Territories" (don't stop on
+    # & / and — we WANT to catch both countries in such constructions).
+    r"\b(depart(?:ing|ed|s)?|leav(?:e|ing|es)|exit(?:ing|ed|s)?|"
+    r"evacuat(?:e|ing|ed|es)|escape(?:d|ing|s)?|flee(?:ing)?|fled)\s+"
+    r"(?:from\s+)?(.{0,80}?)(?=[.!?;]|$)",
+    re.IGNORECASE | re.DOTALL,
+)
+
+_LOC_TRAPPED_RX = re.compile(
+    # "stranded in X", "trapped in X", "stuck in X", "caught in X"
+    r"\b(strand(?:ed|ing)?|trapp(?:ed|ing)?|stuck|caught)\s+in\s+"
+    r"(.{0,80}?)(?=[.!?;]|$)",
+    re.IGNORECASE | re.DOTALL,
+)
+
 
 def _strongest_match(text: str, tiered: list) -> tuple[str | None, list[str]]:
     """Return (strongest_tier, all_matched_patterns)."""
@@ -398,56 +473,95 @@ def classify(text: str) -> dict | None:
         return a if rank[a] <= rank[b] else b
 
     for s in sentences:
-        sev, m_crit = _strongest_match(s, _TRIGGER_RX)
+        sev_from_trigger, m_crit = _strongest_match(s, _TRIGGER_RX)
         warm, m_pos = _strongest_match(s, _POSITIVE_RX)
         all_matched.extend(m_crit + m_pos)
 
-        if sev is None and warm is None:
+        # v1.4.1: Identify perpetrator countries FIRST so that sentences
+        # with no explicit trigger but with oppositional framing still
+        # process (e.g., "we honour resistance against X's regime").
+        perpetrators: set[str] = set()
+        for m in _PERPETRATOR_AGGRESSION_RX.finditer(s):
+            for name, rxs in _TARGET_RX.items():
+                if any(rx.search(m.group(1)) for rx in rxs):
+                    perpetrators.add(name)
+        for m in _PERPETRATOR_DESCRIPT_RX.finditer(s):
+            for name, rxs in _TARGET_RX.items():
+                if any(rx.search(m.group(1)) for rx in rxs):
+                    perpetrators.add(name)
+        for m in _AGAINST_RX.finditer(s):
+            for name in _targets_in(m.group(1), _TARGET_RX):
+                perpetrators.add(name)
+        for m in _ACCOUNTABILITY_RX.finditer(s):
+            for name in _targets_in(m.group(1), _TARGET_RX):
+                perpetrators.add(name)
+
+        if perpetrators:
+            all_matched.append("\\bperpetrator-context\\b")
+
+        # v1.4.2: location-context detection — countries mentioned as the
+        # place from which Australians are departing / leaving / evacuating
+        # / trapped in. These are excluded from POSITIVE attribution only
+        # (the country can still be tagged critical if a separate critical
+        # signal applies).
+        locations: set[str] = set()
+        for m in _LOC_DEPARTURE_RX.finditer(s):
+            for name in _targets_in(m.group(2) or "", _TARGET_RX):
+                locations.add(name)
+        for m in _LOC_TRAPPED_RX.finditer(s):
+            for name in _targets_in(m.group(2) or "", _TARGET_RX):
+                locations.add(name)
+
+        # Skip sentence if nothing at all fired
+        if sev_from_trigger is None and warm is None and not perpetrators:
             continue
 
-        # Identify co-signatories: countries appearing in a "joins X in" /
-        # "alongside X" / "together with X" construction. These are joining
-        # Australia in the statement, not the statement's target. We strip
-        # them from the target list for this sentence.
+        # Identify co-signatories (v1.3): "joins X in", "alongside X", etc.
         cosigners: set[str] = set()
         for m in _COSIGNATORY_RX.finditer(s):
-            cosig_text = m.group(2) or ""
-            for name in _targets_in(cosig_text, _TARGET_RX):
+            for name in _targets_in(m.group(2) or "", _TARGET_RX):
                 cosigners.add(name)
 
-        # v1.3.1: Identify countries appearing in descriptive constructions
-        # ("Indonesian-funded hospital", "Jordanian field hospital") —
-        # these describe a noun, they are not the target of the statement.
+        # Descriptive (v1.3.1): "Indonesian-funded hospital", etc.
         descriptive: set[str] = set()
         for m in _DESCRIPTIVE_RX.finditer(s):
-            adj = m.group(1)
             for name, rxs in _TARGET_RX.items():
-                if any(rx.search(adj) for rx in rxs):
+                if any(rx.search(m.group(1)) for rx in rxs):
                     descriptive.add(name)
 
-        # v1.3.2: Identify victim countries — those appearing as the
-        # object of a violence-word ("attacks on Israel", "killing of
-        # Israeli staff"). These are victims of the violence the tweet
-        # is criticising, not the targets of the criticism itself.
+        # Victims (v1.3.2): countries on the receiving end of violence.
         victims: set[str] = set()
         for m in _VICTIM_RX.finditer(s):
-            victim_span = m.group(3) or ""
-            for name in _targets_in(victim_span, _TARGET_RX):
+            for name in _targets_in(m.group(3) or "", _TARGET_RX):
                 victims.add(name)
 
-        excluded = cosigners | descriptive | victims
-        targets_here = [t for t in _targets_in(s, _TARGET_RX) if t not in excluded]
+        excluded_from_crit = cosigners | descriptive | victims
+        targets_here = [t for t in _targets_in(s, _TARGET_RX) if t not in excluded_from_crit]
         ns_here = _targets_in(s, _NON_STATE_RX)
 
-        if sev is not None:
-            tweet_severity = _stronger(tweet_severity, sev, sev_rank)
+        # CRITICAL attribution
+        # v1.4.1 fix: only apply the explicit trigger's severity to non-
+        # perpetrator targets. Perpetrators get Condemn independently.
+        if sev_from_trigger is not None:
+            tweet_severity = _stronger(tweet_severity, sev_from_trigger, sev_rank)
             for c in targets_here:
-                critical_targets[c] = _stronger(critical_targets.get(c), sev, sev_rank)
+                if c in perpetrators:
+                    continue   # perpetrators handled below
+                critical_targets[c] = _stronger(critical_targets.get(c), sev_from_trigger, sev_rank)
             critical_non_state.update(ns_here)
+        if perpetrators:
+            # Perpetrators always get Condemn, and the tweet's overall
+            # severity is bumped to at least Condemn.
+            tweet_severity = _stronger(tweet_severity, "Condemn", sev_rank)
+            for c in perpetrators:
+                critical_targets[c] = _stronger(critical_targets.get(c), "Condemn", sev_rank)
 
+        # POSITIVE attribution — perpetrators AND location-context excluded
         if warm is not None:
             tweet_warmth = _stronger(tweet_warmth, warm, warm_rank)
             for c in targets_here:
+                if c in perpetrators or c in locations:
+                    continue
                 positive_targets[c] = _stronger(positive_targets.get(c), warm, warm_rank)
             positive_non_state.update(ns_here)
 
