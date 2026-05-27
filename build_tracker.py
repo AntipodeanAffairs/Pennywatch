@@ -29,7 +29,7 @@ import re
 import sys
 import time
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -41,7 +41,7 @@ from urllib.error import HTTPError
 
 HANDLE = "SenatorWong"
 SINCE = "2022-06-01T00:00:00Z"   # Wong sworn in as Foreign Minister
-METHODOLOGY_VERSION = "1.3.5"
+METHODOLOGY_VERSION = "1.3.6"
 
 HERE = Path(__file__).parent
 TWEETS_PATH = HERE / "tweets.json"
@@ -538,6 +538,61 @@ def fetch_tweets(handle: str, since: str, bearer: str) -> list[dict]:
     return out
 
 
+def fetch_conversation_continuations(handle: str, bearer: str,
+                                     conversation_ids: list[str]) -> list[dict]:
+    """v1.3.6: For each conversation Wong started, query X for every tweet
+    she made in that conversation. This is the most specific query we can
+    make — and the most reliable way to surface thread continuations that
+    the broader `from:X` and `from:X is:reply` queries are still filtering.
+
+    Conversation IDs are batched into queries (up to ~25 per query) to stay
+    under X's 1024-character query length limit on Basic tier.
+    """
+    out: list[dict] = []
+    if not conversation_ids:
+        return out
+
+    BATCH_SIZE = 25
+    ids = sorted(set(conversation_ids))
+    n_batches = (len(ids) + BATCH_SIZE - 1) // BATCH_SIZE
+
+    for b, i in enumerate(range(0, len(ids), BATCH_SIZE), 1):
+        batch = ids[i:i + BATCH_SIZE]
+        # Build query: from:HANDLE (conversation_id:A OR conversation_id:B OR ...)
+        clauses = " OR ".join(f"conversation_id:{cid}" for cid in batch)
+        query = f"from:{handle} ({clauses})"
+
+        next_token: str | None = None
+        page = 0
+        while True:
+            page += 1
+            params = {
+                "query": query,
+                "max_results": "100",
+                "tweet.fields": (
+                    "created_at,text,public_metrics,referenced_tweets,"
+                    "in_reply_to_user_id,conversation_id,author_id"
+                ),
+            }
+            if next_token:
+                params["next_token"] = next_token
+            try:
+                data = _x_get("/tweets/search/recent", params, bearer)
+            except HTTPError as e:
+                print(f"  conv-chase batch {b}/{n_batches} failed ({e})", file=sys.stderr)
+                break
+            page_batch = data.get("data", []) or []
+            page_batch = [t for t in page_batch if not _is_retweet(t)]
+            out.extend(page_batch)
+            print(f"  conv-chase batch {b}/{n_batches} page {page}: +{len(page_batch)}",
+                  file=sys.stderr)
+            next_token = data.get("meta", {}).get("next_token")
+            if not next_token:
+                break
+
+    return out
+
+
 def fetch_recent_via_search(handle: str, bearer: str) -> list[dict]:
     """Supplementary fetch via /2/tweets/search/recent.
 
@@ -773,6 +828,29 @@ def main() -> int:
         added = [t for t in recent if t["id"] not in existing_ids]
         raw = list(raw) + added
         print(f"Merge: timeline {len(existing_ids)}, search added {len(added)} new, total {len(raw)}", file=sys.stderr)
+
+        # v1.3.6: conversation chase — for each thread Wong started in the
+        # last 7 days, explicitly query for every tweet she made in that
+        # conversation. This surfaces self-replies that the broader
+        # from:HANDLE queries still filter despite documentation.
+        cutoff_ms = int((datetime.now(timezone.utc) - timedelta(days=7)).timestamp() * 1000)
+        recent_conv_ids: set[str] = set()
+        for t in raw:
+            cid = t.get("conversation_id") or t["id"]
+            try:
+                # Decode tweet snowflake to ms timestamp
+                ts_ms = (int(cid) >> 22) + 1288834974657
+                if ts_ms >= cutoff_ms:
+                    recent_conv_ids.add(cid)
+            except (ValueError, TypeError):
+                continue
+        if recent_conv_ids:
+            print(f"Conversation-chasing {len(recent_conv_ids)} recent threads…", file=sys.stderr)
+            extra = fetch_conversation_continuations(HANDLE, bearer, list(recent_conv_ids))
+            existing_ids = {t["id"] for t in raw}
+            added2 = [t for t in extra if t["id"] not in existing_ids]
+            raw = list(raw) + added2
+            print(f"Conversation chase added {len(added2)} new tweets, total {len(raw)}", file=sys.stderr)
 
     # v1.3.3: merge in any manually-curated tweets that the X API missed.
     manual = load_manual_tweets()
