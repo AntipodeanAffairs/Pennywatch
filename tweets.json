@@ -1,11 +1,129 @@
 {
-  "generated_at": "2026-05-26T01:30:48.783592+00:00",
-  "methodology_version": "1.3.2",
+  "generated_at": "2026-05-29T04:50:15.935092+00:00",
+  "methodology_version": "1.4.2",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 2096,
-  "tweet_count_classified": 317,
+  "tweet_count_raw": 2069,
+  "tweet_count_classified": 356,
+  "tweet_count_manual": 0,
   "tweets": [
+    {
+      "id": "2059428055266001358",
+      "url": "https://x.com/SenatorWong/status/2059428055266001358",
+      "created_at": "2026-05-27T00:14:45.000Z",
+      "text": "As Comprehensive Strategic Partners, the Australia-India relationship is anchored in strategic trust.\n\nIn a more uncertain world, this trust is deeply valued by Australia - and Australia remains a reliable partner for India.",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "India"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "India"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bvalue(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "2059428050752946546",
+      "url": "https://x.com/SenatorWong/status/2059428050752946546",
+      "created_at": "2026-05-27T00:14:44.000Z",
+      "text": "I thanked @DrSJaishankar for the warm welcome to India, and for hosting the Quad Foreign Ministers’ Meeting as well as the 17th Australia-India Foreign Ministers' Framework Dialogue. https://t.co/ZuM6zkXve3",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Commend",
+      "targets": [
+        "India"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "India"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bwelcome(s|d)?\\b",
+        "\\bthank(s|ed|ing)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "2059181078909444561",
+      "url": "https://x.com/SenatorWong/status/2059181078909444561",
+      "created_at": "2026-05-26T07:53:21.000Z",
+      "text": "Quad Foreign Ministers are focused on driving momentum and delivering meaningful outcomes for our people and for the Indo-Pacific.\n\nI thank @DrSJaishankar and India for hosting today’s Quad FMM in Delhi as we work to build a peaceful, stable and prosperous region. https://t.co/3kGR7zWcr3",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "India"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "India"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bthank(s|ed|ing)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "2057237192603570389",
+      "url": "https://x.com/SenatorWong/status/2057237192603570389",
+      "created_at": "2026-05-20T23:09:02.000Z",
+      "text": "I have also directed DFAT to call in Israel’s Ambassador to Australia to reinforce this message.",
+      "tone": "critical",
+      "severity": "Concern",
+      "warmth": null,
+      "targets": [
+        "Israel"
+      ],
+      "critical_targets": [
+        "Israel"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\b(call(s|ed|ing)? in|summon(s|ed|ing)?|haul(s|ed|ing)? in)\\b.{0,40}\\b(ambassador|envoy|diplomat|high commissioner|chargé d'affaires)\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "2057237000168808476",
+      "url": "https://x.com/SenatorWong/status/2057237000168808476",
+      "created_at": "2026-05-20T23:08:17.000Z",
+      "text": "Australia’s Ambassador to Israel has made representations to Israel, reiterating our call for the release of the detained Australians and for Israel to ensure no ill treatment of any detainees and to act in line with international obligations.",
+      "tone": "critical",
+      "severity": "Call for action",
+      "warmth": null,
+      "targets": [
+        "Israel"
+      ],
+      "critical_targets": [
+        "Israel"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcalls? for\\b",
+        "\\b(our|the|a) call for\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2057236882921271412",
       "url": "https://x.com/SenatorWong/status/2057236882921271412",
@@ -198,6 +316,29 @@
       "needs_review": false
     },
     {
+      "id": "2039825708445520016",
+      "url": "https://x.com/SenatorWong/status/2039825708445520016",
+      "created_at": "2026-04-02T22:02:01.000Z",
+      "text": "Australia is not taking offensive action against Iran and we are not deploying troops on the ground in Iran.\n\nThe Australian Government continues to support de-escalation and the resolution of this conflict.",
+      "tone": "critical",
+      "severity": "Condemn",
+      "warmth": null,
+      "targets": [
+        "Iran"
+      ],
+      "critical_targets": [
+        "Iran"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bperpetrator-context\\b"
+      ],
+      "needs_review": false
+    },
+    {
       "id": "2039825502769394050",
       "url": "https://x.com/SenatorWong/status/2039825502769394050",
       "created_at": "2026-04-02T22:01:12.000Z",
@@ -271,13 +412,15 @@
       "url": "https://x.com/SenatorWong/status/2038784085678866640",
       "created_at": "2026-03-31T01:02:59.000Z",
       "text": "Attacks on UN peacekeepers are unacceptable. We condemn the killing of three Indonesian personnel serving with the UN in Lebanon. We extend our sincere condolences to their loved ones, colleagues and to Indonesia. We support Indonesia's calls for a thorough investigation.",
-      "tone": "positive",
+      "tone": "mixed",
       "severity": "Condemn",
       "warmth": "Solidarity",
       "targets": [
         "Indonesia"
       ],
-      "critical_targets": [],
+      "critical_targets": [
+        "Indonesia"
+      ],
       "positive_targets": [
         "Indonesia"
       ],
@@ -287,7 +430,8 @@
       "matched_triggers": [
         "\\bunacceptable\\b",
         "\\bcondemn\\b",
-        "\\bcondolences\\b"
+        "\\bcondolences\\b",
+        "\\bcalls? for\\b"
       ],
       "needs_review": true
     },
@@ -546,21 +690,23 @@
       "url": "https://x.com/SenatorWong/status/2023270568536289324",
       "created_at": "2026-02-16T05:37:48.000Z",
       "text": "Two years on since Alexei Navalny’s tragic death, we honour his bravery and resistance against Putin's oppressive regime.\n\nAustralia holds Mr Putin and Russian authorities accountable for his death and stands with those courageously working to uphold human rights in Russia. https://t.co/FFVd8YW47A",
-      "tone": "positive",
-      "severity": null,
+      "tone": "critical",
+      "severity": "Condemn",
       "warmth": "Solidarity",
       "targets": [
         "Russia"
       ],
-      "critical_targets": [],
-      "positive_targets": [
+      "critical_targets": [
         "Russia"
       ],
+      "positive_targets": [],
       "non_state_targets": [],
       "critical_non_state": [],
       "positive_non_state": [],
       "matched_triggers": [
-        "\\bstands? with\\b"
+        "\\bperpetrator-context\\b",
+        "\\bstands? with\\b",
+        "\\bperpetrator-context\\b"
       ],
       "needs_review": false
     },
@@ -708,6 +854,31 @@
       "needs_review": false
     },
     {
+      "id": "2017741162543747107",
+      "url": "https://x.com/SenatorWong/status/2017741162543747107",
+      "created_at": "2026-01-31T23:25:55.000Z",
+      "text": "Today marks five years since the Myanmar military overthrew the democratically elected government. \n\nAustralia has consistently condemned the regime’s brutal and ongoing atrocities against the people of Myanmar, and we will continue to judge the Myanmar military by its actions.",
+      "tone": "critical",
+      "severity": "Condemn",
+      "warmth": null,
+      "targets": [
+        "Myanmar"
+      ],
+      "critical_targets": [
+        "Myanmar"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcondemned\\b",
+        "\\batrocities\\b",
+        "\\bperpetrator-context\\b"
+      ],
+      "needs_review": false
+    },
+    {
       "id": "2016763384801481151",
       "url": "https://x.com/SenatorWong/status/2016763384801481151",
       "created_at": "2026-01-29T06:40:35.000Z",
@@ -726,7 +897,8 @@
       "critical_non_state": [],
       "positive_non_state": [],
       "matched_triggers": [
-        "\\bcondemn\\b"
+        "\\bcondemn\\b",
+        "\\bperpetrator-context\\b"
       ],
       "needs_review": false
     },
@@ -1014,7 +1186,7 @@
       "created_at": "2025-12-04T03:17:21.000Z",
       "text": "The Albanese Government will provide a $95 million package of military assistance and has imposed targeted sanctions on an additional 45 vessels linked to Russia’s shadow fleet as part of our continued support for Ukraine in its fight against Russia’s illegal &amp; immoral invasion.",
       "tone": "critical",
-      "severity": "Criticise",
+      "severity": "Condemn",
       "warmth": null,
       "targets": [
         "Russia",
@@ -1029,7 +1201,8 @@
       "critical_non_state": [],
       "positive_non_state": [],
       "matched_triggers": [
-        "\\bsanction(s|ed|ing)?\\b"
+        "\\bsanction(s|ed|ing)?\\b",
+        "\\bperpetrator-context\\b"
       ],
       "needs_review": false
     },
@@ -1232,6 +1405,8 @@
       "matched_triggers": [
         "\\bthoughts (are )?with\\b",
         "\\bcondemn\\b",
+        "\\bcalls? for\\b",
+        "\\b(our|the|a) call for\\b",
         "\\b(immediate|urgent|unimpeded) (ceasefire|access|withdrawal|release)\\b"
       ],
       "needs_review": true
@@ -1261,6 +1436,29 @@
         "\\bproud (to|of)\\b",
         "\\bin solidarity with\\b",
         "\\bcalls? on\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1970668367590961604",
+      "url": "https://x.com/SenatorWong/status/1970668367590961604",
+      "created_at": "2025-09-24T01:55:26.000Z",
+      "text": "Great to catch up with Polish Foreign Minister Sikorski in New York.\n\nAustralia and Poland share a commitment to European and Indo-Pacific security and an unwavering support for Ukraine against Russia’s illegal, immoral war. https://t.co/r5YEvpU11w",
+      "tone": "critical",
+      "severity": "Condemn",
+      "warmth": null,
+      "targets": [
+        "Russia"
+      ],
+      "critical_targets": [
+        "Russia"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bperpetrator-context\\b"
       ],
       "needs_review": false
     },
@@ -1461,7 +1659,7 @@
       "created_at": "2025-09-11T03:08:54.000Z",
       "text": "Russia’s reckless violation of Polish airspace is the latest in a series of escalatory attacks, including targeting innocent civilians and government buildings.\n\nWe stand with Poland, Ukraine and Europe against Putin’s dangerous provocations. Russia must end its illegal war.",
       "tone": "mixed",
-      "severity": "Call for action",
+      "severity": "Condemn",
       "warmth": "Solidarity",
       "targets": [
         "Russia",
@@ -1471,7 +1669,6 @@
         "Russia"
       ],
       "positive_targets": [
-        "Russia",
         "Ukraine"
       ],
       "non_state_targets": [],
@@ -1479,6 +1676,7 @@
       "positive_non_state": [],
       "matched_triggers": [
         "\\bstands? with\\b",
+        "\\bperpetrator-context\\b",
         "\\bmust end\\b"
       ],
       "needs_review": false
@@ -1596,7 +1794,8 @@
       "critical_non_state": [],
       "positive_non_state": [],
       "matched_triggers": [
-        "\\bsanction(s|ed|ing)?\\b"
+        "\\bsanction(s|ed|ing)?\\b",
+        "\\bcalls? for\\b"
       ],
       "needs_review": false
     },
@@ -2304,7 +2503,8 @@
       "critical_non_state": [],
       "positive_non_state": [],
       "matched_triggers": [
-        "\\bcondemns\\b"
+        "\\bcondemns\\b",
+        "\\bcalls? for\\b"
       ],
       "needs_review": false
     },
@@ -2459,7 +2659,7 @@
       "created_at": "2025-05-26T04:06:33.000Z",
       "text": "The abhorrent missile attacks on Ukraine over the weekend demonstrate Russia is not serious about wanting to end its illegal and immoral war.\n\nUkraine’s citizens continue to bravely resist Russia’s aggression. We grieve the civilian lives lost.\n\nAustralia stands with Ukraine.",
       "tone": "mixed",
-      "severity": "Criticise",
+      "severity": "Condemn",
       "warmth": "Solidarity",
       "targets": [
         "Russia",
@@ -2477,6 +2677,7 @@
       "positive_non_state": [],
       "matched_triggers": [
         "\\babhorrent\\b",
+        "\\bperpetrator-context\\b",
         "\\bstands? with\\b"
       ],
       "needs_review": false
@@ -2575,6 +2776,29 @@
       "matched_triggers": [
         "\\bcongratulat(e|es|ed|ing|ions)\\b",
         "\\bclose (partner|partnership|friend|friendship)\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1922053291078238301",
+      "url": "https://x.com/SenatorWong/status/1922053291078238301",
+      "created_at": "2025-05-12T22:16:29.000Z",
+      "text": "Australia and the Netherlands have won our historic case against Russia for the downing of Flight MH17. We remain unwavering in our commitment to the pursuit of truth, justice and accountability for the victims and their loved ones. https://t.co/0Hmh9zL4jf",
+      "tone": "critical",
+      "severity": "Condemn",
+      "warmth": null,
+      "targets": [
+        "Russia"
+      ],
+      "critical_targets": [
+        "Russia"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bperpetrator-context\\b"
       ],
       "needs_review": false
     },
@@ -3049,6 +3273,29 @@
       "needs_review": false
     },
     {
+      "id": "1882907976115400878",
+      "url": "https://x.com/SenatorWong/status/1882907976115400878",
+      "created_at": "2025-01-24T21:46:58.000Z",
+      "text": "I spoke to @rafaelmgrossi about the @iaeaorg’s work to address nuclear proliferation risks in Iran and nuclear safety following Russia’s invasion of Ukraine.\n\nI reaffirmed our commitment to the highest non-proliferation standard for our acquisition of AUKUS submarines. https://t.co/sp3Sgi9hN1",
+      "tone": "critical",
+      "severity": "Condemn",
+      "warmth": null,
+      "targets": [
+        "Russia"
+      ],
+      "critical_targets": [
+        "Russia"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bperpetrator-context\\b"
+      ],
+      "needs_review": false
+    },
+    {
       "id": "1877924015215386877",
       "url": "https://x.com/SenatorWong/status/1877924015215386877",
       "created_at": "2025-01-11T03:42:30.000Z",
@@ -3140,6 +3387,30 @@
       "critical_non_state": [],
       "positive_non_state": [],
       "matched_triggers": [
+        "\\bthank(s|ed|ing)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1869713414966407513",
+      "url": "https://x.com/SenatorWong/status/1869713414966407513",
+      "created_at": "2024-12-19T11:56:30.000Z",
+      "text": "A privilege to visit Kyiv to express Australia’s unwavering solidarity with the people of Ukraine and announce further support for the fight against Russia’s brutal, illegal war.\n\nThank you to Prime Minister Shmyhal and Foreign Minister Sybiha for welcoming me so warmly. https://t.co/DfhlUnsp2u",
+      "tone": "critical",
+      "severity": "Condemn",
+      "warmth": "Appreciate",
+      "targets": [
+        "Russia"
+      ],
+      "critical_targets": [
+        "Russia"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bperpetrator-context\\b",
         "\\bthank(s|ed|ing)?\\b"
       ],
       "needs_review": false
@@ -3292,7 +3563,7 @@
       "created_at": "2024-11-28T08:55:14.000Z",
       "text": "Australia is working collectively to impose costs on Russia for its illegal and immoral war, and those who enable it. \n \nWe are pleased to endorse the UK's Call to Action against Russia’s ‘shadow fleet’ engaged in illegal activities including sanctions circumvention.",
       "tone": "critical",
-      "severity": "Criticise",
+      "severity": "Condemn",
       "warmth": null,
       "targets": [
         "Russia",
@@ -3307,7 +3578,8 @@
       "critical_non_state": [],
       "positive_non_state": [],
       "matched_triggers": [
-        "\\bsanction(s|ed|ing)?\\b"
+        "\\bsanction(s|ed|ing)?\\b",
+        "\\bperpetrator-context\\b"
       ],
       "needs_review": false
     },
@@ -3416,17 +3688,20 @@
       "severity": "Condemn",
       "warmth": null,
       "targets": [
-        "Russia"
+        "Russia",
+        "Ukraine"
       ],
       "critical_targets": [
-        "Russia"
+        "Russia",
+        "Ukraine"
       ],
       "positive_targets": [],
       "non_state_targets": [],
       "critical_non_state": [],
       "positive_non_state": [],
       "matched_triggers": [
-        "\\bcondemning\\b"
+        "\\bcondemning\\b",
+        "\\bperpetrator-context\\b"
       ],
       "needs_review": true
     },
@@ -3618,6 +3893,33 @@
       "positive_non_state": [],
       "matched_triggers": [
         "\\bwelcome(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1847067009994969174",
+      "url": "https://x.com/SenatorWong/status/1847067009994969174",
+      "created_at": "2024-10-18T00:07:46.000Z",
+      "text": "We again call for a ceasefire, for Hamas to release all hostages immediately and for Israel to allow essential humanitarian aid to flow.\n\nWe look to a day where Israelis and Palestinians can both realise peace and security with a two-state solution.",
+      "tone": "critical",
+      "severity": "Call for action",
+      "warmth": null,
+      "targets": [
+        "Israel"
+      ],
+      "critical_targets": [
+        "Israel"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [
+        "Hamas"
+      ],
+      "critical_non_state": [
+        "Hamas"
+      ],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcalls? for\\b"
       ],
       "needs_review": false
     },
@@ -3862,29 +4164,6 @@
       "needs_review": false
     },
     {
-      "id": "1844263218128224595",
-      "url": "https://x.com/SenatorWong/status/1844263218128224595",
-      "created_at": "2024-10-10T06:26:30.000Z",
-      "text": "I spoke with Cyprus’ Foreign Minister Dr Constantinos Kombos this morning, to express Australia’s gratitude for the support his country has extended this week.\n\nWe thank the Government of Cyprus for its generosity hosting Australians leaving Lebanon.",
-      "tone": "positive",
-      "severity": null,
-      "warmth": "Appreciate",
-      "targets": [
-        "Lebanon"
-      ],
-      "critical_targets": [],
-      "positive_targets": [
-        "Lebanon"
-      ],
-      "non_state_targets": [],
-      "critical_non_state": [],
-      "positive_non_state": [],
-      "matched_triggers": [
-        "\\bthank(s|ed|ing)?\\b"
-      ],
-      "needs_review": false
-    },
-    {
       "id": "1844250458992542187",
       "url": "https://x.com/SenatorWong/status/1844250458992542187",
       "created_at": "2024-10-10T05:35:48.000Z",
@@ -3904,6 +4183,30 @@
       "positive_non_state": [],
       "matched_triggers": [
         "\\bcelebrate(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1844230631083155617",
+      "url": "https://x.com/SenatorWong/status/1844230631083155617",
+      "created_at": "2024-10-10T04:17:01.000Z",
+      "text": "Today I met @RapporteurUn to discuss the humanitarian &amp; human rights situation in Myanmar.\n\nAustralia reiterates our call for the regime to cease violence against civilians, release those unjustly detained, allow access for aid &amp; return Myanmar to the path of inclusive democracy. https://t.co/Bv8nwAq7Wh",
+      "tone": "critical",
+      "severity": "Call for action",
+      "warmth": null,
+      "targets": [
+        "Myanmar"
+      ],
+      "critical_targets": [
+        "Myanmar"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcalls? for\\b",
+        "\\b(our|the|a) call for\\b"
       ],
       "needs_review": false
     },
@@ -3973,29 +4276,6 @@
       "positive_non_state": [],
       "matched_triggers": [
         "\\bcongratulat(e|es|ed|ing|ions)\\b"
-      ],
-      "needs_review": false
-    },
-    {
-      "id": "1843240728400633996",
-      "url": "https://x.com/SenatorWong/status/1843240728400633996",
-      "created_at": "2024-10-07T10:43:30.000Z",
-      "text": "Welcome home to 349 Australians and their immediate family, who touched down in Sydney tonight after leaving Lebanon over the weekend. \n\nToday another two assisted departure flights leave Beirut Airport for Cyprus. https://t.co/KFckfE3Gwn",
-      "tone": "positive",
-      "severity": null,
-      "warmth": "Commend",
-      "targets": [
-        "Lebanon"
-      ],
-      "critical_targets": [],
-      "positive_targets": [
-        "Lebanon"
-      ],
-      "non_state_targets": [],
-      "critical_non_state": [],
-      "positive_non_state": [],
-      "matched_triggers": [
-        "\\bwelcome(s|d)?\\b"
       ],
       "needs_review": false
     },
@@ -4107,10 +4387,12 @@
       "severity": "Condemn",
       "warmth": null,
       "targets": [
-        "Iran"
+        "Iran",
+        "Lebanon"
       ],
       "critical_targets": [
-        "Iran"
+        "Iran",
+        "Lebanon"
       ],
       "positive_targets": [],
       "non_state_targets": [],
@@ -4118,6 +4400,8 @@
       "positive_non_state": [],
       "matched_triggers": [
         "\\bcondemn\\b",
+        "\\bcalls? for\\b",
+        "\\b(our|the|a) call for\\b",
         "\\bmust end\\b"
       ],
       "needs_review": false
@@ -4643,6 +4927,7 @@
       "positive_non_state": [],
       "matched_triggers": [
         "\\bcondemns\\b",
+        "\\bcalls? for\\b",
         "\\b(immediate|urgent|unimpeded) (ceasefire|access|withdrawal|release)\\b"
       ],
       "needs_review": false
@@ -5410,7 +5695,10 @@
       "positive_non_state": [],
       "matched_triggers": [
         "\\bcondemn\\b",
-        "\\b(immediate|urgent|unimpeded) (ceasefire|access|withdrawal|release)\\b"
+        "\\bcalls? for\\b",
+        "\\b(our|the|a) call for\\b",
+        "\\b(immediate|urgent|unimpeded) (ceasefire|access|withdrawal|release)\\b",
+        "\\bcalls? for\\b"
       ],
       "needs_review": false
     },
@@ -5589,7 +5877,7 @@
       "created_at": "2024-04-11T14:18:14.000Z",
       "text": "Australia is deeply concerned by indications Iran is preparing military action against Israel.\n\nTonight I spoke to Iran’s Foreign Minister @Amirabdolahian to urge Iran to use its influence in the region to promote stability, not contribute to escalation.",
       "tone": "critical",
-      "severity": "Concern",
+      "severity": "Condemn",
       "warmth": null,
       "targets": [
         "Iran",
@@ -5606,6 +5894,7 @@
       "matched_triggers": [
         "\\bconcerned\\b",
         "\\bdeeply concerned\\b",
+        "\\bperpetrator-context\\b",
         "\\burges? (\\w+ ){0,2}\\w+ to\\b"
       ],
       "needs_review": false
@@ -5654,7 +5943,9 @@
       "matched_triggers": [
         "\\bunacceptable\\b",
         "\\boutrageous\\b",
-        "\\bdemand(s|ed)?\\b"
+        "\\bdemand(s|ed)?\\b",
+        "\\bcalls? for\\b",
+        "\\b(our|the|a) call for\\b"
       ],
       "needs_review": false
     },
@@ -6042,14 +6333,16 @@
       "url": "https://x.com/SenatorWong/status/1761156188107079874",
       "created_at": "2024-02-23T22:28:50.000Z",
       "text": "Two years since Russia’s full-scale invasion of Ukraine, Australia mourns Ukraine’s losses and stands unwavering in our support for Ukraine’s sovereignty. We remain steadfast in supporting Ukraine to defend itself and to holding those responsible for Russia's invasion to account. https://t.co/Cw6tP3A5nM",
-      "tone": "positive",
-      "severity": null,
+      "tone": "mixed",
+      "severity": "Condemn",
       "warmth": "Solidarity",
       "targets": [
         "Russia",
         "Ukraine"
       ],
-      "critical_targets": [],
+      "critical_targets": [
+        "Russia"
+      ],
       "positive_targets": [
         "Russia",
         "Ukraine"
@@ -6058,7 +6351,8 @@
       "critical_non_state": [],
       "positive_non_state": [],
       "matched_triggers": [
-        "\\bmourn(s|ed|ing)?\\b"
+        "\\bmourn(s|ed|ing)?\\b",
+        "\\bperpetrator-context\\b"
       ],
       "needs_review": false
     },
@@ -6291,7 +6585,8 @@
       "critical_non_state": [],
       "positive_non_state": [],
       "matched_triggers": [
-        "\\bcondemns\\b"
+        "\\bcondemns\\b",
+        "\\bcalls? for\\b"
       ],
       "needs_review": false
     },
@@ -6433,13 +6728,11 @@
       "severity": null,
       "warmth": "Appreciate",
       "targets": [
-        "Israel",
         "Jordan",
         "Palestine"
       ],
       "critical_targets": [],
       "positive_targets": [
-        "Israel",
         "Jordan",
         "Palestine"
       ],
@@ -6461,18 +6754,21 @@
       "warmth": null,
       "targets": [
         "North Korea",
-        "Russia"
+        "Russia",
+        "Ukraine"
       ],
       "critical_targets": [
         "North Korea",
-        "Russia"
+        "Russia",
+        "Ukraine"
       ],
       "positive_targets": [],
       "non_state_targets": [],
       "critical_non_state": [],
       "positive_non_state": [],
       "matched_triggers": [
-        "\\bcondemn\\b"
+        "\\bcondemn\\b",
+        "\\bperpetrator-context\\b"
       ],
       "needs_review": false
     },
@@ -6566,7 +6862,8 @@
       "positive_non_state": [],
       "matched_triggers": [
         "\\bcondemns\\b",
-        "\\bsanction(s|ed|ing)?\\b"
+        "\\bsanction(s|ed|ing)?\\b",
+        "\\bperpetrator-context\\b"
       ],
       "needs_review": false
     },
@@ -6699,13 +6996,11 @@
       "severity": null,
       "warmth": "Appreciate",
       "targets": [
-        "Israel",
         "Palestine",
         "United Arab Emirates"
       ],
       "critical_targets": [],
       "positive_targets": [
-        "Israel",
         "Palestine",
         "United Arab Emirates"
       ],
@@ -6903,7 +7198,9 @@
       "targets": [
         "Israel"
       ],
-      "critical_targets": [],
+      "critical_targets": [
+        "Israel"
+      ],
       "positive_targets": [
         "Israel"
       ],
@@ -6916,6 +7213,7 @@
       "positive_non_state": [],
       "matched_triggers": [
         "\\bcondemns\\b",
+        "\\bcalls? for\\b",
         "\\brecognis(e|es|ed|ing)\\b",
         "\\bexercise of restraint\\b",
         "\\b(call(s|ing|ed)? (for|on)|urges? .{0,40})\\brestraint\\b"
@@ -6989,6 +7287,52 @@
       "positive_non_state": [],
       "matched_triggers": [
         "\\bwelcome(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1704700819470426328",
+      "url": "https://x.com/SenatorWong/status/1704700819470426328",
+      "created_at": "2023-09-21T03:35:21.000Z",
+      "text": "Australia values our partnership with France in working to deliver solutions to the challenges we all face.\n \nA warm discussion with @MinColonna on how our friendship will deliver in our region and globally. https://t.co/dk0ZkAcYtb",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "France"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "France"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bvalue(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1704286985417105560",
+      "url": "https://x.com/SenatorWong/status/1704286985417105560",
+      "created_at": "2023-09-20T00:10:56.000Z",
+      "text": "Australia has joined 31 other countries supporting Ukraine’s International Court of Justice case against Russia, in response to its illegal and immoral invasion.\n\nRead the full statement: https://t.co/vreCVqgR7X",
+      "tone": "critical",
+      "severity": "Condemn",
+      "warmth": null,
+      "targets": [
+        "Russia"
+      ],
+      "critical_targets": [
+        "Russia"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bperpetrator-context\\b"
       ],
       "needs_review": false
     },
@@ -7111,6 +7455,29 @@
       "needs_review": false
     },
     {
+      "id": "1696122352772460578",
+      "url": "https://x.com/SenatorWong/status/1696122352772460578",
+      "created_at": "2023-08-28T11:27:35.000Z",
+      "text": "Congratulations Prime Minister Srettha - Thailand’s 30th PM.\n\nAustralia and Thailand have been close friends and partners for over 70 years.\n\nWe look forward to working with you @Thavisin as we work to shape our region for the better.",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Endorse",
+      "targets": [
+        "Thailand"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Thailand"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcongratulat(e|es|ed|ing|ions)\\b"
+      ],
+      "needs_review": false
+    },
+    {
       "id": "1694611716880142838",
       "url": "https://x.com/SenatorWong/status/1694611716880142838",
       "created_at": "2023-08-24T07:24:52.000Z",
@@ -7134,6 +7501,124 @@
       "needs_review": false
     },
     {
+      "id": "1694501423386648711",
+      "url": "https://x.com/SenatorWong/status/1694501423386648711",
+      "created_at": "2023-08-24T00:06:36.000Z",
+      "text": "Ukraine’s independence was hard won, and is now so bravely defended by its people, who show extraordinary courage.\n\nThe Australian people join many around the world wishing the Ukrainian people safety and strength as you celebrate your Independence Day today.\n\nSlava Ukraini. https://t.co/FASG7MMstP",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Endorse",
+      "targets": [
+        "Ukraine"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Ukraine"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcelebrate(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1694187383208747110",
+      "url": "https://x.com/SenatorWong/status/1694187383208747110",
+      "created_at": "2023-08-23T03:18:43.000Z",
+      "text": "Australia and Vietnam share a Strategic Partnership and an interest in a peaceful, stable and prosperous region.\n\nThank you to Prime Minister Pham Minh Chinh for the warm welcome to Hanoi. \n\nA privilege to meet with you as our countries celebrate 50 years of diplomatic relations. https://t.co/qxjjkGksfr",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Endorse",
+      "targets": [
+        "Vietnam"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Vietnam"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bwelcome(s|d)?\\b",
+        "\\bthank(s|ed|ing)?\\b",
+        "\\bcelebrate(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1691570499846041964",
+      "url": "https://x.com/SenatorWong/status/1691570499846041964",
+      "created_at": "2023-08-15T22:00:09.000Z",
+      "text": "@ABaerbock We share your disappointment @ABaerbock.\n\nI appreciated your insights when we met at the G20 FMM earlier this year. Australia and Germany are aligned in values and aspiration. We have much more to do together.\n\nSafe travels home. We will see you next time.",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "Germany"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Germany"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bappreciate(s|d)?\\b",
+        "\\bvalue(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1691329557796950016",
+      "url": "https://x.com/SenatorWong/status/1691329557796950016",
+      "created_at": "2023-08-15T06:02:44.000Z",
+      "text": "Relieved to confirm four Australians who were missing in Indonesia have been found safe and well.\n\nGrateful to Indonesian authorities who led search efforts and Australian officials who assisted.\n\nWe’ll continue to provide support to the four Australians and their families.",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "Indonesia"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Indonesia"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bgrateful\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1691243280531697667",
+      "url": "https://x.com/SenatorWong/status/1691243280531697667",
+      "created_at": "2023-08-15T00:19:54.000Z",
+      "text": "Today marks two years since the fall of Kabul.\n\nOur thoughts are with the Afghan people, the Australian-Afghan community, officials and ADF veterans who served.\n\nAustralia remains committed to helping those who helped us, and to supporting and advocating for the Afghan people.",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Solidarity",
+      "targets": [
+        "Afghanistan"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Afghanistan"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bthoughts (are )?with\\b"
+      ],
+      "needs_review": true
+    },
+    {
       "id": "1689545221208739841",
       "url": "https://x.com/SenatorWong/status/1689545221208739841",
       "created_at": "2023-08-10T07:52:25.000Z",
@@ -7153,6 +7638,54 @@
       "positive_non_state": [],
       "matched_triggers": [
         "\\bcondemns\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1689078526685921285",
+      "url": "https://x.com/SenatorWong/status/1689078526685921285",
+      "created_at": "2023-08-09T00:57:56.000Z",
+      "text": "Happy National Day to the people of Singapore, including my friend and counterpart @VivianBala.\n\nAustralia was the second country to recognise Singapore’s independence in 1965, and we share a deep and enduring partnership.\n\nWe celebrate 58 years of independence with you, today. https://t.co/6Su4tLx901",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Endorse",
+      "targets": [
+        "Singapore"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Singapore"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\brecognis(e|es|ed|ing)\\b",
+        "\\benduring (partnership|friendship)\\b",
+        "\\bcelebrate(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1687337964370788352",
+      "url": "https://x.com/SenatorWong/status/1687337964370788352",
+      "created_at": "2023-08-04T05:41:34.000Z",
+      "text": "We welcome China’s decision to remove duties on Australian barley, paving the way for our barley exporters to re-enter the Chinese market – benefiting Australian producers and Chinese consumers.\n\nIt affirms the calm and consistent approach that the Albanese Government has taken. https://t.co/BbjvEOdbul",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Commend",
+      "targets": [
+        "China"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "China"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bwelcome(s|d)?\\b"
       ],
       "needs_review": false
     },
@@ -7204,6 +7737,29 @@
       "needs_review": false
     },
     {
+      "id": "1684121986946170880",
+      "url": "https://x.com/SenatorWong/status/1684121986946170880",
+      "created_at": "2023-07-26T08:42:25.000Z",
+      "text": "Russia’s invasion of Ukraine reminds us that peace, prosperity and stability can never be taken for granted.\n\nRussia underestimated the courage and resilience of the Ukrainian people. Today, at a community event with @AmbVasyl, I reaffirmed Australia's support. \n\nSlava Ukraini. https://t.co/UEg4kFwboo",
+      "tone": "critical",
+      "severity": "Condemn",
+      "warmth": null,
+      "targets": [
+        "Russia"
+      ],
+      "critical_targets": [
+        "Russia"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bperpetrator-context\\b"
+      ],
+      "needs_review": false
+    },
+    {
       "id": "1684111128606146560",
       "url": "https://x.com/SenatorWong/status/1684111128606146560",
       "created_at": "2023-07-26T07:59:16.000Z",
@@ -7223,6 +7779,53 @@
       "positive_non_state": [],
       "matched_triggers": [
         "\\bproud (to|of)\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1684074154440675329",
+      "url": "https://x.com/SenatorWong/status/1684074154440675329",
+      "created_at": "2023-07-26T05:32:21.000Z",
+      "text": "Australia condemns the burning of the Qur'an in Denmark and Sweden.\n\nWe stand against prejudice and hatred. Freedom of religion is a fundamental human right.\n\nWe are also concerned by violent protests in Iraq.\n\nWe must all stand together to prevent violence and division.",
+      "tone": "critical",
+      "severity": "Condemn",
+      "warmth": null,
+      "targets": [
+        "Iraq"
+      ],
+      "critical_targets": [
+        "Iraq"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcondemns\\b",
+        "\\bconcerned\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1681852142003580928",
+      "url": "https://x.com/SenatorWong/status/1681852142003580928",
+      "created_at": "2023-07-20T02:22:52.000Z",
+      "text": "Australia is committed to maintaining pressure on Russia and those supporting its illegal and immoral war.\n\nToday Australia and our international partners have imposed targeted sanctions on 45 entities and individuals of economic and strategic significance to Russia.",
+      "tone": "critical",
+      "severity": "Criticise",
+      "warmth": null,
+      "targets": [
+        "Russia"
+      ],
+      "critical_targets": [
+        "Russia"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bsanction(s|ed|ing)?\\b"
       ],
       "needs_review": false
     },
@@ -7441,6 +8044,57 @@
       "needs_review": false
     },
     {
+      "id": "1673202421953359873",
+      "url": "https://x.com/SenatorWong/status/1673202421953359873",
+      "created_at": "2023-06-26T05:31:58.000Z",
+      "text": "Ukrainians are in desperate need of shelter, healthcare and clean water as a result of Putin’s barbaric war.\n\nAustralia is again stepping up with life saving support.\n\nThe Albanese Government is delivering a further $10m to the Ukraine Humanitarian Fund.\n\nWe stand with Ukraine.",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Solidarity",
+      "targets": [
+        "Ukraine"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Ukraine"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bstands? with\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1672742182191767552",
+      "url": "https://x.com/SenatorWong/status/1672742182191767552",
+      "created_at": "2023-06-24T23:03:08.000Z",
+      "text": "Australia is closely monitoring developments in Russia.\n \nThe security situation is evolving and we are working closely with partners.\n \nWe continue to condemn Russia's immoral and illegal invasion of Ukraine.\n\nAustralia stands with Ukraine.",
+      "tone": "mixed",
+      "severity": "Condemn",
+      "warmth": "Solidarity",
+      "targets": [
+        "Russia",
+        "Ukraine"
+      ],
+      "critical_targets": [
+        "Russia",
+        "Ukraine"
+      ],
+      "positive_targets": [
+        "Ukraine"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcondemn\\b",
+        "\\bstands? with\\b"
+      ],
+      "needs_review": false
+    },
+    {
       "id": "1672366236834091009",
       "url": "https://x.com/SenatorWong/status/1672366236834091009",
       "created_at": "2023-06-23T22:09:16.000Z",
@@ -7460,6 +8114,136 @@
       "positive_non_state": [],
       "matched_triggers": [
         "\\bsanction(s|ed|ing)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1669500496900669441",
+      "url": "https://x.com/SenatorWong/status/1669500496900669441",
+      "created_at": "2023-06-16T00:21:50.000Z",
+      "text": "Australia joins our partners in condemning North Korea's dangerous missile launches.\n\nWe urge all countries to implement UNSC resolutions, prohibiting North Korea from acquiring nuclear missile technologies and launching missiles.\n\nWe stand with our friends Japan and South Korea.",
+      "tone": "mixed",
+      "severity": "Condemn",
+      "warmth": "Solidarity",
+      "targets": [
+        "Japan",
+        "North Korea",
+        "South Korea"
+      ],
+      "critical_targets": [
+        "North Korea"
+      ],
+      "positive_targets": [
+        "Japan",
+        "South Korea"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcondemning\\b",
+        "\\burges? (\\w+ ){0,2}\\w+ to\\b",
+        "\\bstands? with\\b"
+      ],
+      "needs_review": true
+    },
+    {
+      "id": "1666599118708547584",
+      "url": "https://x.com/SenatorWong/status/1666599118708547584",
+      "created_at": "2023-06-08T00:12:48.000Z",
+      "text": "We are deeply concerned for the welfare of Ukrainian communities near the Kakhovka dam.\n\nRussia's invasion has caused unconscionable damage to Ukraine's infrastructure.\n\nAustralia’s support for Ukraine will not waver. We will stand with Ukraine until Russia’s illegal war ends.",
+      "tone": "mixed",
+      "severity": "Condemn",
+      "warmth": "Solidarity",
+      "targets": [
+        "Russia",
+        "Ukraine"
+      ],
+      "critical_targets": [
+        "Russia",
+        "Ukraine"
+      ],
+      "positive_targets": [
+        "Russia",
+        "Ukraine"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bconcerned\\b",
+        "\\bdeeply concerned\\b",
+        "\\bperpetrator-context\\b",
+        "\\bstands? with\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1666367850548961281",
+      "url": "https://x.com/SenatorWong/status/1666367850548961281",
+      "created_at": "2023-06-07T08:53:49.000Z",
+      "text": "Another 158 Australian firefighters and incident management specialists have been deployed to Canada to help battle wildfires in Alberta.\n\nThey join 194 Australian personnel already on the ground.\n\nThank you all for your service and support of our Canadian friends.",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "Canada"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Canada"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bthank(s|ed|ing)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1666210473102958621",
+      "url": "https://x.com/SenatorWong/status/1666210473102958621",
+      "created_at": "2023-06-06T22:28:28.000Z",
+      "text": "Congratulations to Xanana Gusmão and the CNRT party on your victory in Timor-Leste’s election. \n\nAustralia and Timor-Leste are close neighbours and friends.\n\nWe will work with the new government, once formed, to progress its early priorities and help shape the region we want.",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Endorse",
+      "targets": [
+        "Timor-Leste"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Timor-Leste"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcongratulat(e|es|ed|ing|ions)\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1666008789181693953",
+      "url": "https://x.com/SenatorWong/status/1666008789181693953",
+      "created_at": "2023-06-06T09:07:02.000Z",
+      "text": "Australia and Japan are close friends and share a Special Strategic Partnership.\n\nToday I had the opportunity to welcome Japan’s new Ambassador to Australia, H.E. Mr Suzuki Kazuhiro.\n\nI look forward to working closely together as we support an open, stable and prosperous region. https://t.co/UdAoUiDBWg",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Commend",
+      "targets": [
+        "Japan"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Japan"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bwelcome(s|d)?\\b"
       ],
       "needs_review": false
     },
@@ -7585,6 +8369,55 @@
       "needs_review": false
     },
     {
+      "id": "1658458460974120961",
+      "url": "https://x.com/SenatorWong/status/1658458460974120961",
+      "created_at": "2023-05-16T13:04:44.000Z",
+      "text": "Australia has called Iran’s Charge to demand an end to executions.\n\nOur Embassy delivered the message to the regime directly today.\n\nI requested the same when I spoke to Iran’s FM in March.\n\nWe’ll continue to use every strategy at our disposal towards upholding human rights.",
+      "tone": "critical",
+      "severity": "Call for action",
+      "warmth": null,
+      "targets": [
+        "Iran"
+      ],
+      "critical_targets": [
+        "Iran"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bdemand(s|ed)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1656507780919066625",
+      "url": "https://x.com/SenatorWong/status/1656507780919066625",
+      "created_at": "2023-05-11T03:53:26.000Z",
+      "text": "The escalating violence in Israel and the Palestinian Territories is deeply concerning.\n\nAustralia condemns the indiscriminate rocket fire from Gaza and respects Israel's right to defend itself.\n\nWe continue to urge all parties to exercise restraint and protect civilian lives. https://t.co/hry5sOFwnP",
+      "tone": "critical",
+      "severity": "Condemn",
+      "warmth": null,
+      "targets": [
+        "Israel"
+      ],
+      "critical_targets": [
+        "Israel"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcondemns\\b",
+        "\\b(show|exercise|practise|practice|exercising) (maximum |utmost |the greatest )?restraint\\b",
+        "\\b(call(s|ing|ed)? (for|on)|urges? .{0,40})\\brestraint\\b",
+        "\\burges? (\\w+ ){0,2}\\w+ to\\b"
+      ],
+      "needs_review": false
+    },
+    {
       "id": "1656159224576233473",
       "url": "https://x.com/SenatorWong/status/1656159224576233473",
       "created_at": "2023-05-10T04:48:23.000Z",
@@ -7609,10 +8442,132 @@
       "needs_review": false
     },
     {
-      "id": "1654276585011425281",
-      "url": "https://x.com/SenatorWong/status/1654276585011425281",
-      "created_at": "2023-05-05T00:07:27.000Z",
-      "text": "Thank you to @dfat staff who have been working hard to evacuate Australians from Sudan since the beginning of the crisis. \n\nOvernight, 22 Australians, with citizens from 10 other countries departed Sudan on a RAAF flight.\n\nMore than 230 Australians have now left Sudan. https://t.co/uzydDoswPa",
+      "id": "1656096074996809728",
+      "url": "https://x.com/SenatorWong/status/1656096074996809728",
+      "created_at": "2023-05-10T00:37:27.000Z",
+      "text": "Australia is deeply concerned by the tragic loss of civilian life, including children, from Israeli airstrikes overnight in Gaza.\n\nWe continue to urge all parties to exercise restraint. Civilian lives must be protected. https://t.co/ZzEHxHSjKR",
+      "tone": "critical",
+      "severity": "Concern",
+      "warmth": null,
+      "targets": [
+        "Israel"
+      ],
+      "critical_targets": [
+        "Israel"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bconcerned\\b",
+        "\\bdeeply concerned\\b",
+        "\\b(show|exercise|practise|practice|exercising) (maximum |utmost |the greatest )?restraint\\b",
+        "\\b(call(s|ing|ed)? (for|on)|urges? .{0,40})\\brestraint\\b",
+        "\\burges? (\\w+ ){0,2}\\w+ to\\b",
+        "\\bmust (be allowed|be protected|be guaranteed|be ensured|be respected)\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1655462159848206336",
+      "url": "https://x.com/SenatorWong/status/1655462159848206336",
+      "created_at": "2023-05-08T06:38:30.000Z",
+      "text": "When Australians are impacted by a crisis overseas, @dfat is there to support them. \n\nToday, @TimWattsMP &amp; I met with some of our hardworking staff to thank them for their ongoing efforts to help Australians in Sudan.\n\nWe’re grateful for the work of @dfat staff across the world. https://t.co/eF1KPH2faL",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "Sudan"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Sudan"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bthank(s|ed|ing)?\\b",
+        "\\bgrateful\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1654424264622370816",
+      "url": "https://x.com/SenatorWong/status/1654424264622370816",
+      "created_at": "2023-05-05T09:54:17.000Z",
+      "text": "Great to welcome my Malaysian counterpart @ZambryOfficial to Adelaide. \n\nI was born in Malaysia, and as Australia’s Foreign Minister it was a privilege to host the Annual Foreign Minister’s meeting in my hometown. https://t.co/lujuoYG3RV",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Commend",
+      "targets": [
+        "Malaysia"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Malaysia"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bwelcome(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1652852178175029249",
+      "url": "https://x.com/SenatorWong/status/1652852178175029249",
+      "created_at": "2023-05-01T01:47:22.000Z",
+      "text": "Australia welcomes the extension of the ceasefire in Sudan until May 3.\n\nWe call on all parties to agree to a permanent cessation of hostilities and work towards civilian-led democracy.\n\nWe continue to work with partners to evacuate Australians wanting to leave Sudan.",
+      "tone": "positive",
+      "severity": "Call for action",
+      "warmth": "Commend",
+      "targets": [
+        "Sudan"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Sudan"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bwelcome(s|d)?\\b",
+        "\\bcalls? on\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1652567810588168192",
+      "url": "https://x.com/SenatorWong/status/1652567810588168192",
+      "created_at": "2023-04-30T06:57:23.000Z",
+      "text": "Thank you to Canada and the Canadian team on the ground for assisting @dfat officials in our evacuation efforts. \n\nWe continue to work with our international partners to ensure Australians who want to leave Sudan can get home safely. https://t.co/gDFyzOONyp",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "Canada"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Canada"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bthank(s|ed|ing)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1652543895665016832",
+      "url": "https://x.com/SenatorWong/status/1652543895665016832",
+      "created_at": "2023-04-30T05:22:22.000Z",
+      "text": "Australia thanks @FaisalbinFarhan and Saudi authorities for their support of our evacuation efforts in Sudan and for working closely with our consular staff in Jeddah. https://t.co/iweJ6s2IP7",
       "tone": "positive",
       "severity": null,
       "warmth": "Appreciate",
@@ -7632,18 +8587,45 @@
       "needs_review": false
     },
     {
-      "id": "1652866954334720001",
-      "url": "https://x.com/SenatorWong/status/1652866954334720001",
-      "created_at": "2023-05-01T02:46:05.000Z",
-      "text": "Australia thanks @SecBlinken and the United States for their support in our efforts to evacuate Australians from Sudan.\n\nWith assistance from our international partners, more than 150 Australians have safely left Sudan. https://t.co/pFjvMSoX6N",
+      "id": "1651856363830804482",
+      "url": "https://x.com/SenatorWong/status/1651856363830804482",
+      "created_at": "2023-04-28T07:50:21.000Z",
+      "text": "Thank you to @MinColonna, @ambassthebault and France for their support of our evacuation efforts in Sudan.\n\nAustralians wishing to leave should strongly consider doing so as soon as possible.\n\nRegister with DFAT if you are in Sudan at https://t.co/e6kWiZDH72 https://t.co/zah1K0J3aD",
       "tone": "positive",
       "severity": null,
       "warmth": "Appreciate",
       "targets": [
+        "France",
         "Sudan"
       ],
       "critical_targets": [],
       "positive_targets": [
+        "France",
+        "Sudan"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bthank(s|ed|ing)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "1651855772194844674",
+      "url": "https://x.com/SenatorWong/status/1651855772194844674",
+      "created_at": "2023-04-28T07:48:00.000Z",
+      "text": "Australia's heartfelt thanks to @ABaerbock and Germany in aiding the safe and swift evacuation of Australians from Sudan. \n\nWe will continue to work with partners to secure evacuations and are in direct contact with registered Australians. https://t.co/LMZWsCgiiC",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "Germany",
+        "Sudan"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Germany",
         "Sudan"
       ],
       "non_state_targets": [],
