@@ -2,12 +2,21 @@ name: PennyWatch daily refresh
 
 on:
   schedule:
-    - cron: '0 20 * * *'
+    - cron: '0 20 * * *'   # 20:00 UTC = ~6am AEST / 7am AEDT
   workflow_dispatch:
+    inputs:
+      full_fetch:
+        description: 'Force a full backfill from 1 June 2022 (ignores incremental state). Use sparingly — uses ~2000 X API reads.'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # required so the bot can commit refreshed data back
+
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
@@ -20,34 +29,26 @@ jobs:
       - name: Fetch and classify tweets
         env:
           X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
-        run: python build_tracker.py
-
-      - name: Diagnostic — verify token and list projects
-        continue-on-error: true
-        env:
-          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CF_ACCT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CF_PROJ: ${{ secrets.CF_PROJECT_NAME }}
         run: |
-          echo "=== Token verification ==="
-          curl -s -H "Authorization: Bearer $CF_TOKEN" \
-            https://api.cloudflare.com/client/v4/user/tokens/verify \
-            | python -m json.tool
-          echo ""
-          echo "=== Accounts the token can see ==="
-          curl -s -H "Authorization: Bearer $CF_TOKEN" \
-            https://api.cloudflare.com/client/v4/accounts \
-            | python -m json.tool
-          echo ""
-          echo "=== Pages projects in CF_ACCT ==="
-          curl -s -H "Authorization: Bearer $CF_TOKEN" \
-            "https://api.cloudflare.com/client/v4/accounts/$CF_ACCT/pages/projects" \
-            | python -m json.tool
-          echo ""
-          echo "=== Length checks ==="
-          echo "CF_TOKEN length: ${#CF_TOKEN}"
-          echo "CF_ACCT length: ${#CF_ACCT}   (should be 32)"
-          echo "CF_PROJ length: ${#CF_PROJ}   (should be 20 for throbbing-block-f2d0)"
+          if [ "${{ inputs.full_fetch }}" = "true" ]; then
+            echo "Running with --full-fetch (forced full backfill)"
+            python build_tracker.py --full-fetch
+          else
+            echo "Running normal incremental refresh"
+            python build_tracker.py
+          fi
+
+      - name: Commit refreshed data back to repo
+        run: |
+          git config user.name "PennyWatch Bot"
+          git config user.email "bot@antipodeanaffairs.invalid"
+          git add tweets.json summary.json index.html
+          if git diff --staged --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "Refresh data $(date -u +%Y-%m-%d)"
+            git push
+          fi
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
