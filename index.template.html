@@ -137,6 +137,33 @@
     color: var(--muted);
     margin-top: 4px;
   }
+  .stat .top3 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  .stat .top3 .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 3px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 16px;
+  }
+  .stat .top3 .row:last-child { border-bottom: none; }
+  .stat .top3 .row .name {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .stat .top3 .row .count {
+    font-weight: bold;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat .top3 .row .rank {
+    color: var(--muted);
+    font-size: 11px;
+    margin-right: 6px;
+    font-variant-numeric: tabular-nums;
+  }
   .panel {
     background: var(--panel);
     border: 1px solid var(--rule);
@@ -544,20 +571,27 @@ if (dataset.tweets.some(t => String(t.id).startsWith("SAMPLE"))) {
   document.getElementById("sample-banner").style.display = "block";
 }
 
-// Headline stats — show critical + positive side by side
+// Headline stats — totals plus top-3 most-criticised / most-praised
 const critCountries = Object.keys(summary.by_country);
 const posCountries = Object.keys(summary.positive_by_country);
 const totalsEl = document.getElementById("totals");
-const topCrit = critCountries[0] ? `${critCountries[0]} (${summary.by_country[critCountries[0]]})` : "—";
-const topPos = posCountries[0] ? `${posCountries[0]} (${summary.positive_by_country[posCountries[0]]})` : "—";
+
+function top3Html(countries, counts) {
+  if (!countries.length) return '<div class="n">—</div>';
+  const rows = countries.slice(0, 3).map((c, i) =>
+    `<div class="row"><span><span class="rank">${i + 1}.</span><span class="name">${c}</span></span><span class="count">${counts[c]}</span></div>`
+  ).join("");
+  return `<div class="top3">${rows}</div>`;
+}
+
 const cards = [
-  ["Critical statements", summary.total_critical],
-  ["Positive statements", summary.total_positive],
-  ["Most-criticised", topCrit],
-  ["Most-praised", topPos],
+  { label: "Critical statements", body: `<div class="n">${summary.total_critical}</div>` },
+  { label: "Positive statements", body: `<div class="n">${summary.total_positive}</div>` },
+  { label: "Most-criticised",     body: top3Html(critCountries, summary.by_country) },
+  { label: "Most-praised",        body: top3Html(posCountries,  summary.positive_by_country) },
 ];
-totalsEl.innerHTML = cards.map(([l, n]) =>
-  `<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`).join("");
+totalsEl.innerHTML = cards.map(({ label, body }) =>
+  `<div class="stat">${body}<div class="l">${label}</div></div>`).join("");
 
 // Critical country chart — stacked bars, sorted descending
 const sevOrder = ["Condemn", "Criticise", "Concern", "Call for action"];
