@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-05-29T04:50:15.935092+00:00",
+  "generated_at": "2026-05-30T00:16:22.404769+00:00",
   "methodology_version": "1.4.2",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 2069,
+  "tweet_count_raw": 365,
   "tweet_count_classified": 356,
   "tweet_count_manual": 0,
   "tweets": [
@@ -98,7 +98,8 @@
       "matched_triggers": [
         "\\b(call(s|ed|ing)? in|summon(s|ed|ing)?|haul(s|ed|ing)? in)\\b.{0,40}\\b(ambassador|envoy|diplomat|high commissioner|chargé d'affaires)\\b"
       ],
-      "needs_review": false
+      "needs_review": false,
+      "fetched_by_id": true
     },
     {
       "id": "2057237000168808476",
