@@ -1,12 +1,35 @@
 {
-  "generated_at": "2026-05-31T23:45:06.770472+00:00",
+  "generated_at": "2026-06-02T11:54:05.258605+00:00",
   "methodology_version": "1.4.2",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 365,
-  "tweet_count_classified": 356,
+  "tweet_count_raw": 367,
+  "tweet_count_classified": 357,
   "tweet_count_manual": 0,
   "tweets": [
+    {
+      "id": "2061734322152047051",
+      "url": "https://x.com/SenatorWong/status/2061734322152047051",
+      "created_at": "2026-06-02T08:59:02.000Z",
+      "text": "Australia and Sri Lanka are longstanding Indian Ocean Partners.\n\nToday I welcomed Foreign Minister Herath on his first official visit to Australia, where we discussed deepening our maritime and economic cooperation to support a peaceful, stable and prosperous Indian Ocean. https://t.co/95geKAyHJ7",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Commend",
+      "targets": [
+        "India"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "India"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bwelcome(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2059428055266001358",
       "url": "https://x.com/SenatorWong/status/2059428055266001358",
