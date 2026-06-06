@@ -41,7 +41,7 @@ from urllib.error import HTTPError
 
 HANDLE = "SenatorWong"
 SINCE = "2022-06-01T00:00:00Z"   # Wong sworn in as Foreign Minister
-METHODOLOGY_VERSION = "1.5.0"
+METHODOLOGY_VERSION = "1.5.1"
 
 # v1.4.0: incremental fetching. Each daily run fetches only tweets newer
 # than the most recent tweet in the existing dataset, minus this overlap
@@ -1162,10 +1162,20 @@ def main() -> int:
             print(f"WARN: fetch_dfat not importable ({e}); skipping DFAT source",
                   file=sys.stderr)
         else:
-            # Same start-time policy as the X timeline fetch
-            dfat_since = SINCE if (args.full_fetch or not existing_raw) else _incremental_start_time(
-                [r for r in existing_raw if r.get("source") == "dfat"] or existing_raw)
-            print(f"Fetching DFAT media releases since {dfat_since}…", file=sys.stderr)
+            # v1.5.1: DFAT has its own incremental clock — if there are no
+            # DFAT records in the existing dataset yet, force a full backfill
+            # regardless of how many X records are present. Otherwise the
+            # first DFAT run would only fetch the last few days (because the
+            # latest X tweet's date would be the reference point).
+            existing_dfat = [r for r in existing_raw if r.get("source") == "dfat"]
+            if args.full_fetch or not existing_dfat:
+                dfat_since = SINCE
+                reason = "no existing DFAT records" if not existing_dfat else "--full-fetch"
+                print(f"Full DFAT backfill from {dfat_since} ({reason})", file=sys.stderr)
+            else:
+                dfat_since = _incremental_start_time(existing_dfat)
+                print(f"Incremental DFAT fetch from {dfat_since} "
+                      f"({len(existing_dfat)} existing DFAT records)", file=sys.stderr)
             try:
                 dfat = fetch_dfat_releases(dfat_since)
             except Exception as e:

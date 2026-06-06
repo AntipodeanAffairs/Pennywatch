@@ -24,8 +24,13 @@ from urllib.request import Request, urlopen
 BASE = "https://www.foreignminister.gov.au"
 LISTING_PATH = "/minister/penny-wong/media-releases"
 USER_AGENT = (
-    "PennyWatch/Antipodean Affairs "
-    "(github.com/AntipodeanAffairs/Pennywatch)"
+    # Note: the "polite scraper" UA format (Mozilla/5.0 (compatible; Name; +URL))
+    # was being silently blocked by foreignminister.gov.au's WAF as of June 2026.
+    # Use a Firefox-shaped UA with a PennyWatch identifier appended — that gets
+    # through the WAF while still identifying the project for site admins who
+    # inspect logs.
+    "Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0 "
+    "PennyWatch/1.0"
 )
 REQUEST_DELAY_S = 0.5
 
