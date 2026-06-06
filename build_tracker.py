@@ -41,7 +41,7 @@ from urllib.error import HTTPError
 
 HANDLE = "SenatorWong"
 SINCE = "2022-06-01T00:00:00Z"   # Wong sworn in as Foreign Minister
-METHODOLOGY_VERSION = "1.4.2"
+METHODOLOGY_VERSION = "1.5.0"
 
 # v1.4.0: incremental fetching. Each daily run fetches only tweets newer
 # than the most recent tweet in the existing dataset, minus this overlap
@@ -897,17 +897,27 @@ def build_dataset(raw_tweets: list[dict]) -> dict:
 
     classified = []
     n_manual = 0
+    n_by_source: Counter = Counter()
     for t in ordered:
         result = classify(t["text"])
         if not result:
             continue
+        source = t.get("source", "x")
+        # URL: use the source's own URL if it provides one (DFAT does),
+        # otherwise build the X URL from the tweet ID.
+        url = t.get("url") or f"https://x.com/{HANDLE}/status/{t['id']}"
         record = {
             "id": t["id"],
-            "url": f"https://x.com/{HANDLE}/status/{t['id']}",
+            "url": url,
+            "source": source,
             "created_at": t["created_at"],
             "text": t["text"],
             **result,
         }
+        if "title" in t:
+            record["title"] = t["title"]
+        if t.get("joint_with"):
+            record["joint_with"] = t["joint_with"]
         if t.get("_manual"):
             record["manually_added"] = True
             for k in ("added_by", "note"):
@@ -917,6 +927,7 @@ def build_dataset(raw_tweets: list[dict]) -> dict:
         if t.get("_via_id_lookup"):
             record["fetched_by_id"] = True
         classified.append(record)
+        n_by_source[source] += 1
 
     classified.sort(key=lambda c: c["created_at"], reverse=True)
     return {
@@ -927,6 +938,7 @@ def build_dataset(raw_tweets: list[dict]) -> dict:
         "tweet_count_raw": len(ordered),
         "tweet_count_classified": len(classified),
         "tweet_count_manual": n_manual,
+        "count_by_source": dict(n_by_source),
         "tweets": classified,
     }
 
@@ -1002,17 +1014,25 @@ def render_site(dataset: dict, summary: dict) -> None:
 
 def _existing_raw_from_dataset(existing: dict) -> list[dict]:
     """Extract raw fields from an already-classified tweets.json, preserving
-    the manually_added / fetched_by_id flags so a re-classification run keeps
-    them intact."""
+    the manually_added / fetched_by_id / source / title / joint_with flags
+    so a re-classification run keeps them intact."""
     out = []
     for t in existing.get("tweets", []):
-        out.append({
+        rec = {
             "id": t["id"],
             "text": t["text"],
             "created_at": t["created_at"],
             "_manual": t.get("manually_added", False),
             "_via_id_lookup": t.get("fetched_by_id", False),
-        })
+            "source": t.get("source", "x"),
+        }
+        if "title" in t:
+            rec["title"] = t["title"]
+        if "joint_with" in t:
+            rec["joint_with"] = t["joint_with"]
+        if "url" in t:
+            rec["url"] = t["url"]
+        out.append(rec)
     return out
 
 
@@ -1128,8 +1148,32 @@ def main() -> int:
     # v1.3.3: merge in any manually-curated tweets that the X API missed.
     manual = load_manual_tweets()
     if manual:
+        for m in manual:
+            m.setdefault("source", "x")
         print(f"Adding {len(manual)} manually-curated tweets from manual_tweets.json", file=sys.stderr)
         raw = list(raw) + manual
+
+    # v1.5.0: also fetch from DFAT/foreignminister.gov.au (second source).
+    # Skipped for --seed and --no-fetch modes (those are X-only paths).
+    if not args.seed and not args.no_fetch:
+        try:
+            from fetch_dfat import fetch_dfat_releases
+        except ImportError as e:
+            print(f"WARN: fetch_dfat not importable ({e}); skipping DFAT source",
+                  file=sys.stderr)
+        else:
+            # Same start-time policy as the X timeline fetch
+            dfat_since = SINCE if (args.full_fetch or not existing_raw) else _incremental_start_time(
+                [r for r in existing_raw if r.get("source") == "dfat"] or existing_raw)
+            print(f"Fetching DFAT media releases since {dfat_since}…", file=sys.stderr)
+            try:
+                dfat = fetch_dfat_releases(dfat_since)
+            except Exception as e:
+                print(f"WARN: DFAT fetch failed ({type(e).__name__}: {e}); continuing with X only",
+                      file=sys.stderr)
+                dfat = []
+            print(f"DFAT: {len(dfat)} releases fetched", file=sys.stderr)
+            raw = list(raw) + dfat
 
     # v1.4.0: if this was an incremental fetch, merge with the existing
     # dataset. Newly-fetched tweets take precedence on ID collision so
@@ -1151,9 +1195,10 @@ def main() -> int:
     SUMMARY_PATH.write_text(json.dumps(summary, indent=2, ensure_ascii=False))
     render_site(dataset, summary)
 
-    print(f"Classified {summary['total_classified']} / {dataset['tweet_count_raw']} tweets "
+    print(f"Classified {summary['total_classified']} / {dataset['tweet_count_raw']} statements "
           f"({summary['total_critical']} critical, {summary['total_positive']} positive, "
           f"{summary['total_mixed']} mixed, {dataset['tweet_count_manual']} manual)")
+    print(f"By source: {dataset.get('count_by_source', {})}")
     print(f"Top critical targets: {list(summary['by_country'].items())[:5]}")
     print(f"Top positive targets: {list(summary['positive_by_country'].items())[:5]}")
     print(f"Wrote {TWEETS_PATH.name}, {SUMMARY_PATH.name}, {HTML_PATH.name}")
