@@ -1,15 +1,39 @@
 {
-  "generated_at": "2026-06-08T03:45:57.870601+00:00",
+  "generated_at": "2026-06-08T23:56:30.469024+00:00",
   "methodology_version": "1.5.3",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 362,
-  "tweet_count_classified": 357,
+  "tweet_count_raw": 368,
+  "tweet_count_classified": 358,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 357
+    "x": 358
   },
   "tweets": [
+    {
+      "id": "2064029534408859777",
+      "url": "https://x.com/SenatorWong/status/2064029534408859777",
+      "source": "x",
+      "created_at": "2026-06-08T16:59:23.000Z",
+      "text": "Thank you to German Foreign Minister Wadephul for welcoming me so warmly to Berlin. Australia &amp; Germany are lifting our Enhanced Strategic Partnership to a new level as we work together to strengthen our collective security, protect rules and norms, and build regional resilience. https://t.co/aU82ZPEN9Y",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "Germany"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Germany"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bthank(s|ed|ing)?\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2061734322152047051",
       "url": "https://x.com/SenatorWong/status/2061734322152047051",
