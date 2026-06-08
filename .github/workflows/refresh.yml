@@ -29,6 +29,12 @@ jobs:
       - name: Fetch and classify tweets
         env:
           X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+          # v1.5.2: DFAT proxy secrets — route DFAT scraping through a
+          # Cloudflare Worker so the runner's WAF-blocked IP isn't used.
+          # Both must be set in repo secrets for the proxy to activate;
+          # if either is missing, fetch_dfat falls back to direct fetch.
+          DFAT_PROXY_URL: ${{ secrets.DFAT_PROXY_URL }}
+          DFAT_PROXY_SECRET: ${{ secrets.DFAT_PROXY_SECRET }}
         run: |
           if [ "${{ inputs.full_fetch }}" = "true" ]; then
             echo "Running with --full-fetch (forced full backfill)"
