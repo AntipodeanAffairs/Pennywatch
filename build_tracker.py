@@ -41,7 +41,7 @@ from urllib.error import HTTPError
 
 HANDLE = "SenatorWong"
 SINCE = "2022-06-01T00:00:00Z"   # Wong sworn in as Foreign Minister
-METHODOLOGY_VERSION = "1.5.2"
+METHODOLOGY_VERSION = "1.5.3"
 
 # v1.4.0: incremental fetching. Each daily run fetches only tweets newer
 # than the most recent tweet in the existing dataset, minus this overlap

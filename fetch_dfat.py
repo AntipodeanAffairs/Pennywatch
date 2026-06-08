@@ -1,103 +1,46 @@
-"""DFAT/foreignminister.gov.au scraper — second source for PennyWatch.
+"""DFAT/foreignminister.gov.au scraper — RSS-only second source.
 
-Pulls Senator Wong's media releases from foreignminister.gov.au and emits
-records in the same shape as @SenatorWong tweets, so the same classifier
-applies. Each record carries `source: "dfat"` and (where applicable) a
-`joint_with` list naming co-signers of joint statements.
+v1.5.3 (RSS) — Earlier versions (v1.5.0–v1.5.2) scraped the listing+detail
+pages, but foreignminister.gov.au's WAF silently blocks GitHub Actions
+runner IP ranges. The site's public RSS feed at /rss.xml is served from
+a cached endpoint that is NOT WAF-protected, and (we discovered)
+contains the FULL HTML body of each release in the <description> field —
+not a short summary. So RSS-only gives us the same classifier signal as
+the full-page scrape, with the only sacrifice being no historical
+backfill: the feed only ever contains the latest 10 items.
 
-Polite scraping: ~0.5s between requests, descriptive User-Agent, retries
-on transient errors. Government sites don't object to this kind of access,
-but we want to look like a well-behaved scraper rather than a flood.
+Each daily run picks up everything that has appeared since the previous
+run, and the incremental-merge logic in build_tracker.py preserves all
+prior records. So the dataset grows forward from the day v1.5.3 lands.
 """
 
 from __future__ import annotations
 
-import os
 import re
 import sys
 import time
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 from http.client import RemoteDisconnected
 from urllib.error import HTTPError, URLError
-from urllib.parse import quote, urljoin
 from urllib.request import Request, urlopen
 
-BASE = "https://www.foreignminister.gov.au"
-LISTING_PATH = "/minister/penny-wong/media-releases"
+RSS_URL = "https://www.foreignminister.gov.au/rss.xml"
+
+# Use a Firefox-shaped UA with a PennyWatch identifier appended — the
+# /rss.xml endpoint isn't WAF-protected, but being polite costs nothing.
 USER_AGENT = (
-    # Note: the "polite scraper" UA format (Mozilla/5.0 (compatible; Name; +URL))
-    # was being silently blocked by foreignminister.gov.au's WAF as of June 2026.
-    # Use a Firefox-shaped UA with a PennyWatch identifier appended — that gets
-    # through the WAF while still identifying the project for site admins who
-    # inspect logs.
     "Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0 "
     "PennyWatch/1.0"
 )
-REQUEST_DELAY_S = 0.5
 
-# v1.5.2: route requests through a Cloudflare Worker when the GitHub
-# Actions runner's IP is blocked by foreignminister.gov.au's WAF.
-# Both env vars must be set for proxy mode; otherwise we fetch directly
-# (which still works from non-blocked IPs, e.g., local development).
-PROXY_URL = os.environ.get("DFAT_PROXY_URL", "").strip()
-PROXY_SECRET = os.environ.get("DFAT_PROXY_SECRET", "").strip()
-PROXY_ENABLED = bool(PROXY_URL and PROXY_SECRET)
-
-# Listing-page regex — extracts (href, title, ISO date) from each <li> item.
-# Each entry has the shape:
-#   <li>
-#     <div class="views-field views-field-title">
-#       <span class="field-content">
-#         <a href="/minister/penny-wong/media-release/SLUG" hreflang="en">TITLE</a>
-#     ...
-#     <div class="views-field views-field-created">
-#       <span class="field-content">
-#         <time datetime="2026-06-06T11:04:58+10:00">6 June 2026</time>
-_LISTING_ITEM_RX = re.compile(
-    r'<a href="(/minister/penny-wong/media-release/[^"]+)"[^>]*>(.+?)</a>'
-    r'.*?<time datetime="([^"]+)"',
-    re.DOTALL,
-)
-
-# Detail-page regexes
-_DETAIL_TITLE_RX = re.compile(
-    r'<h1 class="au-header-heading">\s*<span>(.+?)</span>',
-    re.DOTALL,
-)
-_DETAIL_BODY_RX = re.compile(
-    r'<div class="field field--name-body[^"]*"[^>]*>(.*?)</div>\s*</div>',
-    re.DOTALL,
-)
-_DETAIL_JOINT_RX = re.compile(
-    r'<li>Joint statement with:</li>.*?'
-    r'<div class="field field--name-field-article-free-text[^"]*"[^>]*>(.*?)</div>',
-    re.DOTALL,
-)
-_DETAIL_JOINT_NAME_RX = re.compile(r'<li>(.+?)</li>', re.DOTALL)
-_TAG_STRIP_RX = re.compile(r'<[^>]+>')
-_WS_RX = re.compile(r'\s+')
-
+# --------------------------------------------------------------------------- #
+# HTTP
+# --------------------------------------------------------------------------- #
 
 def _http_get(url: str, retries: int = 4) -> str | None:
-    """GET a URL. If PROXY_ENABLED, route through the Cloudflare Worker;
-    otherwise fetch directly. Returns None on permanent failure.
-
-    Retries on transient network errors (RemoteDisconnected, timeouts,
-    socket errors, transient HTTP 5xx) with exponential backoff.
-    Returns None on 404 immediately, since the page genuinely doesn't exist.
-    """
-    if PROXY_ENABLED:
-        fetch_url = f"{PROXY_URL}?url={quote(url, safe='')}"
-        headers = {
-            "User-Agent": USER_AGENT,
-            "Accept": "text/html",
-            "X-PennyWatch-Auth": PROXY_SECRET,
-        }
-    else:
-        fetch_url = url
-        headers = {"User-Agent": USER_AGENT, "Accept": "text/html"}
-
-    req = Request(fetch_url, headers=headers)
+    """GET a URL with exponential-backoff retry on transient failures."""
+    req = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/rss+xml,text/xml,*/*"})
     for attempt in range(retries):
         try:
             with urlopen(req, timeout=30) as resp:
@@ -122,151 +65,169 @@ def _http_get(url: str, retries: int = 4) -> str | None:
     return None
 
 
-def _clean_text(html_fragment: str) -> str:
-    """Strip HTML tags, normalise whitespace, unescape entities."""
-    # Replace block tags with line breaks before stripping
-    txt = re.sub(r'</?(p|br|li|h\d|div)[^>]*>', '\n', html_fragment, flags=re.IGNORECASE)
-    txt = _TAG_STRIP_RX.sub('', txt)
-    # Unescape common HTML entities
-    for ent, ch in [("&amp;", "&"), ("&lt;", "<"), ("&gt;", ">"),
-                    ("&quot;", '"'), ("&#039;", "'"), ("&nbsp;", " "),
-                    ("&rsquo;", "'"), ("&lsquo;", "'"),
-                    ("&rdquo;", '"'), ("&ldquo;", '"'),
-                    ("&mdash;", "—"), ("&ndash;", "–"), ("&hellip;", "…")]:
-        txt = txt.replace(ent, ch)
-    # Normalise whitespace but preserve paragraph breaks
-    txt = re.sub(r'[ \t]+', ' ', txt)
-    txt = re.sub(r'\n[ \t]+', '\n', txt)
-    txt = re.sub(r'\n{2,}', '\n\n', txt)
-    return txt.strip()
+# --------------------------------------------------------------------------- #
+# RSS parsing
+# --------------------------------------------------------------------------- #
+
+_ITEM_RX = re.compile(r"<item>(.*?)</item>", re.DOTALL)
+_TITLE_RX = re.compile(r"<title>(.*?)</title>", re.DOTALL)
+_LINK_RX = re.compile(r"<link>(.*?)</link>", re.DOTALL)
+_PUBDATE_RX = re.compile(r"<pubDate>(.*?)</pubDate>", re.DOTALL)
+_DESC_RX = re.compile(r"<description>(.*?)</description>", re.DOTALL)
+_TAG_STRIP_RX = re.compile(r"<[^>]+>")
+_WS_RX = re.compile(r"\s+")
 
 
-def _parse_iso_to_utc(iso_str: str) -> str:
-    """Convert a foreignminister.gov.au datetime ('2026-06-06T11:04:58+10:00')
-    to a UTC ISO 8601 string ('2026-06-06T01:04:58Z')."""
-    try:
-        dt = datetime.fromisoformat(iso_str)
-    except ValueError:
-        return iso_str
-    return dt.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+def _decode_entities(s: str) -> str:
+    """Replace HTML entities common in RSS-wrapped HTML."""
+    for ent, ch in (
+        ("&amp;", "&"), ("&lt;", "<"), ("&gt;", ">"),
+        ("&quot;", '"'), ("&apos;", "'"), ("&#039;", "'"),
+        ("&nbsp;", " "),
+        ("&rsquo;", "'"), ("&lsquo;", "'"),
+        ("&rdquo;", '"'), ("&ldquo;", '"'),
+        ("&mdash;", "—"), ("&ndash;", "–"), ("&hellip;", "…"),
+    ):
+        s = s.replace(ent, ch)
+    return s
 
 
-def _slug_from_url(url: str) -> str:
-    return url.rstrip("/").rsplit("/", 1)[-1]
+def _clean_html_text(html_frag: str) -> str:
+    """Strip HTML tags, decode entities, normalise whitespace, preserve
+    paragraph breaks (which matter for sentence-level classifier scoping)."""
+    # First decode entities so the inner HTML reveals itself
+    s = _decode_entities(html_frag)
+    # Insert newlines around block-level tags before stripping them
+    s = re.sub(r"</?(p|br|div|li|h\d|blockquote)[^>]*>", "\n", s, flags=re.IGNORECASE)
+    # Strip remaining tags
+    s = _TAG_STRIP_RX.sub("", s)
+    # Decode again in case we revealed double-encoded entities
+    s = _decode_entities(s)
+    # Normalise whitespace; preserve paragraph boundaries
+    s = re.sub(r"[ \t]+", " ", s)
+    s = re.sub(r"\n[ \t]+", "\n", s)
+    s = re.sub(r"\n{2,}", "\n\n", s)
+    return s.strip()
 
 
-def fetch_release_detail(url: str) -> dict | None:
-    """Fetch one media-release detail page; return {text, joint_with} or None."""
-    html = _http_get(urljoin(BASE, url))
-    if not html:
-        return None
-    out: dict = {"text": "", "joint_with": []}
+def _slug_from_link(link: str) -> str:
+    return link.rstrip("/").rsplit("/", 1)[-1]
 
-    body_m = _DETAIL_BODY_RX.search(html)
-    if body_m:
-        out["text"] = _clean_text(body_m.group(1))
 
-    joint_m = _DETAIL_JOINT_RX.search(html)
-    if joint_m:
-        names = []
-        for n in _DETAIL_JOINT_NAME_RX.findall(joint_m.group(1)):
-            cleaned = _WS_RX.sub(' ', _TAG_STRIP_RX.sub('', n)).strip()
-            if cleaned:
-                names.append(cleaned)
-        out["joint_with"] = names
-
+def _detect_joint_with(text: str) -> list[str]:
+    """Best-effort detection of joint-statement co-signers from the body
+    text. The RSS feed loses the structured "Joint statement with: …" block
+    from the detail page, but co-signers can usually be inferred from
+    "Quotes attributable to <Title> <Name>:" blocks that bracket the body.
+    We collect any names that match that pattern. Not 100% reliable; the
+    methodology calls this out."""
+    out: list[str] = []
+    seen: set[str] = set()
+    for m in re.finditer(r"Quotes? attributable to\s+([^:\n]{3,120}):", text):
+        name = m.group(1).strip().rstrip(".,;")
+        # Skip if the captured name is just Wong herself (the speaker)
+        if "Penny Wong" in name and "and" not in name.lower():
+            continue
+        if name not in seen:
+            seen.add(name)
+            out.append(name)
     return out
 
 
-def fetch_dfat_releases(since: str, max_pages: int = 30) -> list[dict]:
-    """Walk the media-release listing pages and fetch each release.
+def _parse_pubdate(pubdate_str: str) -> str | None:
+    """Convert an RSS pubDate (RFC 2822-ish) to ISO 8601 UTC."""
+    try:
+        dt = parsedate_to_datetime(pubdate_str.strip())
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    except (TypeError, ValueError):
+        return None
 
-    Stops paginating once it sees releases entirely older than `since` (an
-    ISO 8601 string, e.g. '2022-06-01T00:00:00Z').
+
+# --------------------------------------------------------------------------- #
+# Public API
+# --------------------------------------------------------------------------- #
+
+def fetch_dfat_releases(since: str, max_pages: int | None = None) -> list[dict]:
+    """Fetch Penny Wong's media releases from the official RSS feed.
+
+    Returns records with: id, url, source, created_at, title, text, joint_with.
+    The `since` parameter filters out items older than that ISO 8601 date.
+    The `max_pages` parameter is accepted for API compatibility with the
+    legacy listing-based fetcher but is ignored (RSS is a single document).
     """
     try:
         since_dt = datetime.fromisoformat(since.replace("Z", "+00:00"))
     except ValueError:
         since_dt = datetime(2022, 6, 1, tzinfo=timezone.utc)
 
+    print(f"Fetching DFAT RSS feed ({RSS_URL})", file=sys.stderr)
+    xml = _http_get(RSS_URL)
+    if not xml:
+        print("DFAT RSS feed unfetchable; returning empty", file=sys.stderr)
+        return []
+
+    items = _ITEM_RX.findall(xml)
+    print(f"DFAT RSS contains {len(items)} items", file=sys.stderr)
+
     out: list[dict] = []
-    seen_urls: set[str] = set()
+    skipped_old = 0
 
-    for page in range(max_pages):
-        url = f"{BASE}{LISTING_PATH}?page={page}"
-        print(f"  DFAT listing page {page + 1} ({url})", file=sys.stderr)
-        html = _http_get(url)
-        if not html:
-            print(f"  page {page + 1} unfetchable; stopping", file=sys.stderr)
-            break
+    for raw in items:
+        title_m = _TITLE_RX.search(raw)
+        link_m = _LINK_RX.search(raw)
+        pub_m = _PUBDATE_RX.search(raw)
+        desc_m = _DESC_RX.search(raw)
 
-        items = _LISTING_ITEM_RX.findall(html)
-        if not items:
-            print(f"  no items found on page {page + 1}; stopping", file=sys.stderr)
-            break
+        if not (title_m and link_m and pub_m and desc_m):
+            continue
 
-        # Track whether every item on this page predates `since`
-        all_older = True
-        page_added = 0
+        title = _clean_html_text(title_m.group(1))
+        link = _decode_entities(link_m.group(1).strip())
+        created_at = _parse_pubdate(pub_m.group(1))
+        body = _clean_html_text(desc_m.group(1))
 
-        for href, raw_title, iso_date in items:
-            if href in seen_urls:
-                continue
-            seen_urls.add(href)
-            try:
-                item_dt = datetime.fromisoformat(iso_date)
-            except ValueError:
-                continue
-            if item_dt < since_dt:
-                continue
-            all_older = False
+        if not created_at or not body:
+            continue
+        try:
+            item_dt = datetime.fromisoformat(created_at.replace("Z", "+00:00"))
+        except ValueError:
+            continue
+        if item_dt < since_dt:
+            skipped_old += 1
+            continue
 
-            title = _clean_text(raw_title)
-            full_url = urljoin(BASE, href)
-            slug = _slug_from_url(href)
-            tweet_id = f"dfat:{slug}"
+        slug = _slug_from_link(link)
+        joint = _detect_joint_with(body)
 
-            time.sleep(REQUEST_DELAY_S)
-            detail = fetch_release_detail(href)
-            if not detail or not detail["text"]:
-                print(f"  WARN: no body for {href}", file=sys.stderr)
-                continue
+        out.append({
+            "id": f"dfat:{slug}",
+            "url": link,
+            "source": "dfat",
+            "created_at": created_at,
+            "title": title,
+            # Prepend title to body so classifier picks up triggers in the
+            # headline (which is often the most punchy critical/positive phrase).
+            "text": f"{title}. {body}",
+            "joint_with": joint,
+        })
 
-            out.append({
-                "id": tweet_id,
-                "url": full_url,
-                "source": "dfat",
-                "created_at": _parse_iso_to_utc(iso_date),
-                "title": title,
-                "text": f"{title}. {detail['text']}",
-                "joint_with": detail["joint_with"],
-            })
-            page_added += 1
-
-        print(f"  page {page + 1}: added {page_added} releases (total {len(out)})",
-              file=sys.stderr)
-
-        if all_older and page_added == 0:
-            print(f"  page {page + 1}: all items older than {since}; stopping",
-                  file=sys.stderr)
-            break
-
-        time.sleep(REQUEST_DELAY_S)
-
-    print(f"DFAT fetch complete: {len(out)} releases", file=sys.stderr)
+    if skipped_old:
+        print(f"DFAT RSS: skipped {skipped_old} items older than {since}", file=sys.stderr)
+    print(f"DFAT RSS: returning {len(out)} releases", file=sys.stderr)
     return out
 
 
 if __name__ == "__main__":
-    # CLI smoke test: fetch the last 14 days of releases and print them.
+    # CLI smoke test: fetch the current RSS feed back to 2022-06-01 and
+    # print a summary of each release we'd add.
     import json
-    from datetime import timedelta
-    since = (datetime.now(timezone.utc) - timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%SZ")
-    releases = fetch_dfat_releases(since)
+    releases = fetch_dfat_releases("2022-06-01T00:00:00Z")
     for r in releases:
-        print(f"  {r['created_at']}  {r['title'][:80]}")
+        print(f"  {r['created_at'][:10]}  {r['title'][:70]}")
         if r["joint_with"]:
-            print(f"    joint with: {', '.join(r['joint_with'])}")
+            print(f"    joint_with: {r['joint_with']}")
         print(f"    body: {r['text'][:140]}…")
         print()
     print(f"Total: {len(releases)}")
