@@ -1,0 +1,64 @@
+name: PennyWatch daily refresh
+
+on:
+  schedule:
+    - cron: '0 20 * * *'   # 20:00 UTC = ~6am AEST / 7am AEDT
+  workflow_dispatch:
+    inputs:
+      full_fetch:
+        description: 'Force a full backfill from 1 June 2022 (ignores incremental state). Use sparingly — uses ~2000 X API reads.'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # required so the bot can commit refreshed data back
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch and classify tweets
+        env:
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+          # v1.5.2: DFAT proxy secrets — route DFAT scraping through a
+          # Cloudflare Worker so the runner's WAF-blocked IP isn't used.
+          # Both must be set in repo secrets for the proxy to activate;
+          # if either is missing, fetch_dfat falls back to direct fetch.
+          DFAT_PROXY_URL: ${{ secrets.DFAT_PROXY_URL }}
+          DFAT_PROXY_SECRET: ${{ secrets.DFAT_PROXY_SECRET }}
+        run: |
+          if [ "${{ inputs.full_fetch }}" = "true" ]; then
+            echo "Running with --full-fetch (forced full backfill)"
+            python build_tracker.py --full-fetch
+          else
+            echo "Running normal incremental refresh"
+            python build_tracker.py
+          fi
+
+      - name: Commit refreshed data back to repo
+        run: |
+          git config user.name "PennyWatch Bot"
+          git config user.email "bot@antipodeanaffairs.invalid"
+          git add tweets.json summary.json index.html
+          if git diff --staged --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "Refresh data $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy . --project-name=${{ secrets.CF_PROJECT_NAME }} --branch=main --commit-dirty=true

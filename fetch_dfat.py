@@ -12,13 +12,14 @@ but we want to look like a well-behaved scraper rather than a flood.
 
 from __future__ import annotations
 
+import os
 import re
 import sys
 import time
 from datetime import datetime, timezone
 from http.client import RemoteDisconnected
 from urllib.error import HTTPError, URLError
-from urllib.parse import urljoin
+from urllib.parse import quote, urljoin
 from urllib.request import Request, urlopen
 
 BASE = "https://www.foreignminister.gov.au"
@@ -33,6 +34,14 @@ USER_AGENT = (
     "PennyWatch/1.0"
 )
 REQUEST_DELAY_S = 0.5
+
+# v1.5.2: route requests through a Cloudflare Worker when the GitHub
+# Actions runner's IP is blocked by foreignminister.gov.au's WAF.
+# Both env vars must be set for proxy mode; otherwise we fetch directly
+# (which still works from non-blocked IPs, e.g., local development).
+PROXY_URL = os.environ.get("DFAT_PROXY_URL", "").strip()
+PROXY_SECRET = os.environ.get("DFAT_PROXY_SECRET", "").strip()
+PROXY_ENABLED = bool(PROXY_URL and PROXY_SECRET)
 
 # Listing-page regex — extracts (href, title, ISO date) from each <li> item.
 # Each entry has the shape:
@@ -70,13 +79,25 @@ _WS_RX = re.compile(r'\s+')
 
 
 def _http_get(url: str, retries: int = 4) -> str | None:
-    """GET a URL with polite User-Agent. Returns None on permanent failure.
+    """GET a URL. If PROXY_ENABLED, route through the Cloudflare Worker;
+    otherwise fetch directly. Returns None on permanent failure.
 
     Retries on transient network errors (RemoteDisconnected, timeouts,
     socket errors, transient HTTP 5xx) with exponential backoff.
     Returns None on 404 immediately, since the page genuinely doesn't exist.
     """
-    req = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html"})
+    if PROXY_ENABLED:
+        fetch_url = f"{PROXY_URL}?url={quote(url, safe='')}"
+        headers = {
+            "User-Agent": USER_AGENT,
+            "Accept": "text/html",
+            "X-PennyWatch-Auth": PROXY_SECRET,
+        }
+    else:
+        fetch_url = url
+        headers = {"User-Agent": USER_AGENT, "Accept": "text/html"}
+
+    req = Request(fetch_url, headers=headers)
     for attempt in range(retries):
         try:
             with urlopen(req, timeout=30) as resp:
