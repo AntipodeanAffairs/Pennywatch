@@ -1,15 +1,40 @@
 {
-  "generated_at": "2026-06-08T23:56:30.469024+00:00",
+  "generated_at": "2026-06-10T11:04:43.092578+00:00",
   "methodology_version": "1.5.3",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 368,
-  "tweet_count_classified": 358,
+  "tweet_count_raw": 367,
+  "tweet_count_classified": 359,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 358
+    "x": 359
   },
   "tweets": [
+    {
+      "id": "2064235091849826314",
+      "url": "https://x.com/SenatorWong/status/2064235091849826314",
+      "source": "x",
+      "created_at": "2026-06-09T06:36:12.000Z",
+      "text": "Our thoughts are with the Australian-Filipino community, the people of the Philippines, and all those affected by the earthquake near Mindanao. Australia is ready to provide humanitarian assistance if requested. We stand with our close friends at this time of great difficulty.",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Solidarity",
+      "targets": [
+        "Philippines"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Philippines"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bthoughts (are )?with\\b",
+        "\\bstands? with\\b"
+      ],
+      "needs_review": true
+    },
     {
       "id": "2064029534408859777",
       "url": "https://x.com/SenatorWong/status/2064029534408859777",
