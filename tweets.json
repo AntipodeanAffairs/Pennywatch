@@ -1,15 +1,63 @@
 {
-  "generated_at": "2026-06-10T11:04:43.092578+00:00",
+  "generated_at": "2026-06-11T12:18:38.794035+00:00",
   "methodology_version": "1.5.3",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 367,
-  "tweet_count_classified": 359,
+  "tweet_count_raw": 374,
+  "tweet_count_classified": 361,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 359
+    "x": 361
   },
   "tweets": [
+    {
+      "id": "2064842143764504799",
+      "url": "https://x.com/SenatorWong/status/2064842143764504799",
+      "source": "x",
+      "created_at": "2026-06-10T22:48:24.000Z",
+      "text": "The UK and Australia are among each other's oldest relationships and we’re ambitiously transforming it to deliver for our people now and in the future.\n\nThank you to Foreign Secretary Cooper and Defence Secretary Healey for productive AUKMIN discussions in London. https://t.co/15tsayLDlY",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "United Kingdom"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "United Kingdom"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bthank(s|ed|ing)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "2064668745973547016",
+      "url": "https://x.com/SenatorWong/status/2064668745973547016",
+      "source": "x",
+      "created_at": "2026-06-10T11:19:23.000Z",
+      "text": "Australia and the UK share history, values, and crucially - given these uncertain times - we share interests. Ahead of Australia-UK Ministerial Consultations today, @YvetteCooperMP &amp; I met to discuss our ongoing work to deliver better outcomes for the UK, Australia and the world. https://t.co/kIbDljXus6",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "United Kingdom"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "United Kingdom"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bvalue(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2064235091849826314",
       "url": "https://x.com/SenatorWong/status/2064235091849826314",
