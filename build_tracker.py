@@ -41,7 +41,7 @@ from urllib.error import HTTPError
 
 HANDLE = "SenatorWong"
 SINCE = "2022-06-01T00:00:00Z"   # Wong sworn in as Foreign Minister
-METHODOLOGY_VERSION = "1.5.3"
+METHODOLOGY_VERSION = "1.5.4"
 
 # v1.4.0: incremental fetching. Each daily run fetches only tweets newer
 # than the most recent tweet in the existing dataset, minus this overlap
@@ -1153,37 +1153,13 @@ def main() -> int:
         print(f"Adding {len(manual)} manually-curated tweets from manual_tweets.json", file=sys.stderr)
         raw = list(raw) + manual
 
-    # v1.5.0: also fetch from DFAT/foreignminister.gov.au (second source).
-    # Skipped for --seed and --no-fetch modes (those are X-only paths).
-    if not args.seed and not args.no_fetch:
-        try:
-            from fetch_dfat import fetch_dfat_releases
-        except ImportError as e:
-            print(f"WARN: fetch_dfat not importable ({e}); skipping DFAT source",
-                  file=sys.stderr)
-        else:
-            # v1.5.1: DFAT has its own incremental clock — if there are no
-            # DFAT records in the existing dataset yet, force a full backfill
-            # regardless of how many X records are present. Otherwise the
-            # first DFAT run would only fetch the last few days (because the
-            # latest X tweet's date would be the reference point).
-            existing_dfat = [r for r in existing_raw if r.get("source") == "dfat"]
-            if args.full_fetch or not existing_dfat:
-                dfat_since = SINCE
-                reason = "no existing DFAT records" if not existing_dfat else "--full-fetch"
-                print(f"Full DFAT backfill from {dfat_since} ({reason})", file=sys.stderr)
-            else:
-                dfat_since = _incremental_start_time(existing_dfat)
-                print(f"Incremental DFAT fetch from {dfat_since} "
-                      f"({len(existing_dfat)} existing DFAT records)", file=sys.stderr)
-            try:
-                dfat = fetch_dfat_releases(dfat_since)
-            except Exception as e:
-                print(f"WARN: DFAT fetch failed ({type(e).__name__}: {e}); continuing with X only",
-                      file=sys.stderr)
-                dfat = []
-            print(f"DFAT: {len(dfat)} releases fetched", file=sys.stderr)
-            raw = list(raw) + dfat
+    # v1.5.4: DFAT scraping was attempted across v1.5.0–v1.5.3 (direct
+    # page scrape, Cloudflare Worker proxy, and RSS-feed fallback) but
+    # foreignminister.gov.au's WAF blocks GitHub Actions runner IPs on
+    # every endpoint, including the RSS feed. The capability was dropped
+    # in v1.5.4 in favour of a clean single-source X tracker. The schema
+    # still carries the `source` field on each record (defaulting to "x")
+    # for backward compatibility with historical tweets.json files.
 
     # v1.4.0: if this was an incremental fetch, merge with the existing
     # dataset. Newly-fetched tweets take precedence on ID collision so

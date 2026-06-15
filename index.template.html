@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PennyWatch — tracking Penny Wong's public statements on foreign countries</title>
-<meta name="description" content="PennyWatch, from Antipodean Affairs — an open, auditable tally of public statements (critical and positive) issued by Australian Foreign Minister Penny Wong, drawn from her X feed and her official ministerial media releases at foreignminister.gov.au.">
+<meta name="description" content="PennyWatch, from Antipodean Affairs — an open, auditable tally of public statements (critical and positive) issued by Australian Foreign Minister Penny Wong on her X feed.">
 <meta name="author" content="Antipodean Affairs">
 <meta property="og:title" content="PennyWatch — Antipodean Affairs">
-<meta property="og:description" content="An open, auditable tally of Australian Foreign Minister Penny Wong's public statements about foreign countries and officials — what she condemns and what she praises — drawn from her X feed and the official ministerial media releases. Published by Antipodean Affairs.">
+<meta property="og:description" content="An open, auditable tally of Australian Foreign Minister Penny Wong's public statements about foreign countries and officials — what she condemns and what she praises, sourced from her X feed. Published by Antipodean Affairs.">
 <meta property="og:site_name" content="Antipodean Affairs">
 <meta property="og:type" content="website">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -364,8 +364,8 @@
       <h1><span class="penny">Penny</span><span class="watch">Watch</span></h1>
       <span class="tagline">A foreign-policy statement tracker</span>
     </div>
-    <p class="deck">PennyWatch is an open, auditable tally of public statements — both <strong>critical</strong> and <strong>positive</strong> — issued by Australian Foreign Minister Senator Penny Wong, since her swearing-in on 1 June 2022. We draw from <strong>two sources</strong>: her official X feed (<a href="https://x.com/SenatorWong" rel="noopener" target="_blank">@SenatorWong</a>) and her ministerial media releases at <a href="https://www.foreignminister.gov.au/minister/penny-wong/media-releases" rel="noopener" target="_blank">foreignminister.gov.au</a>.</p>
-    <p class="deck-sub">Every statement is sourced to a specific tweet or release, attributed to the country, government, or official it concerns, and tagged on one of two scales: a four-tier <strong>critical</strong> scale (Condemn → Criticise → Concern → Call for action) or a four-tier <strong>positive</strong> scale (Endorse → Commend → Appreciate → Solidarity). A single statement may register as both at once. Each row in the table carries a small badge identifying its source — <span class="src-badge src-x">X</span> for tweets and <span class="src-badge src-dfat">DFAT</span> for ministerial releases — so readers can see at a glance which source produced each entry. The classifier, the full target list, and every inclusion rule are <a href="#methodology">published below</a> so readers can audit, dispute, or replicate the counts. The aim is not to argue a verdict but to make the pattern of statements visible — what's said, about whom, how warmly or critically, and when.</p>
+    <p class="deck">PennyWatch is an open, auditable tally of public statements — both <strong>critical</strong> and <strong>positive</strong> — issued by Australian Foreign Minister Senator Penny Wong on her X feed (<a href="https://x.com/SenatorWong" rel="noopener" target="_blank">@SenatorWong</a>), since her swearing-in on 1 June 2022.</p>
+    <p class="deck-sub">Every statement is sourced to a specific tweet, attributed to the country, government, or official it concerns, and tagged on one of two scales: a four-tier <strong>critical</strong> scale (Condemn → Criticise → Concern → Call for action) or a four-tier <strong>positive</strong> scale (Endorse → Commend → Appreciate → Solidarity). A single tweet may register as both at once. The classifier, the full target list, and every inclusion rule are <a href="#methodology">published below</a> so readers can audit, dispute, or replicate the counts. The aim is not to argue a verdict but to make the pattern of statements visible — what's said, about whom, how warmly or critically, and when.</p>
     <div class="meta">
       <span>Source: <strong id="m-source"></strong></span>
       <span>Since: <strong id="m-since"></strong></span>
@@ -434,17 +434,8 @@
   <section id="methodology">
     <h2>Methodology</h2>
     <div class="methodology">
-      <p>This tracker counts public statements by Senator the Hon. Penny Wong, Australian Minister for Foreign Affairs, directed <strong>critically or positively</strong> at named foreign countries, governments, or named foreign ministers/officials. Statements are drawn from two sources back to her swearing-in on <strong>1 June 2022</strong>: her official X account, <a href="https://x.com/SenatorWong" rel="noopener" target="_blank">@SenatorWong</a>, and her ministerial media releases at <a href="https://www.foreignminister.gov.au/minister/penny-wong/media-releases" rel="noopener" target="_blank">foreignminister.gov.au</a>.</p>
+      <p>This tracker counts public statements by Senator the Hon. Penny Wong, Australian Minister for Foreign Affairs, directed <strong>critically or positively</strong> at named foreign countries, governments, or named foreign ministers/officials. Statements are sourced from her official X account, <a href="https://x.com/SenatorWong" rel="noopener" target="_blank">@SenatorWong</a>, back to her swearing-in on <strong>1 June 2022</strong>.</p>
       <p>Trackers of this kind are only as credible as their inclusion rules. We publish ours in full so readers can audit, dispute, or replicate them.</p>
-
-      <h3>Sources</h3>
-      <p>Each entry in the dataset carries a <code>source</code> field with one of two values:</p>
-      <ul>
-        <li><span class="src-badge src-x">X</span> — a tweet posted by <a href="https://x.com/SenatorWong" rel="noopener" target="_blank">@SenatorWong</a>. Fetched via the X API v2 (timeline + search + conversation chase + direct ID lookup).</li>
-        <li><span class="src-badge src-dfat">DFAT</span> — a ministerial media release published at <a href="https://www.foreignminister.gov.au/minister/penny-wong/media-releases" rel="noopener" target="_blank">foreignminister.gov.au/minister/penny-wong</a>. Scraped politely (~0.5s between requests, descriptive User-Agent identifying the project). Each release is fetched in full and its body text run through the same classifier as tweets.</li>
-      </ul>
-      <p>The two sources are complementary. The X feed catches Wong's day-to-day reactive language, including doorstop-style tweets and thread continuations that don't always appear elsewhere. The ministerial site catches the formal, full-length versions of her substantive statements, including joint statements that are co-signed by other ministers and rarely tweeted in their entirety. Both feed into a single classified table; you can filter to one source at a time using the <em>Source</em> dropdown in the All Statements section.</p>
-      <p><strong>Joint statements.</strong> Many ministerial releases are co-signed with other foreign ministers (G7, Quad, AUKUS, Australia-UK, Australia-Japan, etc.). These are counted, because Wong's name is on them as a signatory, and tagged with a <em>joint statement with</em> note in the table listing the co-signers so readers can apply their own weighting. The methodology does <strong>not</strong> exclude joint statements; doing so would underrepresent the multilateral dimension of Australian foreign policy, which is most of it.</p>
 
       <h3>What counts as a tracked statement</h3>
       <p>A tweet is included if <strong>both</strong> of the following are true:</p>
@@ -517,6 +508,7 @@
 
       <h3>Changelog</h3>
       <ul>
+        <li><strong>v1.5.4</strong> — Reverted to X-only. DFAT scraping was attempted across v1.5.0–v1.5.3 (direct page scrape, Cloudflare Worker proxy, RSS-feed fallback) but every endpoint on foreignminister.gov.au is blocked at the IP level for GitHub Actions runners. The source filter, source badges, and DFAT-related methodology section have been removed. The <code>source</code> field still exists on every record (defaulting to <code>x</code>) for backward compatibility with older dataset snapshots. The X side of the tracker — 357+ classified statements, the full v1.4.2 classifier with seven exclusion patterns, daily incremental refresh — is unaffected and continues to run.</li>
         <li><strong>v1.5.3</strong> — DFAT scraper switched to RSS-only. The foreignminister.gov.au listing+detail pages are WAF-protected against GitHub Actions runner IPs, but the public RSS feed at <code>/rss.xml</code> is served unprotected — and its <code>&lt;description&gt;</code> field contains the full release body, not a summary. So the classifier gets the same content as the detail-page scrape would have provided, no proxy needed. Trade-off: the RSS feed only holds the latest 10 items, so DFAT coverage begins from the date of v1.5.3 deployment and grows forward, with no historical backfill.</li>
         <li><strong>v1.5.2</strong> — DFAT proxy via a small Cloudflare Worker. foreignminister.gov.au's WAF blocks GitHub Actions runner IPs (silent TCP-accept-then-drop pattern), so the scraper now routes requests through an authenticated Worker on Antipodean Affairs's Cloudflare account. The Worker is allowlisted to only Wong's ministerial subtree and caches responses at the edge for 5 minutes so repeated requests don't burden the upstream. fetch_dfat.py falls back to direct fetch when the proxy env vars are absent (local development).</li>
         <li><strong>v1.5.1</strong> — Two fixes after v1.5.0's first run returned zero DFAT records. The polite "Mozilla/5.0 (compatible; PennyWatch; +URL)" User-Agent was being silently blocked by foreignminister.gov.au's WAF — switched to a Firefox-shaped UA with a PennyWatch identifier appended. Also fixed a first-run bug where the incremental clock for DFAT was using the latest X-tweet date as the reference, so the very first DFAT run only fetched the last week instead of doing the full June-2022 backfill.</li>
@@ -547,11 +539,6 @@
     <div class="controls">
       <input id="q" placeholder="Search text…">
       <select id="f-country"><option value="">All countries</option></select>
-      <select id="f-source">
-        <option value="">All sources</option>
-        <option value="x">X (tweets)</option>
-        <option value="dfat">DFAT (releases)</option>
-      </select>
       <select id="f-tone">
         <option value="">All tones</option>
         <option value="critical">Critical only</option>
@@ -711,7 +698,6 @@ const qEl = document.getElementById("q");
 const fcEl = document.getElementById("f-country");
 const ftoneEl = document.getElementById("f-tone");
 const ftierEl = document.getElementById("f-tier");
-const fsrcEl = document.getElementById("f-source");
 
 // Country filter dropdown — union of critical and positive countries
 const allCountries = Array.from(new Set([...critCountries, ...posCountries])).sort();
@@ -728,12 +714,10 @@ function render() {
   const fc = fcEl.value;
   const ftone = ftoneEl.value;
   const ftier = ftierEl.value;
-  const fsrc = fsrcEl.value;
   const matches = dataset.tweets.filter(t => {
     if (q && !t.text.toLowerCase().includes(q)) return false;
     if (ftone && t.tone !== ftone) return false;
     if (ftier && t.severity !== ftier && t.warmth !== ftier) return false;
-    if (fsrc && (t.source || "x") !== fsrc) return false;
     if (fc) {
       // Country filter respects the active tone filter
       const inCrit = (t.critical_targets || []).includes(fc);
@@ -762,24 +746,12 @@ function render() {
     const tierTags = [];
     if (t.severity) tierTags.push(`<span class="tag ${TIER_CLASS[t.severity]}">${t.severity}</span>`);
     if (t.warmth) tierTags.push(`<span class="tag ${TIER_CLASS[t.warmth]}">${t.warmth}</span>`);
-    // v1.5.0: source badge + joint-statement hint
-    const sourceLabel = (t.source === "dfat") ? "DFAT" : "X";
-    const sourceTitle = (t.source === "dfat")
-      ? "Ministerial media release from foreignminister.gov.au"
-      : "Tweet from @SenatorWong";
-    const srcBadge = `<span class="src-badge src-${t.source || "x"}" title="${sourceTitle}">${sourceLabel}</span>`;
-    const jointNote = (t.joint_with && t.joint_with.length)
-      ? `<div class="joint-note">Joint statement with: ${t.joint_with.join(", ")}</div>`
-      : "";
-    const textBlock = (t.title && t.source === "dfat")
-      ? `<strong>${t.title.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]))}</strong> — ${escText.slice(0, 350)}${escText.length > 350 ? "…" : ""}`
-      : escText;
     return `<tr>
-      <td class="date">${t.created_at.slice(0, 10)}<br>${srcBadge}</td>
+      <td class="date">${t.created_at.slice(0, 10)}</td>
       <td>${toneCell}</td>
       <td>${tierTags.join(" ")}${review}${manual}${idBadge}</td>
       <td class="targets">${tags}</td>
-      <td><a href="${url}" target="_blank" rel="noopener">${textBlock}</a>${jointNote}</td>
+      <td><a href="${url}" target="_blank" rel="noopener">${escText}</a></td>
     </tr>`;
   }).join("");
   if (!matches.length) rowsEl.innerHTML = '<tr><td colspan="5" style="color:var(--muted);padding:20px">No matching statements.</td></tr>';
@@ -789,7 +761,6 @@ qEl.addEventListener("input", render);
 fcEl.addEventListener("change", render);
 ftoneEl.addEventListener("change", render);
 ftierEl.addEventListener("change", render);
-fsrcEl.addEventListener("change", render);
 render();
 </script>
 </body>
