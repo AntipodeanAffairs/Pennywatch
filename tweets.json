@@ -1,15 +1,39 @@
 {
-  "generated_at": "2026-06-15T02:40:33.687889+00:00",
+  "generated_at": "2026-06-16T15:28:50.292556+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 378,
-  "tweet_count_classified": 361,
+  "tweet_count_raw": 380,
+  "tweet_count_classified": 362,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 361
+    "x": 362
   },
   "tweets": [
+    {
+      "id": "2066730013530161543",
+      "url": "https://x.com/SenatorWong/status/2066730013530161543",
+      "source": "x",
+      "created_at": "2026-06-16T03:50:07.000Z",
+      "text": "Russia’s latest aerial assault on Kyiv has caused further death and destruction.\n \nAustralia stands firmly with Ukraine and joins with international partners in condemning these brutal strikes, including those on the UNESCO-listed Pechersk Lavra monastery.",
+      "tone": "critical",
+      "severity": "Condemn",
+      "warmth": null,
+      "targets": [
+        "Ukraine"
+      ],
+      "critical_targets": [
+        "Ukraine"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcondemning\\b"
+      ],
+      "needs_review": true
+    },
     {
       "id": "2064842143764504799",
       "url": "https://x.com/SenatorWong/status/2064842143764504799",
