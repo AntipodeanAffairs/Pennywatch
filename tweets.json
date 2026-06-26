@@ -1,15 +1,40 @@
 {
-  "generated_at": "2026-06-24T23:52:49.144276+00:00",
+  "generated_at": "2026-06-26T08:36:42.452465+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 372,
-  "tweet_count_classified": 362,
+  "tweet_count_raw": 373,
+  "tweet_count_classified": 363,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 362
+    "x": 363
   },
   "tweets": [
+    {
+      "id": "2069997092060451091",
+      "url": "https://x.com/SenatorWong/status/2069997092060451091",
+      "source": "x",
+      "created_at": "2026-06-25T04:12:20.000Z",
+      "text": "Our thoughts are with the people of Venezuela, the Australian-Venezuelan community, and all those affected by the devastating earthquakes in Venezuela.\n\nWe send our deepest condolences following this dreadful tragedy.",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Solidarity",
+      "targets": [
+        "Venezuela"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Venezuela"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bthoughts (are )?with\\b",
+        "\\bcondolences\\b"
+      ],
+      "needs_review": true
+    },
     {
       "id": "2066730013530161543",
       "url": "https://x.com/SenatorWong/status/2066730013530161543",
