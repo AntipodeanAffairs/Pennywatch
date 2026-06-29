@@ -1,15 +1,40 @@
 {
-  "generated_at": "2026-06-28T21:10:15.605992+00:00",
+  "generated_at": "2026-06-29T21:39:08.417258+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 364,
-  "tweet_count_classified": 363,
+  "tweet_count_raw": 366,
+  "tweet_count_classified": 364,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 363
+    "x": 364
   },
   "tweets": [
+    {
+      "id": "2071439462509498871",
+      "url": "https://x.com/SenatorWong/status/2071439462509498871",
+      "source": "x",
+      "created_at": "2026-06-29T03:43:48.000Z",
+      "text": "Today is an important day for Australia, for Vanuatu and for our region.\n\nAustralia and Vanuatu have a deep, enduring partnership based on mutual respect, shared values and a common vision for our region.\n\nAnd today we’ve elevated that partnership through the Nakamal Agreement. https://t.co/VwVooSSBQ8",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "Vanuatu"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Vanuatu"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bvalue(s|d)?\\b",
+        "\\benduring (partnership|friendship)\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2069997092060451091",
       "url": "https://x.com/SenatorWong/status/2069997092060451091",
