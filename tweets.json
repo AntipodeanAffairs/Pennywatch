@@ -1,15 +1,41 @@
 {
-  "generated_at": "2026-07-08T21:15:05.906851+00:00",
+  "generated_at": "2026-07-09T21:27:12.133358+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 370,
-  "tweet_count_classified": 366,
+  "tweet_count_raw": 371,
+  "tweet_count_classified": 367,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 366
+    "x": 367
   },
   "tweets": [
+    {
+      "id": "2075139033035116943",
+      "url": "https://x.com/SenatorWong/status/2075139033035116943",
+      "source": "x",
+      "created_at": "2026-07-09T08:44:34.000Z",
+      "text": "Welcome to Australia @narendramodi!\n\nAustralia and India's relationship has never been more consequential.\n\nI was pleased to welcome PM Narendra Modi to Government House in Melbourne, as we discussed deepening the  Comprehensive Strategic Partnership between our two countries. https://t.co/QipiWDgHVZ",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Commend",
+      "targets": [
+        "India"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "India"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bwelcome(s|d)?\\b",
+        "\\bwelcome(s|d)?\\b",
+        "\\bpleased to (welcome|meet|host|see)\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2074337554409898164",
       "url": "https://x.com/SenatorWong/status/2074337554409898164",
