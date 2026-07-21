@@ -1,15 +1,41 @@
 {
-  "generated_at": "2026-07-20T21:15:58.216697+00:00",
+  "generated_at": "2026-07-21T21:17:07.836774+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 371,
-  "tweet_count_classified": 367,
+  "tweet_count_raw": 375,
+  "tweet_count_classified": 368,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 367
+    "x": 368
   },
   "tweets": [
+    {
+      "id": "2079334912122036495",
+      "url": "https://x.com/SenatorWong/status/2079334912122036495",
+      "source": "x",
+      "created_at": "2026-07-20T22:37:29.000Z",
+      "text": "Congratulations to @Ed_Miliband on your appointment as UK Foreign Secretary.\n\nAustralia and the UK have an enduring partnership, underpinned by shared history, values and interests. I look forward to working with you again to further strengthen and modernise our relationship.",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Endorse",
+      "targets": [
+        "United Kingdom"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "United Kingdom"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcongratulat(e|es|ed|ing|ions)\\b",
+        "\\bvalue(s|d)?\\b",
+        "\\benduring (partnership|friendship)\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2075139033035116943",
       "url": "https://x.com/SenatorWong/status/2075139033035116943",
