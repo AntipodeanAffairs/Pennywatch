@@ -1,15 +1,39 @@
 {
-  "generated_at": "2026-07-21T21:17:07.836774+00:00",
+  "generated_at": "2026-07-22T21:15:24.769994+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
   "tweet_count_raw": 375,
-  "tweet_count_classified": 368,
+  "tweet_count_classified": 369,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 368
+    "x": 369
   },
   "tweets": [
+    {
+      "id": "2079746086479241530",
+      "url": "https://x.com/SenatorWong/status/2079746086479241530",
+      "source": "x",
+      "created_at": "2026-07-22T01:51:21.000Z",
+      "text": "Australia is proud to be a trusted partner of the Philippines as we mark 80 years of diplomatic relations.\n\nI met President @bongbongmarcos to reaffirm our support for the Philippines’ ASEAN Chair year and our shared commitment to a peaceful, stable and prosperous region. https://t.co/quSWnV4J18",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Commend",
+      "targets": [
+        "Philippines"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Philippines"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bproud (to|of)\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2079334912122036495",
       "url": "https://x.com/SenatorWong/status/2079334912122036495",
