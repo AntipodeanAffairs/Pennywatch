@@ -1,15 +1,39 @@
 {
-  "generated_at": "2026-07-22T21:15:24.769994+00:00",
+  "generated_at": "2026-07-23T21:11:14.557007+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 375,
-  "tweet_count_classified": 369,
+  "tweet_count_raw": 381,
+  "tweet_count_classified": 370,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 369
+    "x": 370
   },
   "tweets": [
+    {
+      "id": "2080185048452702250",
+      "url": "https://x.com/SenatorWong/status/2080185048452702250",
+      "source": "x",
+      "created_at": "2026-07-23T06:55:38.000Z",
+      "text": "The European Union recognises ASEAN as an indispensable partner in advancing regional stability and prosperity. I met with @kajakallas in Manila to discuss our shared support for ASEAN centrality and cooperation on the challenges facing our regions. https://t.co/vjV3IVu5RK",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "European Union"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "European Union"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\brecognis(e|es|ed|ing)\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2079746086479241530",
       "url": "https://x.com/SenatorWong/status/2079746086479241530",
