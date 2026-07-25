@@ -1,10 +1,10 @@
 {
-  "total_classified": 371,
-  "total_critical": 141,
-  "total_positive": 254,
-  "total_mixed": 24,
+  "total_classified": 372,
+  "total_critical": 142,
+  "total_positive": 255,
+  "total_mixed": 25,
   "by_country": {
-    "Russia": 42,
+    "Russia": 43,
     "Israel": 28,
     "Iran": 24,
     "Ukraine": 14,
@@ -32,7 +32,7 @@
     "South Korea": 1
   },
   "by_severity": {
-    "Condemn": 65,
+    "Condemn": 66,
     "Concern": 11,
     "Call for action": 37,
     "Criticise": 28
@@ -75,9 +75,16 @@
     "2026-03": 3,
     "2026-04": 3,
     "2026-05": 3,
-    "2026-06": 1
+    "2026-06": 1,
+    "2026-07": 1
   },
   "by_country_severity": {
+    "Russia": {
+      "Condemn": 24,
+      "Call for action": 10,
+      "Criticise": 8,
+      "Concern": 1
+    },
     "Ukraine": {
       "Condemn": 10,
       "Call for action": 2,
@@ -119,12 +126,6 @@
       "Call for action": 8,
       "Criticise": 1,
       "Condemn": 1,
-      "Concern": 1
-    },
-    "Russia": {
-      "Call for action": 10,
-      "Condemn": 23,
-      "Criticise": 8,
       "Concern": 1
     },
     "Myanmar": {
@@ -191,7 +192,7 @@
   },
   "positive_by_country": {
     "Indonesia": 24,
-    "Ukraine": 20,
+    "Ukraine": 21,
     "United Kingdom": 19,
     "India": 17,
     "Japan": 15,
@@ -234,10 +235,10 @@
     "Egypt": 1
   },
   "positive_by_warmth": {
+    "Solidarity": 46,
     "Endorse": 65,
     "Appreciate": 76,
-    "Commend": 68,
-    "Solidarity": 45
+    "Commend": 68
   },
   "positive_by_month": {
     "2023-04": 4,
@@ -278,9 +279,15 @@
     "2026-04": 6,
     "2026-05": 5,
     "2026-06": 7,
-    "2026-07": 7
+    "2026-07": 8
   },
   "positive_by_country_warmth": {
+    "Ukraine": {
+      "Solidarity": 15,
+      "Endorse": 3,
+      "Commend": 1,
+      "Appreciate": 2
+    },
     "Philippines": {
       "Endorse": 2,
       "Commend": 2,
@@ -380,12 +387,6 @@
     "Samoa": {
       "Commend": 1
     },
-    "Ukraine": {
-      "Endorse": 3,
-      "Solidarity": 14,
-      "Commend": 1,
-      "Appreciate": 2
-    },
     "Canada": {
       "Solidarity": 2,
       "Endorse": 2,
@@ -472,7 +473,7 @@
     }
   },
   "net_by_country": {
-    "Russia": -34,
+    "Russia": -35,
     "Israel": -20,
     "Iran": -17,
     "North Korea": -8,
@@ -484,34 +485,34 @@
     "Qatar": -1,
     "Syria": -1,
     "Saudi Arabia": -1,
-    "European Union": 0,
-    "United Arab Emirates": 0,
     "China": 0,
     "Afghanistan": 0,
     "Venezuela": 0,
-    "Türkiye": 1,
-    "Egypt": 1,
+    "European Union": 0,
+    "United Arab Emirates": 0,
     "Samoa": 1,
+    "Egypt": 1,
     "Cook Islands": 1,
+    "Türkiye": 1,
     "France": 2,
-    "Jordan": 3,
     "Papua New Guinea": 3,
     "Kiribati": 3,
+    "Jordan": 3,
     "Palestine": 4,
     "Sudan": 5,
-    "Germany": 6,
-    "Vietnam": 6,
     "Tuvalu": 6,
-    "Ukraine": 6,
-    "Vanuatu": 6,
     "Philippines": 6,
-    "New Zealand": 7,
-    "Tonga": 7,
-    "Fiji": 7,
-    "Solomon Islands": 7,
+    "Germany": 6,
+    "Vanuatu": 6,
+    "Vietnam": 6,
     "South Korea": 7,
+    "Solomon Islands": 7,
+    "Ukraine": 7,
     "Canada": 7,
+    "Fiji": 7,
+    "Tonga": 7,
     "Thailand": 7,
+    "New Zealand": 7,
     "Singapore": 8,
     "Malaysia": 10,
     "Timor-Leste": 13,
@@ -520,5 +521,5 @@
     "India": 16,
     "Indonesia": 23
   },
-  "needs_review": 22
+  "needs_review": 23
 }

@@ -1,15 +1,43 @@
 {
-  "generated_at": "2026-07-24T21:10:57.391527+00:00",
+  "generated_at": "2026-07-25T20:59:32.282093+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 384,
-  "tweet_count_classified": 371,
+  "tweet_count_raw": 385,
+  "tweet_count_classified": 372,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 371
+    "x": 372
   },
   "tweets": [
+    {
+      "id": "2080873195805323415",
+      "url": "https://x.com/SenatorWong/status/2080873195805323415",
+      "source": "x",
+      "created_at": "2026-07-25T04:30:05.000Z",
+      "text": "Russia’s attacks on Kyiv and Sloviansk on 24 July killed at least 15 people and destroyed the Honorary Consulate of Latvia, with two staff injured. Australia’s thoughts are with them and with Ukraine and Latvia as they stand against Russia’s unprovoked and unjustified aggression.",
+      "tone": "mixed",
+      "severity": "Condemn",
+      "warmth": "Solidarity",
+      "targets": [
+        "Russia",
+        "Ukraine"
+      ],
+      "critical_targets": [
+        "Russia"
+      ],
+      "positive_targets": [
+        "Ukraine"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bthoughts (are )?with\\b",
+        "\\bperpetrator-context\\b"
+      ],
+      "needs_review": true
+    },
     {
       "id": "2080489316674130149",
       "url": "https://x.com/SenatorWong/status/2080489316674130149",
