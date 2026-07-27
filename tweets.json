@@ -1,15 +1,39 @@
 {
-  "generated_at": "2026-07-26T21:03:23.882398+00:00",
+  "generated_at": "2026-07-27T21:17:00.878551+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 385,
-  "tweet_count_classified": 372,
+  "tweet_count_raw": 387,
+  "tweet_count_classified": 373,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 372
+    "x": 373
   },
   "tweets": [
+    {
+      "id": "2081679024917733547",
+      "url": "https://x.com/SenatorWong/status/2081679024917733547",
+      "source": "x",
+      "created_at": "2026-07-27T09:52:09.000Z",
+      "text": "Australia and Singapore have built one of the region’s closest and most trusted partnerships. \n\nToday @RichardMarlesMP @Senator_Farrell and I welcomed @VivianBala @DefenceMinSG and Minister Tan See Leng to Adelaide for the Singapore-Australia Joint Ministerial Committee. https://t.co/71xeswlNZL",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Commend",
+      "targets": [
+        "Singapore"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Singapore"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bwelcome(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2080873195805323415",
       "url": "https://x.com/SenatorWong/status/2080873195805323415",
