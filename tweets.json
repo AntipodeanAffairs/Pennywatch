@@ -1,15 +1,39 @@
 {
-  "generated_at": "2026-07-28T21:13:39.317203+00:00",
+  "generated_at": "2026-07-29T21:02:36.592666+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
   "tweet_count_raw": 384,
-  "tweet_count_classified": 373,
+  "tweet_count_classified": 374,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 373
+    "x": 374
   },
   "tweets": [
+    {
+      "id": "2082287437179732440",
+      "url": "https://x.com/SenatorWong/status/2082287437179732440",
+      "source": "x",
+      "created_at": "2026-07-29T02:09:46.000Z",
+      "text": "Our thoughts are with the people of Japan following the earthquake in Kyushu, and especially with all those affected. DFAT stands ready to provide consular assistance. Those in need should call the Consular Emergency Centre on 1300 555 135 (Australia) or +61 6261 3305 (overseas).",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Solidarity",
+      "targets": [
+        "Japan"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Japan"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bthoughts (are )?with\\b"
+      ],
+      "needs_review": true
+    },
     {
       "id": "2081679024917733547",
       "url": "https://x.com/SenatorWong/status/2081679024917733547",
