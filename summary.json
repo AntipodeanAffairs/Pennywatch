@@ -1,7 +1,7 @@
 {
-  "total_classified": 374,
+  "total_classified": 375,
   "total_critical": 142,
-  "total_positive": 257,
+  "total_positive": 258,
   "total_mixed": 25,
   "by_country": {
     "Russia": 43,
@@ -204,6 +204,7 @@
     "Israel": 8,
     "Thailand": 8,
     "Russia": 8,
+    "Vanuatu": 7,
     "Solomon Islands": 7,
     "Germany": 7,
     "New Zealand": 7,
@@ -211,7 +212,6 @@
     "Tonga": 7,
     "Fiji": 7,
     "Philippines": 6,
-    "Vanuatu": 6,
     "Lebanon": 6,
     "Vietnam": 6,
     "Tuvalu": 6,
@@ -235,9 +235,9 @@
     "Egypt": 1
   },
   "positive_by_warmth": {
+    "Endorse": 66,
     "Solidarity": 47,
     "Commend": 69,
-    "Endorse": 65,
     "Appreciate": 76
   },
   "positive_by_month": {
@@ -279,9 +279,14 @@
     "2026-04": 6,
     "2026-05": 5,
     "2026-06": 7,
-    "2026-07": 10
+    "2026-07": 11
   },
   "positive_by_country_warmth": {
+    "Vanuatu": {
+      "Endorse": 4,
+      "Appreciate": 2,
+      "Commend": 1
+    },
     "Japan": {
       "Solidarity": 2,
       "Commend": 5,
@@ -330,11 +335,6 @@
       "Solidarity": 3,
       "Appreciate": 7,
       "Endorse": 6
-    },
-    "Vanuatu": {
-      "Appreciate": 2,
-      "Endorse": 3,
-      "Commend": 1
     },
     "Venezuela": {
       "Solidarity": 1
@@ -482,16 +482,16 @@
     "Iraq": -3,
     "Myanmar": -3,
     "Yemen": -2,
-    "Syria": -1,
     "Saudi Arabia": -1,
+    "Syria": -1,
     "Qatar": -1,
     "China": 0,
-    "United Arab Emirates": 0,
     "Afghanistan": 0,
     "Venezuela": 0,
+    "United Arab Emirates": 0,
     "European Union": 0,
-    "Türkiye": 1,
     "Egypt": 1,
+    "Türkiye": 1,
     "Samoa": 1,
     "Cook Islands": 1,
     "France": 2,
@@ -500,25 +500,25 @@
     "Kiribati": 3,
     "Palestine": 4,
     "Sudan": 5,
-    "Vietnam": 6,
     "Philippines": 6,
     "Tuvalu": 6,
+    "Vietnam": 6,
     "Germany": 6,
-    "Vanuatu": 6,
-    "Thailand": 7,
-    "Tonga": 7,
-    "New Zealand": 7,
     "South Korea": 7,
+    "Tonga": 7,
+    "Ukraine": 7,
+    "Vanuatu": 7,
+    "New Zealand": 7,
     "Solomon Islands": 7,
     "Fiji": 7,
-    "Ukraine": 7,
     "Canada": 7,
+    "Thailand": 7,
     "Singapore": 9,
     "Malaysia": 10,
     "Timor-Leste": 13,
     "United Kingdom": 14,
-    "India": 16,
     "Japan": 16,
+    "India": 16,
     "Indonesia": 23
   },
   "needs_review": 24

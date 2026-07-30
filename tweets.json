@@ -1,15 +1,40 @@
 {
-  "generated_at": "2026-07-29T21:02:36.592666+00:00",
+  "generated_at": "2026-07-30T21:17:01.519755+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 384,
-  "tweet_count_classified": 374,
+  "tweet_count_raw": 380,
+  "tweet_count_classified": 375,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 374
+    "x": 375
   },
   "tweets": [
+    {
+      "id": "2082638628938006922",
+      "url": "https://x.com/SenatorWong/status/2082638628938006922",
+      "source": "x",
+      "created_at": "2026-07-30T01:25:17.000Z",
+      "text": "Congratulations Prime Minister Napat and the people of Vanuatu on 46 years of independence.\n\nAustralia and Vanuatu have never had a deeper partnership, founded on mutual respect, shared values and a common vision for the Pacific.\n\nHapi Independens Dei. https://t.co/P30iR1QSiv",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Endorse",
+      "targets": [
+        "Vanuatu"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Vanuatu"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcongratulat(e|es|ed|ing|ions)\\b",
+        "\\bvalue(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2082287437179732440",
       "url": "https://x.com/SenatorWong/status/2082287437179732440",
