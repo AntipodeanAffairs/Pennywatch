@@ -1,15 +1,40 @@
 {
-  "generated_at": "2026-07-30T21:17:01.519755+00:00",
+  "generated_at": "2026-07-31T21:13:03.082177+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
   "tweet_count_raw": 380,
-  "tweet_count_classified": 375,
+  "tweet_count_classified": 376,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 375
+    "x": 376
   },
   "tweets": [
+    {
+      "id": "2083014470461513943",
+      "url": "https://x.com/SenatorWong/status/2083014470461513943",
+      "source": "x",
+      "created_at": "2026-07-31T02:18:44.000Z",
+      "text": "Australia is deploying firefighting assets and teams, including a CH-47D Chinook helicopter and a Bell 412 reconnaissance and support aircraft, to support the response to devastating wildfires in France.\n\nWe stand with France, our close and valued friend, in their time of need.",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "France"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "France"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bvalue(s|d)?\\b",
+        "\\bstands? with\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2082638628938006922",
       "url": "https://x.com/SenatorWong/status/2082638628938006922",
