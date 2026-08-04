@@ -1,15 +1,41 @@
 {
-  "generated_at": "2026-08-03T21:10:58.311870+00:00",
+  "generated_at": "2026-08-04T21:18:00.537427+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 383,
-  "tweet_count_classified": 376,
+  "tweet_count_raw": 384,
+  "tweet_count_classified": 377,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 376
+    "x": 377
   },
   "tweets": [
+    {
+      "id": "2084466465076662360",
+      "url": "https://x.com/SenatorWong/status/2084466465076662360",
+      "source": "x",
+      "created_at": "2026-08-04T02:28:27.000Z",
+      "text": "Congratulations to the people of the Cook Islands as you celebrate Constitution Day.\n\nAustralia is proud to work alongside the Cook Islands in support of a secure, resilient and prosperous Pacific.\n\nI look forward to our continued cooperation. Kia manuia.",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Endorse",
+      "targets": [
+        "Cook Islands"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Cook Islands"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcongratulat(e|es|ed|ing|ions)\\b",
+        "\\bcelebrate(s|d)?\\b",
+        "\\bproud (to|of)\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2083014470461513943",
       "url": "https://x.com/SenatorWong/status/2083014470461513943",
