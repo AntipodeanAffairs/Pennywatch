@@ -1,15 +1,39 @@
 {
-  "generated_at": "2026-08-10T20:50:33.146950+00:00",
+  "generated_at": "2026-08-11T20:53:39.240418+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 387,
-  "tweet_count_classified": 378,
+  "tweet_count_raw": 389,
+  "tweet_count_classified": 379,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 378
+    "x": 379
   },
   "tweets": [
+    {
+      "id": "2087131940478750798",
+      "url": "https://x.com/SenatorWong/status/2087131940478750798",
+      "source": "x",
+      "created_at": "2026-08-11T11:00:06.000Z",
+      "text": "Australia and the UK have a deep and enduring partnership.\n\nIt was a pleasure to speak to my friend, UK Foreign Secretary @Ed_Miliband so soon after seeing him at ASEAN, to discuss our continuing cooperation and shared commitment to a peaceful, stable and prosperous Indo-Pacific.",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "United Kingdom"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "United Kingdom"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\benduring (partnership|friendship)\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2086334192384934388",
       "url": "https://x.com/SenatorWong/status/2086334192384934388",
