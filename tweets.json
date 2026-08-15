@@ -1,15 +1,39 @@
 {
-  "generated_at": "2026-08-14T20:36:02.485645+00:00",
+  "generated_at": "2026-08-15T20:28:54.154968+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 390,
-  "tweet_count_classified": 379,
+  "tweet_count_raw": 393,
+  "tweet_count_classified": 380,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 379
+    "x": 380
   },
   "tweets": [
+    {
+      "id": "2088475411286258112",
+      "url": "https://x.com/SenatorWong/status/2088475411286258112",
+      "source": "x",
+      "created_at": "2026-08-15T03:58:34.000Z",
+      "text": "Five years since the fall of Kabul, our thoughts are with the people of Afghanistan &amp; Afghan communities around the world. We honour Australians who served in Afghanistan and remember those who are no longer with us. Australia will continue to work to hold the Taliban to account.",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Solidarity",
+      "targets": [
+        "Afghanistan"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Afghanistan"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bthoughts (are )?with\\b"
+      ],
+      "needs_review": true
+    },
     {
       "id": "2087131940478750798",
       "url": "https://x.com/SenatorWong/status/2087131940478750798",
