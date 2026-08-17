@@ -1,15 +1,39 @@
 {
-  "generated_at": "2026-08-16T20:29:03.218808+00:00",
+  "generated_at": "2026-08-17T20:32:51.179207+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 385,
-  "tweet_count_classified": 380,
+  "tweet_count_raw": 386,
+  "tweet_count_classified": 381,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 380
+    "x": 381
   },
   "tweets": [
+    {
+      "id": "2089275096955601150",
+      "url": "https://x.com/SenatorWong/status/2089275096955601150",
+      "source": "x",
+      "created_at": "2026-08-17T08:56:14.000Z",
+      "text": "Sending my best wishes to the Indonesian people &amp; government as they celebrate 81 years of independence today.\n\nIndonesia is one of our closest partners, and we remain committed to Indonesia’s sovereignty &amp; territorial integrity under the Lombok Treaty.\n\nSelamat Hari Kemerdekaan! https://t.co/mgj3f3mZrV",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Endorse",
+      "targets": [
+        "Indonesia"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Indonesia"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcelebrate(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2088475411286258112",
       "url": "https://x.com/SenatorWong/status/2088475411286258112",
