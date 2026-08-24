@@ -1,15 +1,44 @@
 {
-  "generated_at": "2026-08-23T20:29:32.520138+00:00",
+  "generated_at": "2026-08-24T20:36:44.152296+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 386,
-  "tweet_count_classified": 381,
+  "tweet_count_raw": 387,
+  "tweet_count_classified": 382,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 381
+    "x": 382
   },
   "tweets": [
+    {
+      "id": "2091732107811025197",
+      "url": "https://x.com/SenatorWong/status/2091732107811025197",
+      "source": "x",
+      "created_at": "2026-08-24T03:39:31.000Z",
+      "text": "On the 35th anniversary of Ukraine’s Declaration of Independence, Australia stands with Ukraine against Russia's unprovoked and unjustified aggression. We honour the bravery of the Ukrainian people.\n\nOur support for Ukraine’s sovereignty and freedom remains steadfast. https://t.co/2Lg5XdHOzO",
+      "tone": "mixed",
+      "severity": "Condemn",
+      "warmth": "Endorse",
+      "targets": [
+        "Russia",
+        "Ukraine"
+      ],
+      "critical_targets": [
+        "Russia"
+      ],
+      "positive_targets": [
+        "Ukraine"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bstands? with\\b",
+        "\\bperpetrator-context\\b",
+        "\\bhonou?r(s|ed)? the\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2089275096955601150",
       "url": "https://x.com/SenatorWong/status/2089275096955601150",
