@@ -1,15 +1,40 @@
 {
-  "generated_at": "2026-08-25T20:35:26.868204+00:00",
+  "generated_at": "2026-08-26T23:12:24.673530+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 385,
-  "tweet_count_classified": 382,
+  "tweet_count_raw": 389,
+  "tweet_count_classified": 383,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 382
+    "x": 383
   },
   "tweets": [
+    {
+      "id": "2092518541945872783",
+      "url": "https://x.com/SenatorWong/status/2092518541945872783",
+      "source": "x",
+      "created_at": "2026-08-26T07:44:32.000Z",
+      "text": "A special visit to the MCG to celebrate Australian-Indonesia connections through sport, language and education. I joined Indonesian Foreign Minister Sugiono @Menlu_RI, @TimWattsMP, Collingwood’s Darcy Moore and local students to mark the strength of our nations’ close friendship. https://t.co/1Vvrz99WIs",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Endorse",
+      "targets": [
+        "Indonesia"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Indonesia"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcelebrate(s|d)?\\b",
+        "\\bclose (partner|partnership|friend|friendship)\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2091732107811025197",
       "url": "https://x.com/SenatorWong/status/2091732107811025197",
