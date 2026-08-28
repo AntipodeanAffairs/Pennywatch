@@ -1,15 +1,39 @@
 {
-  "generated_at": "2026-08-26T23:12:24.673530+00:00",
+  "generated_at": "2026-08-28T04:08:29.356011+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 389,
-  "tweet_count_classified": 383,
+  "tweet_count_raw": 393,
+  "tweet_count_classified": 384,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 383
+    "x": 384
   },
   "tweets": [
+    {
+      "id": "2092887543666925847",
+      "url": "https://x.com/SenatorWong/status/2092887543666925847",
+      "source": "x",
+      "created_at": "2026-08-27T08:10:49.000Z",
+      "text": "Congratulations to PM Brown on your success in the Cook Islands election.\n\nI fondly remember my visit to Rarotonga, and the warmth and generosity shown by the people of the Cook Islands. In an increasingly complex world, our connections matter more than ever.\n\nKia manuia! https://t.co/BJp1HTmSqY",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Endorse",
+      "targets": [
+        "Cook Islands"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Cook Islands"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcongratulat(e|es|ed|ing|ions)\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2092518541945872783",
       "url": "https://x.com/SenatorWong/status/2092518541945872783",
