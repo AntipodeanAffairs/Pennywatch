@@ -1,15 +1,40 @@
 {
-  "generated_at": "2026-09-08T22:29:47.683435+00:00",
+  "generated_at": "2026-09-09T22:24:12.277406+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 406,
-  "tweet_count_classified": 384,
+  "tweet_count_raw": 407,
+  "tweet_count_classified": 385,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 384
+    "x": 385
   },
   "tweets": [
+    {
+      "id": "2097614569632117113",
+      "url": "https://x.com/SenatorWong/status/2097614569632117113",
+      "source": "x",
+      "created_at": "2026-09-09T09:14:19.000Z",
+      "text": "Faith groups play a key role in communities across the Pacific.\n\nThis week, I welcomed senior church leaders from Papua New Guinea to Parliament, and thanked them for their important contributions in connecting our communities, building resilience and advancing shared priorities. https://t.co/HO60xCU8YY",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Commend",
+      "targets": [
+        "Papua New Guinea"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Papua New Guinea"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bwelcome(s|d)?\\b",
+        "\\bthank(s|ed|ing)?\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2092887543666925847",
       "url": "https://x.com/SenatorWong/status/2092887543666925847",
