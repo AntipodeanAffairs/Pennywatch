@@ -1,15 +1,40 @@
 {
-  "generated_at": "2026-09-17T22:45:45.015976+00:00",
+  "generated_at": "2026-09-19T22:16:09.027959+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 387,
-  "tweet_count_classified": 386,
+  "tweet_count_raw": 389,
+  "tweet_count_classified": 387,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 386
+    "x": 387
   },
   "tweets": [
+    {
+      "id": "2100856167295746267",
+      "url": "https://x.com/SenatorWong/status/2100856167295746267",
+      "source": "x",
+      "created_at": "2026-09-18T07:55:16.000Z",
+      "text": "I was delighted to welcome my friend Yōko Kamikawa, former FM of Japan, to Canberra this week, along with the Shepherd Centre’s Youth Ambassadors. https://t.co/ye0GlQqMGl",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Commend",
+      "targets": [
+        "Japan"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Japan"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bwelcome(s|d)?\\b",
+        "\\bdelighted\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2100018894631293003",
       "url": "https://x.com/SenatorWong/status/2100018894631293003",
