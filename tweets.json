@@ -1,15 +1,64 @@
 {
-  "generated_at": "2026-09-30T23:36:49.755963+00:00",
+  "generated_at": "2026-10-01T23:49:16.755189+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 420,
-  "tweet_count_classified": 387,
+  "tweet_count_raw": 424,
+  "tweet_count_classified": 389,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 387
+    "x": 389
   },
   "tweets": [
+    {
+      "id": "2105532219569963063",
+      "url": "https://x.com/SenatorWong/status/2105532219569963063",
+      "source": "x",
+      "created_at": "2026-10-01T05:36:14.000Z",
+      "text": "Relieved to confirm at least two Australians who were on the Flydubai flight to Israel are safe - thanks to the heroes who thwarted the attack and helped bring the passengers to safety. We’re thinking of those injured and hope for their full recovery.",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "Israel"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Israel"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bthank(s|ed|ing)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "2105529863520297063",
+      "url": "https://x.com/SenatorWong/status/2105529863520297063",
+      "source": "x",
+      "created_at": "2026-10-01T05:26:52.000Z",
+      "text": "A prosperous and resilient Pacific is built on friendship, respect and shared purpose. Today, I extend my warmest congratulations to PM Feleti Teo and the people of Tuvalu as you celebrate your 48th Independence Day. May the spirit of falepili continue to guide our shared future. https://t.co/0t8brC1Lwd",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Endorse",
+      "targets": [
+        "Tuvalu"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Tuvalu"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcongratulat(e|es|ed|ing|ions)\\b",
+        "\\bcelebrate(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2100856167295746267",
       "url": "https://x.com/SenatorWong/status/2100856167295746267",

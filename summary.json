@@ -1,7 +1,7 @@
 {
-  "total_classified": 387,
+  "total_classified": 389,
   "total_critical": 143,
-  "total_positive": 270,
+  "total_positive": 272,
   "total_mixed": 26,
   "by_country": {
     "Russia": 44,
@@ -200,11 +200,12 @@
     "Timor-Leste": 13,
     "Singapore": 10,
     "Malaysia": 10,
+    "Israel": 9,
     "Canada": 9,
     "South Korea": 8,
-    "Israel": 8,
     "Thailand": 8,
     "Russia": 8,
+    "Tuvalu": 7,
     "Vanuatu": 7,
     "Solomon Islands": 7,
     "Germany": 7,
@@ -216,7 +217,6 @@
     "Philippines": 6,
     "Lebanon": 6,
     "Vietnam": 6,
-    "Tuvalu": 6,
     "Papua New Guinea": 5,
     "Sudan": 5,
     "Palestine": 4,
@@ -236,10 +236,10 @@
     "Egypt": 1
   },
   "positive_by_warmth": {
+    "Appreciate": 80,
+    "Endorse": 73,
     "Commend": 71,
-    "Endorse": 72,
-    "Solidarity": 48,
-    "Appreciate": 79
+    "Solidarity": 48
   },
   "positive_by_month": {
     "2023-04": 4,
@@ -282,9 +282,20 @@
     "2026-06": 7,
     "2026-07": 12,
     "2026-08": 8,
-    "2026-09": 3
+    "2026-09": 3,
+    "2026-10": 2
   },
   "positive_by_country_warmth": {
+    "Israel": {
+      "Appreciate": 4,
+      "Commend": 3,
+      "Solidarity": 2
+    },
+    "Tuvalu": {
+      "Endorse": 4,
+      "Appreciate": 1,
+      "Commend": 2
+    },
     "Japan": {
       "Commend": 6,
       "Solidarity": 2,
@@ -374,11 +385,6 @@
       "Endorse": 1,
       "Solidarity": 2
     },
-    "Israel": {
-      "Commend": 3,
-      "Solidarity": 2,
-      "Appreciate": 3
-    },
     "Lebanon": {
       "Commend": 1,
       "Endorse": 1,
@@ -440,11 +446,6 @@
       "Appreciate": 3,
       "Solidarity": 1
     },
-    "Tuvalu": {
-      "Endorse": 3,
-      "Appreciate": 1,
-      "Commend": 2
-    },
     "Kiribati": {
       "Appreciate": 2,
       "Endorse": 1
@@ -478,7 +479,7 @@
   },
   "net_by_country": {
     "Russia": -36,
-    "Israel": -20,
+    "Israel": -19,
     "Iran": -17,
     "North Korea": -8,
     "Lebanon": -5,
@@ -486,36 +487,36 @@
     "Iraq": -3,
     "Myanmar": -3,
     "Yemen": -2,
-    "Saudi Arabia": -1,
     "Syria": -1,
     "Qatar": -1,
-    "United Arab Emirates": 0,
-    "Venezuela": 0,
+    "Saudi Arabia": -1,
     "China": 0,
     "European Union": 0,
-    "Türkiye": 1,
-    "Egypt": 1,
-    "Afghanistan": 1,
+    "Venezuela": 0,
+    "United Arab Emirates": 0,
     "Samoa": 1,
-    "France": 3,
+    "Egypt": 1,
+    "Türkiye": 1,
+    "Afghanistan": 1,
     "Cook Islands": 3,
     "Kiribati": 3,
+    "France": 3,
     "Jordan": 3,
     "Palestine": 4,
-    "Sudan": 5,
     "Papua New Guinea": 5,
-    "Vietnam": 6,
-    "Tuvalu": 6,
+    "Sudan": 5,
     "Germany": 6,
     "Philippines": 6,
-    "Solomon Islands": 7,
-    "Tonga": 7,
-    "Fiji": 7,
-    "Thailand": 7,
+    "Vietnam": 6,
     "Vanuatu": 7,
+    "Tonga": 7,
+    "Solomon Islands": 7,
+    "Fiji": 7,
     "South Korea": 7,
     "Canada": 7,
     "New Zealand": 7,
+    "Thailand": 7,
+    "Tuvalu": 7,
     "Ukraine": 8,
     "Malaysia": 10,
     "Singapore": 10,
