@@ -1,15 +1,63 @@
 {
-  "generated_at": "2026-10-01T23:49:16.755189+00:00",
+  "generated_at": "2026-10-02T23:39:09.518364+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 424,
-  "tweet_count_classified": 389,
+  "tweet_count_raw": 393,
+  "tweet_count_classified": 391,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 389
+    "x": 391
   },
   "tweets": [
+    {
+      "id": "2105959840183153041",
+      "url": "https://x.com/SenatorWong/status/2105959840183153041",
+      "source": "x",
+      "created_at": "2026-10-02T09:55:27.000Z",
+      "text": "Thank you Bapak Sugiono. You have been a cherished friend to both me and Australia. Your contribution to the Australia-Indonesia partnership has been enormous, including your integral role in delivering the Jakarta Treaty. I wish you every success in your new role. Semoga sukses! https://t.co/qXRTexrhqb",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "Indonesia"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Indonesia"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bthank(s|ed|ing)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "2105959813410930878",
+      "url": "https://x.com/SenatorWong/status/2105959813410930878",
+      "source": "x",
+      "created_at": "2026-10-02T09:55:21.000Z",
+      "text": "Congratulations Bapak Arrmanatha Nasir on your appointment as Indonesia’s Foreign Minister. Indonesia is one of Australia’s most important partners. Our security, prosperity and futures are deeply connected. I look forward to working with you as we continue strengthening our ties",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Endorse",
+      "targets": [
+        "Indonesia"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Indonesia"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcongratulat(e|es|ed|ing|ions)\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2105532219569963063",
       "url": "https://x.com/SenatorWong/status/2105532219569963063",
