@@ -1,15 +1,40 @@
 {
-  "generated_at": "2026-10-06T01:14:22.449533+00:00",
+  "generated_at": "2026-10-06T23:41:46.310503+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 393,
-  "tweet_count_classified": 391,
+  "tweet_count_raw": 395,
+  "tweet_count_classified": 392,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 391
+    "x": 392
   },
   "tweets": [
+    {
+      "id": "2107365244922384884",
+      "url": "https://x.com/SenatorWong/status/2107365244922384884",
+      "source": "x",
+      "created_at": "2026-10-06T07:00:01.000Z",
+      "text": "There’s no country more important to Australia than Indonesia. \n\nI was delighted to speak with new Indonesian Foreign Minister Arrmanatha Nasir today to discuss the implementation of the Jakarta Treaty, and the next chapter in our countries' close partnership and friendship.",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Commend",
+      "targets": [
+        "Indonesia"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Indonesia"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bdelighted\\b",
+        "\\bclose (partner|partnership|friend|friendship)\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2105959840183153041",
       "url": "https://x.com/SenatorWong/status/2105959840183153041",
