@@ -1,15 +1,39 @@
 {
-  "generated_at": "2026-10-06T23:41:46.310503+00:00",
+  "generated_at": "2026-10-08T00:05:55.338430+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 395,
-  "tweet_count_classified": 392,
+  "tweet_count_raw": 396,
+  "tweet_count_classified": 393,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 392
+    "x": 393
   },
   "tweets": [
+    {
+      "id": "2107631691498213483",
+      "url": "https://x.com/SenatorWong/status/2107631691498213483",
+      "source": "x",
+      "created_at": "2026-10-07T00:38:47.000Z",
+      "text": "On October 7, we remember those killed by Hamas’ horrific terror attacks on Israel, including Australian Galit Carbone.\n\nOur thoughts remain with her loved ones and all affected by Hamas’ abhorrent acts.\n\nWe continue to work to combat antisemitism and terror in all its forms. https://t.co/VHcAghqx1Z",
+      "tone": "critical",
+      "severity": "Criticise",
+      "warmth": null,
+      "targets": [],
+      "critical_targets": [],
+      "positive_targets": [],
+      "non_state_targets": [
+        "Hamas"
+      ],
+      "critical_non_state": [
+        "Hamas"
+      ],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\babhorrent\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2107365244922384884",
       "url": "https://x.com/SenatorWong/status/2107365244922384884",
