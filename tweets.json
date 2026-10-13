@@ -1,15 +1,45 @@
 {
-  "generated_at": "2026-10-11T23:32:17.794321+00:00",
+  "generated_at": "2026-10-13T01:55:39.605853+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 399,
-  "tweet_count_classified": 393,
+  "tweet_count_raw": 404,
+  "tweet_count_classified": 394,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 393
+    "x": 394
   },
   "tweets": [
+    {
+      "id": "2109442752480170207",
+      "url": "https://x.com/SenatorWong/status/2109442752480170207",
+      "source": "x",
+      "created_at": "2026-10-12T00:35:18.000Z",
+      "text": "Australia condemns the Houthi strikes on Saudi Arabia, including those on Riyadh airport which have stolen the lives of so many innocent people.\n\nHouthi attacks on civilians and civilian infrastructure are unacceptable and must cease.",
+      "tone": "critical",
+      "severity": "Condemn",
+      "warmth": null,
+      "targets": [
+        "Saudi Arabia"
+      ],
+      "critical_targets": [
+        "Saudi Arabia"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [
+        "Houthis"
+      ],
+      "critical_non_state": [
+        "Houthis"
+      ],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcondemns\\b",
+        "\\bunacceptable\\b",
+        "\\bmust cease\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2107631691498213483",
       "url": "https://x.com/SenatorWong/status/2107631691498213483",
