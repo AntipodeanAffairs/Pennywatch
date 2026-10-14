@@ -1,15 +1,40 @@
 {
-  "generated_at": "2026-10-13T23:40:39.165393+00:00",
+  "generated_at": "2026-10-14T23:05:18.208052+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 403,
-  "tweet_count_classified": 394,
+  "tweet_count_raw": 405,
+  "tweet_count_classified": 395,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 394
+    "x": 395
   },
   "tweets": [
+    {
+      "id": "2110157166305046794",
+      "url": "https://x.com/SenatorWong/status/2110157166305046794",
+      "source": "x",
+      "created_at": "2026-10-13T23:54:07.000Z",
+      "text": "Yesterday I warmly welcomed my friend Jordanian DPM and FM Ayman Safadi to Australia. We discussed our joint work to support unimpeded aid into Gaza, our shared leadership on the Declaration for the Protection of Humanitarian Personnel, and our commitment to a two-state solution. https://t.co/AcDNGwqsvP",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Endorse",
+      "targets": [
+        "Jordan"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Jordan"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bwarmly welcome(s|d)?\\b",
+        "\\bwelcome(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2109442752480170207",
       "url": "https://x.com/SenatorWong/status/2109442752480170207",
