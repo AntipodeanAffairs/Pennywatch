@@ -1,6 +1,6 @@
 {
-  "total_classified": 395,
-  "total_critical": 145,
+  "total_classified": 396,
+  "total_critical": 146,
   "total_positive": 276,
   "total_mixed": 26,
   "by_country": {
@@ -10,8 +10,8 @@
     "Ukraine": 14,
     "Lebanon": 11,
     "North Korea": 10,
+    "Afghanistan": 6,
     "Myanmar": 5,
-    "Afghanistan": 5,
     "United Kingdom": 5,
     "Belarus": 4,
     "China": 4,
@@ -32,7 +32,7 @@
     "South Korea": 1
   },
   "by_severity": {
-    "Condemn": 68,
+    "Condemn": 69,
     "Criticise": 29,
     "Concern": 11,
     "Call for action": 37
@@ -78,9 +78,14 @@
     "2026-06": 1,
     "2026-07": 1,
     "2026-08": 1,
-    "2026-10": 2
+    "2026-10": 3
   },
   "by_country_severity": {
+    "Afghanistan": {
+      "Condemn": 3,
+      "Criticise": 2,
+      "Call for action": 1
+    },
     "Saudi Arabia": {
       "Condemn": 2
     },
@@ -135,11 +140,6 @@
       "Concern": 1,
       "Call for action": 2,
       "Criticise": 1
-    },
-    "Afghanistan": {
-      "Condemn": 2,
-      "Criticise": 2,
-      "Call for action": 1
     },
     "Canada": {
       "Condemn": 1,
@@ -486,39 +486,39 @@
     "North Korea": -8,
     "Lebanon": -5,
     "Belarus": -4,
-    "Myanmar": -3,
     "Iraq": -3,
+    "Myanmar": -3,
     "Saudi Arabia": -2,
     "Yemen": -2,
     "Qatar": -1,
     "Syria": -1,
-    "United Arab Emirates": 0,
     "Venezuela": 0,
     "China": 0,
     "European Union": 0,
+    "United Arab Emirates": 0,
+    "Afghanistan": 0,
     "Samoa": 1,
-    "Türkiye": 1,
-    "Afghanistan": 1,
     "Egypt": 1,
+    "Türkiye": 1,
     "Cook Islands": 3,
     "Kiribati": 3,
     "France": 3,
     "Jordan": 4,
     "Palestine": 4,
-    "Sudan": 5,
     "Papua New Guinea": 5,
-    "Vietnam": 6,
+    "Sudan": 5,
     "Philippines": 6,
     "Germany": 6,
-    "Vanuatu": 7,
-    "Solomon Islands": 7,
+    "Vietnam": 6,
     "Fiji": 7,
-    "New Zealand": 7,
-    "Tonga": 7,
     "Thailand": 7,
-    "Canada": 7,
-    "Tuvalu": 7,
+    "Solomon Islands": 7,
+    "Tonga": 7,
     "South Korea": 7,
+    "New Zealand": 7,
+    "Tuvalu": 7,
+    "Vanuatu": 7,
+    "Canada": 7,
     "Ukraine": 8,
     "Malaysia": 10,
     "Singapore": 10,
