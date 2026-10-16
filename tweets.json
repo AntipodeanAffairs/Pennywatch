@@ -1,15 +1,39 @@
 {
-  "generated_at": "2026-10-15T22:58:16.170680+00:00",
+  "generated_at": "2026-10-16T22:42:26.605962+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 407,
-  "tweet_count_classified": 396,
+  "tweet_count_raw": 405,
+  "tweet_count_classified": 397,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 396
+    "x": 397
   },
   "tweets": [
+    {
+      "id": "2110987275769385000",
+      "url": "https://x.com/SenatorWong/status/2110987275769385000",
+      "source": "x",
+      "created_at": "2026-10-16T06:52:41.000Z",
+      "text": "This week I welcomed Vanuatu’s Deputy Prime Minister Johnny Koanapo to Canberra.\n\nWe convened the first meeting of the Nakamal Committee, to drive forward practical implementation of the Nakamal Agreement. https://t.co/J7NChGqwCv",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Commend",
+      "targets": [
+        "Vanuatu"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Vanuatu"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bwelcome(s|d)?\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2110669187572269414",
       "url": "https://x.com/SenatorWong/status/2110669187572269414",
