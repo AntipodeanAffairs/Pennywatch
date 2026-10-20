@@ -1,15 +1,39 @@
 {
-  "generated_at": "2026-10-19T23:29:44.868147+00:00",
+  "generated_at": "2026-10-20T23:04:24.781990+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 406,
-  "tweet_count_classified": 397,
+  "tweet_count_raw": 408,
+  "tweet_count_classified": 398,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 397
+    "x": 398
   },
   "tweets": [
+    {
+      "id": "2112440192409981272",
+      "url": "https://x.com/SenatorWong/status/2112440192409981272",
+      "source": "x",
+      "created_at": "2026-10-20T07:06:03.000Z",
+      "text": "Thank you to @TkatchenkoMP for co-chairing the Australia-Papua New Guinea Ministerial Forum in Port Moresby today.\nOur partnership has never been stronger, and we’re focused on translating that strength into practical outcomes for our peoples, our countries and our region. https://t.co/VhpwwlgrlU",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Appreciate",
+      "targets": [
+        "Papua New Guinea"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Papua New Guinea"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bthank(s|ed|ing)?\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2110987275769385000",
       "url": "https://x.com/SenatorWong/status/2110987275769385000",
