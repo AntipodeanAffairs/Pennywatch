@@ -1,15 +1,88 @@
 {
-  "generated_at": "2026-10-21T23:08:09.075668+00:00",
+  "generated_at": "2026-10-22T23:08:21.089798+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 403,
-  "tweet_count_classified": 398,
+  "tweet_count_raw": 409,
+  "tweet_count_classified": 401,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 398
+    "x": 401
   },
   "tweets": [
+    {
+      "id": "2113191112181690808",
+      "url": "https://x.com/SenatorWong/status/2113191112181690808",
+      "source": "x",
+      "created_at": "2026-10-22T08:49:56.000Z",
+      "text": "I also congratulated my friend Sugiono on his new role as Coordinating Minister for Human Development and Cultural Affairs.\n\nI thanked him for his personal support for our bilateral relationship, and discussed how we can continue to support Indonesia’s development priorities. https://t.co/9pcggoU7oG",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Endorse",
+      "targets": [
+        "Indonesia"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Indonesia"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcongratulat(e|es|ed|ing|ions)\\b",
+        "\\bthank(s|ed|ing)?\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "2113191086336418095",
+      "url": "https://x.com/SenatorWong/status/2113191086336418095",
+      "source": "x",
+      "created_at": "2026-10-22T08:49:50.000Z",
+      "text": "Australia and Indonesia work closely on climate, economic development and security.\n\nPleased to meet Coordinating Minister Sugiono, Special Presidential Envoy Hashim Djojohadikusumo and Deputy Chair of Commission I Budi Djiwandono to discuss our partnership. https://t.co/v8om7GLCgD",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Commend",
+      "targets": [
+        "Indonesia"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Indonesia"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bpleased to (welcome|meet|host|see)\\b"
+      ],
+      "needs_review": false
+    },
+    {
+      "id": "2113175648365871345",
+      "url": "https://x.com/SenatorWong/status/2113175648365871345",
+      "source": "x",
+      "created_at": "2026-10-22T07:48:30.000Z",
+      "text": "Indonesia is a trusted partner &amp; the closest of friends to Australia.\nIt was an honour to be the first Foreign Minister to call on Indonesian FM Arrmanatha Nasir\nI look forward to working closely together to strengthen our relationship &amp; drive implementation of the Jakarta Treaty https://t.co/zskEzxTFZl",
+      "tone": "critical",
+      "severity": "Call for action",
+      "warmth": null,
+      "targets": [
+        "Indonesia"
+      ],
+      "critical_targets": [
+        "Indonesia"
+      ],
+      "positive_targets": [],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bcalls? on\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2112440192409981272",
       "url": "https://x.com/SenatorWong/status/2112440192409981272",
