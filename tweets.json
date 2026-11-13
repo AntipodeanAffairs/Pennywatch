@@ -1,15 +1,42 @@
 {
-  "generated_at": "2026-11-12T01:51:17.952523+00:00",
+  "generated_at": "2026-11-13T00:58:08.418257+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 428,
-  "tweet_count_classified": 402,
+  "tweet_count_raw": 429,
+  "tweet_count_classified": 403,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 402
+    "x": 403
   },
   "tweets": [
+    {
+      "id": "2120742145128841386",
+      "url": "https://x.com/SenatorWong/status/2120742145128841386",
+      "source": "x",
+      "created_at": "2026-11-12T04:55:03.000Z",
+      "text": "Australia strongly opposes and voted against Iran’s appointment to the UN Committee for Programme and Coordination.\n\nIran’s human rights violations and destabilising conduct undermine multilateralism. Australia stands with the people of Iran.",
+      "tone": "mixed",
+      "severity": "Condemn",
+      "warmth": "Solidarity",
+      "targets": [
+        "Iran"
+      ],
+      "critical_targets": [
+        "Iran"
+      ],
+      "positive_targets": [
+        "Iran"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bperpetrator-context\\b",
+        "\\bstands? with\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2113777436832014546",
       "url": "https://x.com/SenatorWong/status/2113777436832014546",

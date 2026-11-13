@@ -1,12 +1,12 @@
 {
-  "total_classified": 402,
-  "total_critical": 148,
-  "total_positive": 281,
-  "total_mixed": 27,
+  "total_classified": 403,
+  "total_critical": 149,
+  "total_positive": 282,
+  "total_mixed": 28,
   "by_country": {
     "Russia": 44,
     "Israel": 28,
-    "Iran": 24,
+    "Iran": 25,
     "Ukraine": 14,
     "Lebanon": 11,
     "North Korea": 10,
@@ -32,8 +32,8 @@
     "South Korea": 1
   },
   "by_severity": {
+    "Condemn": 70,
     "Call for action": 39,
-    "Condemn": 69,
     "Criticise": 29,
     "Concern": 11
   },
@@ -78,9 +78,15 @@
     "2026-06": 1,
     "2026-07": 1,
     "2026-08": 1,
-    "2026-10": 5
+    "2026-10": 5,
+    "2026-11": 1
   },
   "by_country_severity": {
+    "Iran": {
+      "Condemn": 14,
+      "Call for action": 5,
+      "Criticise": 6
+    },
     "United Kingdom": {
       "Call for action": 1,
       "Condemn": 2,
@@ -115,11 +121,6 @@
       "Call for action": 7,
       "Condemn": 12,
       "Criticise": 5
-    },
-    "Iran": {
-      "Condemn": 13,
-      "Call for action": 5,
-      "Criticise": 6
     },
     "Iraq": {
       "Condemn": 2,
@@ -205,6 +206,7 @@
     "Malaysia": 10,
     "Israel": 9,
     "Canada": 9,
+    "Iran": 8,
     "Vanuatu": 8,
     "South Korea": 8,
     "Thailand": 8,
@@ -213,7 +215,6 @@
     "Solomon Islands": 7,
     "Germany": 7,
     "New Zealand": 7,
-    "Iran": 7,
     "Tonga": 7,
     "Fiji": 7,
     "Sudan": 6,
@@ -239,7 +240,7 @@
     "Egypt": 1
   },
   "positive_by_warmth": {
-    "Solidarity": 49,
+    "Solidarity": 50,
     "Endorse": 76,
     "Commend": 74,
     "Appreciate": 82
@@ -286,9 +287,15 @@
     "2026-07": 12,
     "2026-08": 8,
     "2026-09": 3,
-    "2026-10": 11
+    "2026-10": 11,
+    "2026-11": 1
   },
   "positive_by_country_warmth": {
+    "Iran": {
+      "Solidarity": 6,
+      "Endorse": 1,
+      "Appreciate": 1
+    },
     "Sudan": {
       "Solidarity": 1,
       "Appreciate": 4,
@@ -429,11 +436,6 @@
       "Endorse": 2,
       "Appreciate": 5
     },
-    "Iran": {
-      "Solidarity": 5,
-      "Endorse": 1,
-      "Appreciate": 1
-    },
     "Tonga": {
       "Commend": 4,
       "Appreciate": 3
@@ -491,40 +493,40 @@
     "Belarus": -4,
     "Iraq": -3,
     "Myanmar": -3,
-    "Yemen": -2,
     "Saudi Arabia": -2,
-    "Syria": -1,
+    "Yemen": -2,
     "Qatar": -1,
-    "Venezuela": 0,
+    "Syria": -1,
     "United Arab Emirates": 0,
-    "Afghanistan": 0,
-    "China": 0,
     "European Union": 0,
-    "Samoa": 1,
+    "China": 0,
+    "Afghanistan": 0,
+    "Venezuela": 0,
     "Egypt": 1,
+    "Samoa": 1,
     "Türkiye": 1,
-    "France": 3,
     "Kiribati": 3,
+    "France": 3,
     "Cook Islands": 3,
     "Jordan": 4,
     "Palestine": 4,
-    "Philippines": 6,
     "Sudan": 6,
-    "Germany": 6,
     "Papua New Guinea": 6,
+    "Germany": 6,
     "Vietnam": 6,
-    "Fiji": 7,
+    "Philippines": 6,
+    "Solomon Islands": 7,
     "Tonga": 7,
-    "Canada": 7,
+    "Thailand": 7,
+    "Tuvalu": 7,
+    "Fiji": 7,
     "New Zealand": 7,
     "South Korea": 7,
-    "Solomon Islands": 7,
-    "Tuvalu": 7,
-    "Thailand": 7,
-    "Ukraine": 8,
+    "Canada": 7,
     "Vanuatu": 8,
-    "Malaysia": 10,
+    "Ukraine": 8,
     "Singapore": 10,
+    "Malaysia": 10,
     "Timor-Leste": 13,
     "United Kingdom": 14,
     "India": 16,
