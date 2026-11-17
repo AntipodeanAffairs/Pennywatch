@@ -1,26 +1,26 @@
 {
-  "total_classified": 403,
-  "total_critical": 149,
+  "total_classified": 404,
+  "total_critical": 150,
   "total_positive": 282,
   "total_mixed": 28,
   "by_country": {
     "Russia": 44,
-    "Israel": 28,
+    "Israel": 29,
     "Iran": 25,
     "Ukraine": 14,
     "Lebanon": 11,
     "North Korea": 10,
-    "United Kingdom": 6,
+    "United Kingdom": 7,
     "Afghanistan": 6,
     "Myanmar": 5,
     "Belarus": 4,
     "China": 4,
+    "Canada": 3,
     "Iraq": 3,
     "Indonesia": 2,
     "Saudi Arabia": 2,
     "Qatar": 2,
     "United Arab Emirates": 2,
-    "Canada": 2,
     "European Union": 2,
     "Yemen": 2,
     "Jordan": 1,
@@ -32,8 +32,8 @@
     "South Korea": 1
   },
   "by_severity": {
+    "Call for action": 40,
     "Condemn": 70,
-    "Call for action": 39,
     "Criticise": 29,
     "Concern": 11
   },
@@ -79,19 +79,29 @@
     "2026-07": 1,
     "2026-08": 1,
     "2026-10": 5,
-    "2026-11": 1
+    "2026-11": 2
   },
   "by_country_severity": {
+    "Canada": {
+      "Call for action": 2,
+      "Condemn": 1
+    },
+    "Israel": {
+      "Call for action": 8,
+      "Concern": 4,
+      "Condemn": 12,
+      "Criticise": 5
+    },
+    "United Kingdom": {
+      "Call for action": 2,
+      "Condemn": 2,
+      "Criticise": 1,
+      "Concern": 2
+    },
     "Iran": {
       "Condemn": 14,
       "Call for action": 5,
       "Criticise": 6
-    },
-    "United Kingdom": {
-      "Call for action": 1,
-      "Condemn": 2,
-      "Criticise": 1,
-      "Concern": 2
     },
     "Indonesia": {
       "Call for action": 1,
@@ -115,12 +125,6 @@
       "Condemn": 10,
       "Call for action": 2,
       "Criticise": 2
-    },
-    "Israel": {
-      "Concern": 4,
-      "Call for action": 7,
-      "Condemn": 12,
-      "Criticise": 5
     },
     "Iraq": {
       "Condemn": 2,
@@ -148,10 +152,6 @@
       "Concern": 1,
       "Call for action": 2,
       "Criticise": 1
-    },
-    "Canada": {
-      "Condemn": 1,
-      "Call for action": 1
     },
     "European Union": {
       "Condemn": 1,
@@ -486,49 +486,49 @@
   },
   "net_by_country": {
     "Russia": -36,
-    "Israel": -19,
+    "Israel": -20,
     "Iran": -17,
     "North Korea": -8,
     "Lebanon": -5,
     "Belarus": -4,
     "Myanmar": -3,
     "Iraq": -3,
-    "Yemen": -2,
     "Saudi Arabia": -2,
-    "Syria": -1,
+    "Yemen": -2,
     "Qatar": -1,
-    "United Arab Emirates": 0,
+    "Syria": -1,
     "European Union": 0,
-    "Venezuela": 0,
     "Afghanistan": 0,
+    "United Arab Emirates": 0,
     "China": 0,
+    "Venezuela": 0,
     "Türkiye": 1,
-    "Egypt": 1,
     "Samoa": 1,
-    "Cook Islands": 3,
-    "Kiribati": 3,
+    "Egypt": 1,
     "France": 3,
+    "Kiribati": 3,
+    "Cook Islands": 3,
     "Jordan": 4,
     "Palestine": 4,
-    "Germany": 6,
     "Sudan": 6,
-    "Philippines": 6,
     "Papua New Guinea": 6,
+    "Canada": 6,
+    "Germany": 6,
+    "Philippines": 6,
     "Vietnam": 6,
-    "Fiji": 7,
-    "Solomon Islands": 7,
-    "South Korea": 7,
-    "Tonga": 7,
-    "New Zealand": 7,
-    "Tuvalu": 7,
-    "Canada": 7,
     "Thailand": 7,
-    "Vanuatu": 8,
+    "South Korea": 7,
+    "Tuvalu": 7,
+    "Solomon Islands": 7,
+    "New Zealand": 7,
+    "Fiji": 7,
+    "Tonga": 7,
     "Ukraine": 8,
-    "Malaysia": 10,
+    "Vanuatu": 8,
     "Singapore": 10,
+    "Malaysia": 10,
     "Timor-Leste": 13,
-    "United Kingdom": 14,
+    "United Kingdom": 13,
     "India": 16,
     "Japan": 17,
     "Indonesia": 29
