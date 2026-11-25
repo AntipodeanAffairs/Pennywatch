@@ -1,15 +1,41 @@
 {
-  "generated_at": "2026-11-24T04:40:31.314795+00:00",
+  "generated_at": "2026-11-25T03:27:07.724819+00:00",
   "methodology_version": "1.5.4",
   "source_handle": "@SenatorWong",
   "since": "2022-06-01T00:00:00Z",
-  "tweet_count_raw": 410,
-  "tweet_count_classified": 404,
+  "tweet_count_raw": 412,
+  "tweet_count_classified": 405,
   "tweet_count_manual": 0,
   "count_by_source": {
-    "x": 404
+    "x": 405
   },
   "tweets": [
+    {
+      "id": "2125118997431832642",
+      "url": "https://x.com/SenatorWong/status/2125118997431832642",
+      "source": "x",
+      "created_at": "2026-11-24T06:47:06.000Z",
+      "text": "Singapore is a trusted partner and close friend to Australia. \n\nI was pleased to welcome FM @VivianBala to Canberra today to discuss implementation of our ambitious Comprehensive Strategic Partnership 2.0, and our shared vision for a peaceful, stable and prosperous region. https://t.co/jKQ5tSgvtP",
+      "tone": "positive",
+      "severity": null,
+      "warmth": "Commend",
+      "targets": [
+        "Singapore"
+      ],
+      "critical_targets": [],
+      "positive_targets": [
+        "Singapore"
+      ],
+      "non_state_targets": [],
+      "critical_non_state": [],
+      "positive_non_state": [],
+      "matched_triggers": [
+        "\\bclose (partner|partnership|friend|friendship)\\b",
+        "\\bwelcome(s|d)?\\b",
+        "\\bpleased to (welcome|meet|host|see)\\b"
+      ],
+      "needs_review": false
+    },
     {
       "id": "2122136574989304046",
       "url": "https://x.com/SenatorWong/status/2122136574989304046",
